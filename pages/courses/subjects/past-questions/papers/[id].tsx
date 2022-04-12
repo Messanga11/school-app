@@ -1,15 +1,25 @@
 import { Icon } from "@iconify/react"
 import { Box, Modal } from "@mui/material"
-import { useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import Button from "../../../../../components/Button"
 import Container from "../../../../../components/Container"
 import PastQuestionItem from "../../../../../components/PastQuestionItem"
 import DashboardLayout from "../../../../../layouts/DashboardLayout"
 import Image from "next/image"
+import { useDispatch, useSelector } from "react-redux"
+import { ApplicationState, Paper } from "@/store/types"
+import { getPapersEffect } from "@/store/effects/paper"
 
 const Papers = () => {
 
-    const [paperToShow, setPaperToShow] = useState(null)
+    // Hooks
+    const dispatch = useDispatch()
+    
+    // Stores
+    const { paper: {paper_data} } = useSelector((state:ApplicationState) => state)
+
+    const [loading, setLoading] = useState(false)
+    const [paperToShow, setPaperToShow] = useState<Paper | null>(null)
     const [started, setStarted] = useState(false)
     const [submitted, setSubmitted] = useState(false)
     const [showCorrectAnswers, setShowCorrectAnswers] = useState(false)
@@ -25,6 +35,27 @@ const Papers = () => {
         setPaperToShow(null)
     }
 
+    const fetchPapers = useCallback(():void => {
+        dispatch(getPapersEffect({
+            range: {
+                page: 1,
+                per_page: 10,
+                order_field: "date_added"
+            },
+            failCb: ():void => {
+                
+            },
+            successCb: ():void => {
+                
+            },
+            setLoading
+        }))
+    }, [dispatch])
+
+    useEffect(() => {
+        fetchPapers()
+    }, [fetchPapers])
+
     return (
         <DashboardLayout>
 
@@ -39,22 +70,27 @@ const Papers = () => {
                             {started ? (
                             <div>
 
-                                <div className="h-screen w-full relative mb-8">
-                                    <Image layout="fill" className="absolute h-full w-full object-contain" src="https://images.unsplash.com/photo-1587135991058-8816b028691f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="Paper cover" />
-                                </div>
-                                
-                                <div className="flex items-center gap-4">
-                                    <div className="flex-grow">
-                                        <small className="font-bold">Question 1</small>
-                                        <p>What is what ?</p>
-                                        <p>A) What</p>
-                                        <p>B) Nothing</p>
-                                    </div>
-                                    <div>
-                                        <small>Your answer</small>
-                                        <input type="text" className="intent border" />
-                                    </div>
-                                </div>
+                                {paperToShow?.questions?.map((question, i) => (
+                                    question?.is_an_image ? (
+                                        <div className="h-screen w-full relative mb-8">
+                                            <Image layout="fill" className="absolute h-full w-full object-contain" src={question?.image || ""} alt="" />
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center gap-4">
+                                            <div className="flex-grow">
+                                                <small className="font-bold">Question {i+1}</small>
+                                                <p>{question?.text}</p>
+                                                {question.answers?.map(answer => (
+                                                    <p key={answer?.uuid}>{answer?.letter}) {answer?.text}</p>
+                                                ))}
+                                            </div>
+                                            <div>
+                                                <small>Your answer</small>
+                                                <input type="text" className="intent border" />
+                                            </div>
+                                        </div>
+                                    )
+                                ))}
 
                                 <Button className='w-full mt-8' onClick={() =>{
                                     setSubmitted(true)
@@ -85,30 +121,40 @@ const Papers = () => {
                                         <p>50</p>
                                     </div>
                                 </div>
-                                
-                                    {!showCorrectAnswers && <Button className='w-full mt-8' onClick={() =>{
+                                {!showCorrectAnswers && (
+                                    <Button className='w-full mt-8' onClick={() =>{
                                         setShowCorrectAnswers(true)
-                                        }}>Show correct answers</Button>}
-
+                                    }}>
+                                        Show correct answers
+                                    </Button>
+                                )}
                                 </div>
                             )
-                            : <div className="flex gap-4">
-                                <Button className="mx-auto w-full mt-8" onClick={() => setStarted(true)}>Yes</Button>
-                                <Button className="mx-auto w-full mt-8 bg-slate-600" onClick={() => setStarted(true)}>No</Button>
-                            </div> }
+                            : (
+                                <div className="flex gap-4">
+                                    <Button className="mx-auto w-full mt-8" onClick={() => setStarted(true)}>Yes</Button>
+                                    <Button className="mx-auto w-full mt-8 bg-slate-600" onClick={() => setStarted(true)}>No</Button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </Box>
             </Modal>
 
-            <Container className="flex flex-col justify-center -mt-8 h-full">
-                <h2 className="text-center mb-4">Papers</h2>
+            <Container className="flex flex-col h-full">
+                <h2 className="mb-8">Papers</h2>
                 <div>
                     <div>
-                        <div className="grid grid-cols-3 gap-4">
-                            <PastQuestionItem xl text={"Paper 1"} onClick={() => setPaperToShow("paper1")} />
-                            <PastQuestionItem xl text={"Paper 2"} onClick={() => setPaperToShow("paper1")} />
-                            <PastQuestionItem xl text={"Paper 3"} onClick={() => setPaperToShow("paper1")} />
+                        <div className="grid grid-cols-4 gap-4">
+                            {paper_data.data.map(paper => (
+                                <PastQuestionItem
+                                    key={paper.uuid}
+                                    paper={paper}
+                                    xl
+                                    showType
+                                    onClick={() => setPaperToShow(paper)}
+                            />
+                            ))}
                         </div>
                     </div>
                 </div>

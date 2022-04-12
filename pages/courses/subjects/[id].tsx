@@ -1,17 +1,34 @@
+import { getTopicsEffect } from "@/store/effects/topic"
+import { ApplicationState } from "@/store/types"
 import { Icon } from "@iconify/react"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import Button from "../../../components/Button"
 import Container from "../../../components/Container"
 import SubjectListItem from "../../../components/SubjectListItem"
 import DashboardLayout from "../../../layouts/DashboardLayout"
 
 const SubjectDetails = () => {
+    
+    // Hooks
+    const router = useRouter()
+    const dispatch = useDispatch()
+    
+    // Params
+    const subject_uuid = router.query?.["id"] as string
 
+    // Store
+    const { topic: {
+        topic_data
+    } } = useSelector((state:ApplicationState) => state)
+
+    // States
     const [topicToShow, setTopicToShow] = useState(null)
     const [activeCat, setActiveCat] = useState(0)
+    const [loading, setLoading] = useState(false)
 
-    const router = useRouter()
+
 
     const topics = [
         {
@@ -28,13 +45,28 @@ const SubjectDetails = () => {
         },
     ]
 
-    const fetchData = () => {
-
+    const fetchTopics = ():void => {
+        dispatch(getTopicsEffect({
+            range: {
+                page: 1,
+                per_page: 10,
+                order_field: "date_added",
+                subject_uuid
+            },
+            failCb: ():void => {
+                
+            },
+            successCb: ():void => {
+                
+            },
+            setLoading: () => undefined
+        }))
     }
 
     useEffect(() => {
-      fetchData()
-    }, [activeCat])
+        fetchTopics()
+        // eslint-disable-next-line
+    }, [])
     
 
     return (
@@ -50,9 +82,12 @@ const SubjectDetails = () => {
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 p-4 w-full">
-                        <SubjectListItem />
-                        <SubjectListItem />
-                        <SubjectListItem />
+                        {!loading && topic_data.data.length === 0 && (
+                            <p className="text-center">No topic at now</p>
+                        )}
+                        {topic_data.data.map(topic => (
+                            <SubjectListItem key={topic?.uuid} item={topic} />
+                        ))}
                     </div>
                 </div>
             </div>

@@ -9,8 +9,9 @@ import Friend from "../../components/Friend"
 import DashboardLayout from "../../layouts/DashboardLayout"
 import Typo from "@/components/basics/Typo"
 import InputCheckbox from "@/components/basics/InputCheckbox"
-import Select from "@/components/basics/Select"
+import SelectComponent from "@/components/basics/Select"
 import { EditSharp } from "@mui/icons-material"
+import { useLoginChecker } from "@/utils/hooks"
 
 const Students = () =>{
 
@@ -18,6 +19,8 @@ const Students = () =>{
     const closeModal = () => setShowModal(false)
     const openModal = () => setShowModal(true)
     const [subject, setSubject] = useState("")
+
+    useLoginChecker(true)
 
     const [form, setForm] = useState(
         {

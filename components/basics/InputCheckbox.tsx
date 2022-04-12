@@ -2,16 +2,17 @@ interface InputCheckboxProps extends React.InputHTMLAttributes<HTMLInputElement>
     rainbow?: boolean,
     label?: string
     border?: string
+    name?: string
     labelClassName?: string
 }
-const InputCheckbox = ({className, border, label, rainbow, labelClassName, ...otherProps}:InputCheckboxProps) => {
+const InputCheckbox = ({className, border, label, rainbow, name, labelClassName, ...otherProps}:InputCheckboxProps) => {
     return (
-        <div className="flex space-x-2 items-center">
-            <label htmlFor={otherProps.id} className={`relative block w-4 h-4 rounded-sm border-2 cursor-pointer ${border || "border-black"}`}>
-                <input className={`hidden ${className}`} {...otherProps} type="checkbox" checked={otherProps.checked} />
-                {otherProps?.checked && <div className={`absolute h-4 w-4 animate-none bg-black`}></div>}
+        <div>
+            <input id={otherProps?.id || name} name={name} className={`hidden ${className}`} {...otherProps} type="checkbox" checked={otherProps.checked} />
+            <label className={`flex gap-x-2 items-center cursor-pointer ${` ${labelClassName || ""}`}`} htmlFor={otherProps.id || name}>
+            <div className={`h-4 w-4 animate-none rounded-sm ${otherProps?.checked ? 'bg-black' : 'border border-black'} `}></div>
+                {label}
             </label>
-            <label className={`cursor-pointer ${` ${labelClassName || ""}`}`} htmlFor={otherProps.id}>{label}</label>
         </div>
     )
 }

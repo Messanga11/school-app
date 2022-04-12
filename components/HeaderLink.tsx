@@ -3,7 +3,7 @@ import { useSession, signOut } from "next-auth/react";
 interface HeaderLinkProps { 
   Icon?: any, 
   text?: string,
-  feed?: string,
+  feed?: boolean,
   active?: boolean,
   avatar?: string,
   hidden?: boolean }

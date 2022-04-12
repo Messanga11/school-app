@@ -1,86 +1,93 @@
 import Image from "next/image";
-import HeaderLink from "../components/HeaderLink";
-import ExploreIcon from "@mui/icons-material/Explore";
-import GroupIcon from "@mui/icons-material/Group";
-import OndemandVideoSharpIcon from "@mui/icons-material/OndemandVideoSharp";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import Head from "next/head";
-import { getProviders, signIn } from "next-auth/react";
 import { useRouter } from "next/router"
 import Link from "next/link";
-import { useTranslation } from "../utils/hooks";
+import { useCustomFormik, useLoginChecker, useTranslation } from "../utils/hooks";
+import { NextPage } from "next";
+import * as Yup from "yup"
+import Button from "@/components/basics/Button";
+import { loginEffect } from "@/store/effects/auth";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { ApplicationDispatch } from "@/store/types";
+import { useState } from "react";
+import DefaultLayout from "@/layouts/DefaultLayout";
+import { getUserInfosEffect } from '../store/effects/auth';
 
-function Home({ providers }) {
+const Home:NextPage = () => {
 
+  // Hooks
   const router = useRouter()
   const t = useTranslation()
+  const dispatch:ApplicationDispatch = useDispatch()
+
+  // States
+  const [loading, setLoading] = useState(false)
+  useLoginChecker()
+
+  // Form handler
+  const { fields, formik } = useCustomFormik(
+    [
+      {
+        initialValue: "",
+        name: "email",
+        placeholder: "email",
+        type: "text",
+        validation: Yup.string().email("Enter a valid email")
+      },
+      {
+        initialValue: "",
+        name: "password",
+        placeholder: "password",
+        type: "password",
+        validation: Yup.string().min(6).typeError(t("enter_at_least_six_chars")).required(t("required_field"))
+      },
+    ],
+    (values) => {
+      dispatch(loginEffect({
+        payload: values,
+       successCb: () => {
+         dispatch(getUserInfosEffect({
+           setLoading,
+           successCb: () => {
+             router.push("/dashboard")
+          },
+          failCb: () => {
+            toast.error("Something went wrong!")
+          }
+         }))
+       },
+       failCb: () => {
+         toast.error("Something went wrong!")
+       },
+       setLoading: setLoading
+      }))
+    }
+  )
 
   return (
-    <div className="space-y-10 relative">
-      <Head>
-        <title>LinkedIn</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header className="flex justify-around items-center py-4">
-        <div className="relative w-36 h-10">
-          <p className="text-black font-bold">LOGO</p>
-        </div>
-        <div className="flex items-center sm:divide-x divide-gray-300">
-          <div className="hidden sm:flex space-x-8 pr-4">
-            <HeaderLink Icon={ExploreIcon} text="University" />
-            <HeaderLink Icon={ExploreIcon} text="School" />
-          </div>
-        </div>
-      </header>
-
-      <div className="p-10 text-white bg-gradient-to-tr from-purple-800 to-pink-700" style={{margin: 0}}>
+    <DefaultLayout titleDesc="Login to your account" noWidthLimit>
+      <div className="white-label py-10 text-white bg-gradient-to-tr from-purple-800 to-pink-700" style={{margin: 0}}>
         <main className="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto">
           <div className="space-y-6 xl:space-y-10">
             <div>
               <h1 className="text-3xl md:text-5xl text-white max-w-xl !leading-snug pl-4 xl:pl-0">
                 Please Login
               </h1>
-              <p>{t("login_text")}</p>
+              <p className="text-gray-200">{t("login_text")}</p>
             </div>
-            <div className="space-y-4 pb-8">
-                <div>
-                      <p className="font-bold">Email/Phone number</p>
-                      <input type="text" className="intent outline-none w-full" />
-                </div>
-                <div>
-                      <p className="font-bold">Password</p>
-                      <input type="text" className="intent outline-none w-full" />
-                </div>
-                <div className="underline">
-                  <Link href="/forgot-password">{t("forgot_password")}</Link>
-                </div>
-                  <button
-                    className="w-full bg-blue-700 font-semibold rounded-full border text-white border-transparent px-5 py-1.5"
-                    onClick={() => router.push("/login")}
-                  >
-                    Log in
-                  </button>
-            </div>
+            <form className="space-y-4" onSubmit={formik.handleSubmit}>
+              {fields}
+              <Button loading={loading} type="submit">Submit</Button>
+            </form>
           </div>
 
           <div className="relative xl:absolute w-72 h-72 xl:w-[650px] xl:h-[650px] top-14 right-5">
-            <Image src="/images/exams.svg" layout="fill" priority />
+            <Image src="/images/exams.svg" layout="fill" priority alt="" />
           </div>
         </main>
       </div>
-    </div>
+    </DefaultLayout>
   );
 }
 
 export default Home;
-
-export async function getServerSideProps(context) {
-  const providers = await getProviders();
-
-  return {
-    props: {
-      providers,
-    },
-  };
-}

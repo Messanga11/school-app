@@ -1,9 +1,13 @@
+import { useLoginChecker } from "@/utils/hooks"
 import { Container } from "@mui/material"
 import Friend from "../../components/Friend"
 import DashboardLayout from "../../layouts/DashboardLayout"
 
 const Administration = () =>{
-
+    
+    // Hooks
+    useLoginChecker(true)
+    
     return (
         <DashboardLayout titleDesc="admin pannel" admin>
             <Container>

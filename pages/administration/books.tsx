@@ -7,12 +7,18 @@ import { useState } from "react"
 import DashboardItem from "../../components/DashboardItem"
 import Friend from "../../components/Friend"
 import DashboardLayout from "../../layouts/DashboardLayout"
+import { useLoginChecker } from "@/utils/hooks"
 
-const Students = () =>{
+const Books = () =>{
 
+
+    // States
     const [showModal, setShowModal] = useState(false)
     const closeModal = () => setShowModal(false)
     const openModal = () => setShowModal(true)
+
+    // Hooks
+    useLoginChecker(true)
 
     return (
         <DashboardLayout titleDesc="admin pannel" admin>
@@ -70,4 +76,4 @@ const Students = () =>{
     
     }
     
-    export default Students
+    export default Books

@@ -6,12 +6,17 @@ import { Icon } from "@iconify/react"
 import DashboardItem from "@/components/DashboardItem"
 import Modal from "@/components/Modal"
 import DashboardLayout from "@/layouts/DashboardLayout"
+import { useLoginChecker } from "@/utils/hooks"
 
-const Students = () =>{
+const Courses = () =>{
 
+    // States
     const [showModal, setShowModal] = useState(false)
     const closeModal = () => setShowModal(false)
     const openModal = () => setShowModal(true)
+
+    //Hooks
+    useLoginChecker(true)
 
     return (
         <DashboardLayout titleDesc="admin pannel" admin>
@@ -69,4 +74,4 @@ const Students = () =>{
     
     }
     
-    export default Students
+    export default Courses

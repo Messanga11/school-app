@@ -1,3 +1,4 @@
+import { useLoginChecker } from "@/utils/hooks"
 import { Icon } from "@iconify/react"
 import { Container } from "@mui/material"
 import DashboardItem from "../../components/DashboardItem"
@@ -5,6 +6,8 @@ import Friend from "../../components/Friend"
 import DashboardLayout from "../../layouts/DashboardLayout"
 
 const Students = () =>{
+
+    useLoginChecker(true)
 
     return (
         <DashboardLayout titleDesc="admin pannel" admin>

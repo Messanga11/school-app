@@ -6,7 +6,7 @@ let _timerId = null
 
 
 export const subjects = {
-  ordinaryGeneral : [
+  ordinaryGrammar : [
     {title: "Accounting"},
     {title: "Biology"},
     {title: "Chemistry"},
@@ -14,33 +14,31 @@ export const subjects = {
     {title: "Economics"},
     {title: "English Language"},
     {title: "Literature in English"},
-    {title: "Food Science and Nutrition"},
-    {title: "French"},
-    {title: "Special Bilingual Education French"},
-  ],
-  ordinaryCommercial : [
-    {title: "Accounting"},
-    {title: "Biology"},
-    {title: "Chemistry"},
-    {title: "Economics"},
-    {title: "English Language"},
-    {title: "Literature in English"},
-    {title: "Food Science and Nutrition"},
+    {title: "Food and Nutrition"},
     {title: "French"},
     {title: "Special Bilingual Education French"},
     {title: "Geography"},
     {title: "Geology"},
     {title: "History"},
-    {title: "Pure Mathematics With Mechanics"},
-    {title: "Pure Mathematics With Statistics"},
-    {title: "Further Mathematics"},
+    {title: "Citizenship Education"},
+    {title: "Human Biology"},
+    {title: "Mathematics"},
+    {title: "Additional Mathematics"},
     {title: "Physics"},
     {title: "Religious Studies"},
-    {title: "Philosophy"},
+    {title: "Logic"},
     {title: "Computer Science"},
-    {title: "Information and Communication Technology"}
   ],
-  advancedGeneral : [
+  ordinaryCommercial : [
+    {title: "OHADA Financial Reporting"},
+    {title: "Computer Aided Accounting"},
+    {title: "International Financial and Reporting"},
+    {title: "International Financial and Reporting Standards"},
+    {title: "Business Mathematics and Statistics"},
+    {title: "Commerce and Finance"},
+    {title: "Micro Economics"},
+  ],
+  advancedGrammar : [
     {title: "Accounting"},
     {title: "Biology"},
     {title: "Chemistry"},
@@ -63,26 +61,13 @@ export const subjects = {
     {title: "Information and Communication Technology"}
   ],
   advancedCommercial : [
-    {title: "Accounting"},
-    {title: "Biology"},
-    {title: "Chemistry"},
-    {title: "Economics"},
-    {title: "English Language"},
-    {title: "Literature in English"},
-    {title: "Food Science and Nutrition"},
-    {title: "French"},
-    {title: "Special Bilingual Education French"},
-    {title: "Geography"},
-    {title: "Geology"},
-    {title: "History"},
-    {title: "Pure Mathematics With Mechanics"},
-    {title: "Pure Mathematics With Statistics"},
-    {title: "Further Mathematics"},
-    {title: "Physics"},
-    {title: "Religious Studies"},
-    {title: "Philosophy"},
-    {title: "Computer Science"},
-    {title: "Information and Communication Technology"}
+    {title: "Corporate accounting"},
+    {title: "Cost and Management Accounting"},
+    {title: "Financial Accounting"},
+    {title: "International Financial and Reporting Standards"},
+    {title: "Business Mathematics and Statistics"},
+    {title: "Commerce and Finance"},
+    {title: "Macro Economics"},
   ],
 }
 
@@ -187,9 +172,11 @@ export const paginationStyles = {
 export const toBase64 = (data: any) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.readAsDataURL(data);
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
+        if(data instanceof Blob) {
+          reader.readAsDataURL(data);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        }
     });
 };
 

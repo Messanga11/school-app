@@ -3,21 +3,23 @@ import { Fragment } from "react"
 
 import messages from "./messages"
 import { connect } from "react-redux"
+import { NextPage } from "next"
+import { ApplicationState } from "@/store/types"
 
 interface ProviderProps {
-    children: any,
-    locale?: string
+    children: JSX.Element,
+    locale: string
 }
 
 const Provider = ({ children, locale }: ProviderProps) => {
     return (
-        <IntlProvider locale={locale} textComponent={Fragment} messages={messages[locale]}>
+        <IntlProvider onError={() => undefined} locale={locale} textComponent={Fragment} messages={messages[locale]}>
             {children}
         </IntlProvider>
     )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:ApplicationState) => ({
     locale: state.auth.locale
 })
 

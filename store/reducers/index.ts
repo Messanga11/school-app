@@ -1,24 +1,24 @@
 import { Action, combineReducers, Reducer } from "redux";
-import productReducer from "./product/productReducer";
-import authReducer from "./auth/auhReducer";
-import orderReducer from "./order/orderReducer";
-import salonReducer from "./salon/salonReducer";
-import bookingReducer from "./booking/bookingReducer";
-import layoutReducer from "./layout/layoutReducer";
-import notificationReducer from "./notification";
-import chatReducer from './chat/chatReducer';
 import { ApplicationAction, ApplicationState } from "../types";
+import authReducer from "./auth";
+import bookReducer from "./book";
+import paperReducer from "./paper";
+import paymentReducer from "./payment";
+import studentReducer from "./student";
+import subjectReducer from "./subject";
+import topicReducer from "./topic";
+import videoReducer from "./video";
 
 
-const combinedReducers:Reducer<ApplicationState, Action<ApplicationAction>> = combineReducers({
+const combinedReducers:Reducer<ApplicationState, ApplicationAction> = combineReducers({
+  student: studentReducer,
   auth: authReducer,
-  product: productReducer,
-  order: orderReducer,
-  salon: salonReducer,
-  booking: bookingReducer,
-  layout: layoutReducer,
-  notification: notificationReducer,
-  chat: chatReducer,
+  book: bookReducer,
+  paper: paperReducer,
+  payment: paymentReducer,
+  subject: subjectReducer,
+  video: videoReducer,
+  topic: topicReducer
 });
 
 export default combinedReducers;

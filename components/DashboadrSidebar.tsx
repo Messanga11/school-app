@@ -1,9 +1,13 @@
+import { logoutEffect } from '@/store/effects/auth'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 const DashboardSidebar = ({admin}: {admin?: boolean}) => {
+    
+    const dispatch = useDispatch()
 
     const router = useRouter()
 
@@ -24,14 +28,15 @@ const DashboardSidebar = ({admin}: {admin?: boolean}) => {
             icon: <Icon icon="heroicons-solid:users" />
         },
         {
-            name: "Notifications",
-            link: "/notifications",
-            icon: <Icon icon="bi:bell-fill" />
+            name: "Messages",
+            link: "/messages",
+            icon: <Icon icon="ant-design:message-filled" />
         },
         {
             name: "logout",
             link: "#logout",
-            icon: <Icon icon="ion:exit" />
+            icon: <Icon icon="ion:exit" />,
+            logout: true
         },
         {
             name: "help",
@@ -69,27 +74,40 @@ const DashboardSidebar = ({admin}: {admin?: boolean}) => {
         {
             name: "logout",
             link: "#logout",
-            icon: <Icon icon="ion:exit" />
+            icon: <Icon icon="ion:exit" />,
+            logout: true
         },
     ]
 
   return (
-    <div className='text-black h-full border-r border-gray-300' style={{minWidth: 210}}>
+    <div className='bg-white text-black h-full border-r border-gray-100 pb-6' style={{minWidth: 210}}>
         <div>
             <div>
-                <ul className='flex flex-col'>
-                    <li className="px-4 py-2 text-sm">
-                        {admin && (
-                            <div className='bg-black h-16 w-16 rounded-full my-4 flex justify-center items-center'>
-                                <Icon icon="bxs:user" color="white" height={30} />
+                <div className='h-16 flex items-center justify-center'>
+                    <div className="px-4 text-sm text-center flex items-center gap-3">
+                            <div className='bg-orange-600 h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
+                                <Icon icon="bxs:user" color="white" height={25} />
                             </div>
-                        )}
-                        <p>@administrator</p>
-                        {!admin && <p>US: ID  - 0000</p>}
-                    </li>
+                            <div>
+                                <p className='text-sm'>@administrator</p>
+                                {!admin && <p className='text-sm'>US: ID  - 0000</p>}
+                            </div>
+                    </div>
+                </div>
+                <ul className='flex flex-col gap-3'>
+                    <hr />
                     {(admin ? adminNavigationItems : navigationItems).map((navItem, i) => (
-                        <li key={`sidebar-nav-item-${i}`} className='w-full px-4 bg-gray-100 border-l-3 border-gray-500 block cursor-pointer hover:bg-slate-200 font-semibold' onClick={() => router.push(navItem.link)}>
-                            <div className='transition-gpu duration-300 ml-0 hover:ml-2 w-full py-2 flex gap-2 items-center'>{navItem.icon} {navItem.name}</div>
+                        <li key={`sidebar-nav-item-${i}`} className='w-full px-8 border-l-3 border-gray-400 block cursor-pointer font-semibold' onClick={() => {
+                            if(navItem?.logout) {
+                                dispatch(logoutEffect())
+                                router.push("/")
+                            } else {
+                                router.push(navItem.link)
+                            }
+                        }}>
+                            <div className={`
+                            transition-gpu duration-300 hover:ml-2 w-full py-2 flex gap-4 items-center text-lg hover:text-black 
+                            ${router.pathname === navItem.link ? " ml-2 text-black" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
                         </li>
                     ))}
                 </ul>

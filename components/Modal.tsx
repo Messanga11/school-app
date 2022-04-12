@@ -56,30 +56,20 @@ const gifYouUp = {
 
 interface ModalProps {
   handleClose: MouseEventHandler<HTMLImageElement>;
-  type: string;
+  type?: string;
+  className?: string;
   children: ReactNode | ReactNode[]
 }
 
-const Modal = ({ handleClose, type, children }: ModalProps) => {
+const Modal = ({ handleClose, type, children, className }: ModalProps) => {
 
   return (
     <Backdrop onClick={handleClose}>
-        <motion.div
-          onClick={(e) => e.stopPropagation()}
-          className="rounded-xl flex flex-col justify-center bg-white w-full max-w-lg mx-6 overflow-y-auto max-h-screen"
-          variants={dropIn}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          <div>
-            <div>
-              <div className="p-4">
-                {children}
-              </div>
-            </div>
+        <div onClick={(e) => e.stopPropagation()} className={`overflow-auto bg-white w-full my-4 ${className}`} style={{maxHeight: "calc(100vh - 60px)"}}>
+        <div className="p-4 flex flex-col">
+            {children}
           </div>
-        </motion.div>
+        </div>
     </Backdrop>
   );
 };

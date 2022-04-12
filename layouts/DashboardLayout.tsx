@@ -11,21 +11,23 @@ interface DashboardLayoutProps {
     admin?: boolean
 }
 
-const DashboardLayout = ({title, titleDesc, children, admin}: DashboardLayoutProps) => {
+const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, children, admin}) => {
 
     const t = useTranslation()
 
     return (
         <div color="black">
             <Head>
-                <title>IS Dashboard | {titleDesc}</title>
+                <title>US Dashboard | {titleDesc}</title>
             </Head>
-            {!admin && <DashboardHeader />}
-            <div className="mt-16">
+            <div className="">
                 <div>
-                    <div className="flex" style={{height: admin ? "100vh" : "calc(100vh - 4rem)"}}>
+                    <div className="flex h-screen">
                     <DashboardSidebar admin={!!admin} />
-                    <div className="text-black flex-grow bg-gray-50 overflow-y-scroll h-full">
+                    <div className="text-black flex-grow overflow-y-scroll h-full">
+                        {!admin && (
+                            <DashboardHeader />
+                        )}
                         {children}
                     </div>
                 </div>

@@ -19,6 +19,7 @@ export const REFUSE_INVITATION = "REFUSE_INVITATION"
 export const DELETE_FRIEND = "DELETE_FRIEND"
 export const GET_INVITATIONS = "GET_INVITATIONS"
 export const GET_FRIENDS = "GET_FRIENDS"
+export const UPDATE_PROFILE_PIC = "UPDATE_PROFILE_PIC"
 
 // ************************* Interfaces ***************************** //
 export interface Student {
@@ -27,15 +28,17 @@ export interface Student {
     last_name: string;
     phone_number: number;
     email?: string;
-    img_url?: string;
+    image_url?: string;
     guardian_phone_number?: number;
     is_friend?: boolean
 }
 
 export interface Conversation {
     uuid: string;
+    last_message: string;
     sender: User;
-    have_unread: boolean
+    have_unread: boolean;
+    members: User[]
 }
 
 export interface Message {
@@ -43,6 +46,7 @@ export interface Message {
     text?: string;
     created_at?: string;
     conversation_id?: string;
+    sender_uuid: string;
 }
 
 export interface StudentsResponse {
@@ -89,6 +93,10 @@ export interface Message {
     sender_id: string;
     receiver_id?: string;
     message: string;
+}
+
+export interface ImageUpload {
+    base64: string;
 }
 
 export interface Invitation {
@@ -179,6 +187,11 @@ export interface DeleteFriend extends Action {
     payload: undefined
 }
 
+export interface UpdateProfilePic extends Action {
+    type: typeof UPDATE_PROFILE_PIC;
+    payload: undefined
+}
+
 export type StudentActions = 
 GetStudents
 | GetStudent
@@ -196,3 +209,4 @@ GetStudents
 | GetInvitations
 | GetFriends
 | DeleteFriend
+| UpdateProfilePic

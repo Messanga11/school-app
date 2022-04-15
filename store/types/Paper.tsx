@@ -1,5 +1,6 @@
 import { Action } from "redux";
 import { RequestRange } from ".";
+import { Subject } from "./Subject";
 
 // ************************* Constants **************************** //
 export const GET_PAPERS = "GET_PAPERS"
@@ -8,6 +9,7 @@ export const UPDATE_PAPER = "UPDATE_PAPER"
 export const CREATE_PAPER = "CREATE_PAPER"
 export const DELETE_PAPER = "DELETE_PAPER"
 export const RESET_PAPER_STATE = "RESET_PAPER_STATE"
+export const VALIDATE_PAPER = "VALIDATE_PAPER"
 
 // ************************* Interfaces ***************************** //
 
@@ -27,6 +29,7 @@ export interface Answer {
   }
   
 export interface QuestionItem {
+    uuid?: string;
     is_an_image: boolean;
     image?: string;
     text?: string;
@@ -38,10 +41,17 @@ export interface QuestionRequest {
     answers: Answer[];
   }
 
+export interface QuestionValidate {
+    paper_uuid: string;
+    answers: string[];
+  }
+
 export interface Paper {
     uuid: string;
     paper_type: string;
-    year: string;
+    year: number;
+    subject: Subject;
+    visible_for: string;
     questions: QuestionItem[]
 }
 
@@ -95,6 +105,11 @@ export interface DeletePaper extends Action {
     }
 }
 
+export interface ValidatePaper extends Action {
+    type: typeof VALIDATE_PAPER;
+    payload: undefined
+}
+
 export interface ResetPaperState extends Action {
     type: typeof RESET_PAPER_STATE;
     payload: undefined
@@ -107,3 +122,4 @@ GetPapers
 | CreatePaper
 | DeletePaper 
 | ResetPaperState
+| ValidatePaper

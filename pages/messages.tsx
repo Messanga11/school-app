@@ -10,17 +10,28 @@ import messages from '@/i18n/messages';
 import Input from '@/components/basics/Input';
 import Button from '../components/basics/Button';
 import toast from 'react-hot-toast';
+import { Conversation } from '../store/types/Student';
 
 const Messages = () => {
 
       // Store
-      const { student: { messages, conversations } } = useSelector((state: ApplicationState) => state)
+      const {
+            student: {
+                  messages,
+                  conversations
+            },
+            auth: {
+                  userInfos
+            }
+      } = useSelector((state: ApplicationState) => state)
 
       // States
       const [selectedExam, setSelectedExam] = useState(null)
-      const [loadingSendMessage, setLoadingSendMessage] = useState(false)
-      const [inputValue, setInputValue] = useState("");
-      const [loadingMessages, setLoadingMessages] = useState(false)
+      const [loadingSendMessage, setLoadingSendMessage] = useState<boolean>(false)
+      const [inputValue, setInputValue] = useState<string>("");
+      const [currentConversation, setCurrentConversation] = useState<Conversation | null>(null);
+      const [loadingMessages, setLoadingMessages] = useState<boolean>(false)
+      const [loadingConversation, setLoadingConversation] = useState<boolean>(false)
 
       // Hooks
       const router = useRouter()
@@ -31,8 +42,8 @@ const Messages = () => {
             dispatch(
               sendMessageEffect({
                 payload: {
-                  conversation_id: messages.data?.[0]?.conversation_id,
-                  receiver_uuid: messages.data?.[0]?.receiver_id,
+                  conversation_id: currentConversation?.uuid,
+                  receiver_uuid: userInfos?.uuid || "",
                   text: inputValue,
                 },
                 setLoading: setLoadingSendMessage,
@@ -40,7 +51,7 @@ const Messages = () => {
                   setInputValue("")
                   dispatch(
                         getMessagesEffect({
-                          range: {conversation_uuid: messages.data?.[0]?.conversation_id},
+                          range: {conversation_uuid: currentConversation?.uuid},
                           setLoading: setLoadingMessages,
                           successCb: () => undefined,
                           failCb: (data: any) =>
@@ -54,19 +65,48 @@ const Messages = () => {
             );
           };
 
+          const openConversation = (conversation:Conversation, noLoading=false) => {
+            dispatch(
+              getMessagesEffect({
+                range: {conversation_uuid: conversation?.uuid || ""},
+                setLoading: noLoading ? () => undefined : setLoadingMessages,
+                successCb: () => {
+                  setCurrentConversation(conversation)
+                },
+                failCb: (data: any) =>
+                  toast.error(data?.detail || "Something went wrong!"),
+              })
+            );
+          };
+
+          const getConversations = (noLoading=false) => {
+            dispatch(getConversationsEffect({
+                  setLoading: noLoading ? () => undefined : setLoadingConversation,
+                  successCb: () => undefined,
+                  failCb: () => undefined,
+              }))
+          }
+
       useEffect(() => {
-        dispatch(getConversationsEffect({
-            setLoading: setLoadingSendMessage,
-            successCb: () => undefined,
-            failCb: () => undefined,
-        }))
-        // eslint-disable-next-line
+            getConversations()
+            const id = setInterval(() => {
+                  getConversations()
+                  if(!!currentConversation?.uuid && !loadingSendMessage) {
+                        openConversation(currentConversation)
+                  }
+            }, 3000)
+
+            return () => clearTimeout(id)
+            // eslint-disable-next-line
       }, [])
+      
       
 
   return (
     <DashboardLayout title="Profile">
+
       <div className='px-12 mt-4'>
+            
             <h2>
             Message
             </h2>
@@ -77,7 +117,14 @@ const Messages = () => {
                               <h2 className='mb-4'>Discussions</h2>
                               <div className='space-y-4 overflow-y-auto flex-grow'>
                                     { conversations?.data?.map(conv => (
-                                          <ConversationItem key={conv?.uuid} conversation={conv} />
+                                          <ConversationItem
+                                                key={conv?.uuid}
+                                                conversation={conv}
+                                                setCurrentConversation={setCurrentConversation}
+                                                setLoading={setLoadingConversation}
+                                                currentConversation={currentConversation}
+                                                openConversation={openConversation}
+                                          />
                                     )) }    
                               </div>
                         </div>

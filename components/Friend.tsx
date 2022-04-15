@@ -13,12 +13,14 @@ import { useDispatch } from "react-redux";
 import Modal from "./Modal";
 import Input from "@/components/basics/Input";
 import toast from "react-hot-toast";
+import DefaultImageComponent from './DefaultImageComponent';
 
 interface StudentProps {
   friend: Student;
   invitationUuid?: string;
   getData?: Function;
   accepted?: boolean;
+  setStudentToSendMessage?: (student:Student) => void;
 }
 
 const Friend = ({
@@ -130,12 +132,16 @@ const Friend = ({
           </div>
         </Modal>
       )}
-      <img
-        className="h-2/3 w-full object-cover"
-        src={friend?.img_url}
-        alt={friend?.first_name}
-        loading="lazy"
-      />
+      {friend?.image_url ? (
+        <img
+          className="h-2/3 w-full object-cover"
+          src={friend?.image_url}
+          alt={friend?.first_name}
+          loading="lazy"
+        />
+      ) : (
+        <DefaultImageComponent />
+      )}
       <div className="py-4 px-2 w-full">
         <div className="flex gap-3 items-center">
           <p className="text-lg mb-2">

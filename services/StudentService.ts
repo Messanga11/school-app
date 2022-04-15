@@ -1,4 +1,4 @@
-import { DeleteResponse, Message, RequestRange, ResponseRange, Student, StudentRequest, StudentsResponse } from "@/store/types";
+import { DeleteResponse, Message, RequestRange, ResponseRange, Student, StudentRequest, StudentsResponse, ImageUpload } from "@/store/types";
 import BaseService from "./BaseService";
 import { studentUrls } from "./urls";
 
@@ -18,4 +18,5 @@ export default class StudentService {
     static sendInvitation = (payload: Message):Promise<Response> => BaseService.postRequest(studentUrls.SEND_INVITATION, payload, true)
     static refuseInvitation = (payload: Message):Promise<Response> => BaseService.deleteRequest(studentUrls.REFUSE_INVITATION, payload, true)
     static deleteFriend = (payload: Message):Promise<Response> => BaseService.deleteRequest(studentUrls.DELETE_FRIEND, payload, true)
+    static updateProfilePic = (payload: ImageUpload):Promise<Response> => BaseService.postRequest(studentUrls.UPDATE_PROFILE_PIC, payload, true)
 }

@@ -91,7 +91,7 @@ const Students:NextPage = ():JSX.Element =>{
                         </div>
                         <div className="mt-6">
                         <Input name="specificDate" label="Send on a specific date" value={inputForm.specificDate} onChange={handleInputChange} type={"datetime-local"} className="mb-4" />
-                        <Typo type="small" className="font-semibold">Attachement</Typo>
+                        {/* <Typo type="small" className="font-semibold">Attachement</Typo>
                         <Input type={"file"} className="mb-4"
                         onChange={(e) =>
                             handleImages(
@@ -108,7 +108,7 @@ const Students:NextPage = ():JSX.Element =>{
                             }
                             )
                         }
-          />
+          /> */}
                         <Typo type="small" className="font-semibold">To</Typo>
                         <p className="mb-4 font-semibold bg-gray-100 p-4 rounded-md">{studentToShow ? studentToShow?.first_name : "Everyone"}</p>
                         <div className="flex flex-col">
@@ -134,7 +134,7 @@ const Students:NextPage = ():JSX.Element =>{
                                 </div>
                             </div>
                             <button className="intent bg-green-500 text-white font-semibold mt-4 h-10" onClick={() => openModal(null)}>Send a message to every student</button>
-                            <div className="my-6 flex flex-col gap-4 mt-10">
+                            <div className="my-6 grid grid-cols-4 gap-4 mt-10">
                                 {data.map(item => (
                                     <Friend key={item?.uuid} friend={item} setStudentToSendMessage={(student:Student) => setStudentToShow(student)} />
                                 ))}

@@ -1,6 +1,6 @@
 import { RequestRange } from "@/store/types"
 
-const apiPrefix:string = "http://localhost:5301"
+export const apiPrefix:string = "http://localhost:5301"
 
 export const authUrls = {
     LOGIN: `${apiPrefix}/auth/login`,
@@ -24,6 +24,7 @@ export const studentUrls = {
     REFUSE_INVITATION: `${apiPrefix}/administration/users/remove-friend`,
     DELETE_FRIEND: `${apiPrefix}/administration/users/remove-friend`,
     SEND_INVITATION: `${apiPrefix}/administration/users/send-invitation`,
+    UPDATE_PROFILE_PIC: `${apiPrefix}/upload/images/update-profile`,
 }
 
 export const topicUrls = {
@@ -48,6 +49,7 @@ export const paperUrls = {
     CREATE_PAPER: `${apiPrefix}/administration/papers`,
     DELETE_PAPER: (uuid:string):string => `${apiPrefix}/administration/papers/${uuid}`,
     UPDATE_PAPER: `${apiPrefix}/administration/papers`,
+    VALIDATE_PAPER: `${apiPrefix}/administration/papers/validate`,
 }
 
 export const paymentUrls = {

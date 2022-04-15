@@ -51,6 +51,7 @@ import TextArea from "@/components/basics/Textarea"
 // import { useFormik } from "formik"
 import toast from "react-hot-toast"
 import { useRouter } from "next/router";
+import { apiPrefix } from "@/services/urls";
 // import { object } from "yup"
 
 interface Option {
@@ -199,5 +200,47 @@ export const useFields = (fields: Field[], formik:any) => {
             if(token && ["/login", "/signup"].includes(router.pathname)) {
                 router.push("/home")
             }
-    }, [isAdminPage, router])
+    }, [])
+  }
+
+  export const uploadFormDataWithFile = ({
+      setLoading,
+      payload,
+      successCb,
+      failCb,
+      url,
+      requireAuth
+  }: {
+      setLoading: Function,
+      successCb: Function,
+      failCb: Function,
+      payload: any,
+      url?: string,
+      requireAuth?: boolean
+  }) => {
+    const formData = new FormData()
+    setLoading(true)
+    Object.keys(payload).map(key => {
+        formData.append(key, payload[key])
+    })
+    const request = new XMLHttpRequest()
+    request.open("POST", url || `${apiPrefix}/administration/books`)
+    if(requireAuth) {
+        request.setRequestHeader("authorization", `Bearer ${localStorage.getItem("token") || ""}`)
+    }
+    
+    request.send(formData)
+    request.onload = () => {
+        if(request.status === 200) {
+            successCb()
+        } else {
+            failCb()
+        }
+        setLoading(false)
+    }
+    request.onerror = () => {
+        toast.error("An unexpected error occurred!")
+        setLoading(false)
+        failCb()
+    }
   }

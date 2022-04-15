@@ -1,4 +1,4 @@
-import { Student } from "./Student"
+import { Student, UpdateProfilePic } from './Student';
 
 // ************************* Constants **************************** //
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
@@ -34,6 +34,7 @@ export interface User {
     last_name:string;
     user_name:string;
     phone_number:string;
+    image_url:string;
     guardian_phone_number:string;
     email:string;
     selected_exam:{title: string}[];
@@ -64,3 +65,4 @@ export interface Logout {
 export type AuthActions = LoginSuccess | Logout
 | GetAuthInfosSuccess
 | UpdateAuthInfosSuccess
+| UpdateProfilePic

@@ -1,4 +1,4 @@
-import { ApplicationState, FileRequest, Topic } from "@/store/types";
+import { ApplicationState, Book, FileRequest, Topic } from "@/store/types";
 import { handleImages } from "@/utils/common";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -12,14 +12,14 @@ interface Props {
   libBooks: any[];
   videos: any[];
   topicToShow: Topic;
-  setFileToDelete: Dispatch<SetStateAction<FileRequest | null>>;
+  setFileToDelete: Dispatch<SetStateAction<Book | null>>;
   handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
   setFilesForm: Dispatch<
     SetStateAction<{
-      note: string;
-      book: string;
-      lib_book: string;
-      video: string;
+      note: any;
+      book: any;
+      lib_book: any;
+      video: any;
     }>
   >;
   saveFile: Function;
@@ -87,7 +87,12 @@ const TopicFilesComponent: React.FC<Props> = ({
         <Typo type="small">File</Typo>
         <Input
           type="file"
-          onChange={(e) =>
+          onChange={(e) => {
+            setFilesForm(state => ({
+              ...state,
+              [_key]: e.target.files?.[0]
+            }))
+            return
             handleImages(
               {
                 target: {
@@ -100,7 +105,7 @@ const TopicFilesComponent: React.FC<Props> = ({
                   [_key]: data,
                 }));
               }
-            )
+            )}
           }
           className="flex-grow"
         />

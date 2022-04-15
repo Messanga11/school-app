@@ -3,9 +3,12 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
 
+* {
+  font-family: 'Playfair Display', serif;
+}
+
 @layer base {
   body {
-    font-family: 'Playfair Display', serif;
     @apply bg-gray-100 select-none text-gray-600 min-h-screen;
   }
   h2 {
@@ -13,6 +16,9 @@
   }
   p {
     @apply text-lg text-gray-700
+  }
+  img {
+    max-width: 100%;
   }
 }
 
@@ -25,7 +31,7 @@
     @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer rounded-none text-black bg-white mx-auto xl:mx-0 py-4;
   }
   .intent {
-    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer text-black bg-white mx-auto xl:mx-0;
+    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer text-black bg-white mx-auto xl:mx-0 rounded-none;
   }
 
   .sidebarButton {

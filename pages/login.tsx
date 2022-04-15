@@ -56,8 +56,8 @@ const Home:NextPage = () => {
           }
          }))
        },
-       failCb: () => {
-         toast.error("Something went wrong!")
+       failCb: (data:any) => {
+         toast.error(data?.detail || "Something went wrong!")
        },
        setLoading: setLoading
       }))
@@ -82,7 +82,7 @@ const Home:NextPage = () => {
           </div>
 
           <div className="relative xl:absolute w-72 h-72 xl:w-[650px] xl:h-[650px] top-14 right-5">
-            <Image src="/images/exams.svg" layout="fill" priority alt="" />
+            <Image className="object-cover" src="/images/exams.svg" layout="fill" priority alt="" />
           </div>
         </main>
       </div>

@@ -1,4 +1,5 @@
 import { CreatePaper, CREATE_PAPER, DeleteResponse, DeletePaper, DELETE_PAPER, GetPaper, GetPapers, GET_PAPER, GET_PAPERS, Paper, PapersResponse, UpdatePaper, UPDATE_PAPER } from "../types";
+import { ValidatePaper, VALIDATE_PAPER } from '../types/Paper';
 
 export const getPapers = (data:PapersResponse):GetPapers => ({
   type: GET_PAPERS,
@@ -22,5 +23,10 @@ export const createPaper = (data:Paper):CreatePaper => ({
 
 export const deletePaper = (data:DeleteResponse):DeletePaper => ({
   type: DELETE_PAPER,
+  payload: data
+})
+
+export const validatePaper = (data:undefined):ValidatePaper => ({
+  type: VALIDATE_PAPER,
   payload: data
 })

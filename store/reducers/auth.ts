@@ -1,4 +1,5 @@
 import produce from "immer";
+import { UPDATE_PROFILE_PIC } from "../types";
 import { AuthActions, AuthState, LOGIN_SUCCESS, LOGOUT, GET_AUTH_INFOS_SUCCESS } from '../types/Auth';
 
 const initialState:AuthState = {
@@ -22,6 +23,15 @@ const authReducer = (state=initialState, action: AuthActions) => {
                 userInfos: {
                     ...state.userInfos,
                     ...action.payload
+                }
+            }
+        }
+        case UPDATE_PROFILE_PIC: {
+            return {
+                ...state,
+                userInfos: {
+                    ...state.userInfos,
+                    image_url: action.payload
                 }
             }
         }

@@ -169,7 +169,7 @@ export const paginationStyles = {
   },
 }
 
-export const toBase64 = (data: any) => {
+export const toBase64 = (data: Blob) => {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         if(data instanceof Blob) {
@@ -180,7 +180,7 @@ export const toBase64 = (data: any) => {
     });
 };
 
-export const handleImages = (e, cb) => {
+export const handleImages = (e:any, cb: Function) => {
   let fileArray = []
   for (const key in e.target.files) {
   if (Object.prototype.hasOwnProperty.call(e.target.files, key)) {

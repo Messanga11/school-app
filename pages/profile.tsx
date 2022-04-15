@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import DashboardLayout from '../layouts/DashboardLayout'
-import { subjects } from '../utils/common'
+import { subjects, handleImages } from '../utils/common';
 import Image from "next/image"
 import { useCustomFormik, useTranslation } from '@/utils/hooks'
 import * as Yup from "yup"
-import { createStudentEffect, updateStudentEffect } from '@/store/effects'
+import { createStudentEffect, updateProfilePicEffect, updateStudentEffect } from '@/store/effects'
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationDispatch } from '@/store/types'
 import toast from 'react-hot-toast'
@@ -14,6 +14,8 @@ import Button from '@/components/basics/Button'
 import { ApplicationState } from '../store/types/index';
 import { getUserInfosEffect } from '../store/effects/auth';
 import DefaultImageComponent from '../components/DefaultImageComponent';
+import { uploadFormDataWithFile } from '../utils/hooks';
+import { studentUrls } from '@/services/urls';
 
 const Profile = () => {
 
@@ -25,6 +27,9 @@ const Profile = () => {
     const t = useTranslation()
 
       const [loading, setLoading] = useState<boolean>(false)
+      const [file, setFile] = useState<any>(null)
+      const [uploading, setUploading] = useState<boolean>(false)
+      const [profileBase64, setProfileBase64] = useState<string>("")
 
       const dispatch:ApplicationDispatch = useDispatch()
 
@@ -116,8 +121,34 @@ const Profile = () => {
       }))
     })
 
+    // Functions
+    const uploadImage = () => {
+      if(!file) {
+        toast.error("Image file needed")
+      }
+      uploadFormDataWithFile({
+        url: studentUrls.UPDATE_PROFILE_PIC,
+        payload: {
+          file
+        },
+        requireAuth: true,
+        setLoading: setUploading,
+        successCb: () => toast.success("Profile picture updated"),
+        failCb: () => toast.error("Something went wrong!")
+      })
+      return
+      dispatch(updateProfilePicEffect({
+        payload: {
+          base_64: profileBase64
+        },
+        setLoading: setUploading,
+        successCb: () => toast.success("Profile picture updated"),
+        failCb: () => toast.error("Something went wrong!")
+      }))
+    }
+
   return (
-    <DashboardLayout title="Profile" >
+    <DashboardLayout title="Profile">
       <div className='p-12'>
             <h2>Profile
             </h2>
@@ -125,9 +156,21 @@ const Profile = () => {
             <div className='flex flex-wrap gap-8'>
               <div className='w-32 flex-shrink-0'>
                 <div className='w-full h-32'>
-                  <DefaultImageComponent />
+                  {profileBase64 || userInfos?.image_url ? (
+                    <img className='w-full h-full object-cover' src={profileBase64 || userInfos?.image_url} alt="" />
+                  )
+                  : (
+                    <DefaultImageComponent />
+                  )}
                 </div>
-                <Button className='w-full mt-4'>Add an image</Button>
+                <input id='profile-picture' className='hidden' type="file" onChange={(e) => {
+                  setFile(e.target.files?.[0])
+                  handleImages(e, (data:string) => setProfileBase64(data))
+                }} />
+                <Button className='w-full mt-4'><label className='cursor-pointer' htmlFor="profile-picture">{profileBase64 || userInfos?.image_url ? "Change this image" : "Add an image"}</label></Button>
+                {profileBase64 && (
+                  <Button loading={uploading} className='mt-2 w-full' color="secondary" onClick={uploadImage}>Upload</Button>
+                )}
               </div>
 
               <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow'>

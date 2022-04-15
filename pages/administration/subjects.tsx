@@ -26,6 +26,8 @@ import { getBooks, getTopics } from "@/store/actions"
 import Loading from "@/components/basics/Loading"
 import { useLoginChecker } from "@/utils/hooks"
 import LoadingComponent from "@/components/LodingComponent"
+import { apiPrefix } from "@/services/urls"
+import { uploadFormDataWithFile } from '../../utils/hooks';
 
 // Interfaces
 interface InputFormType {
@@ -88,7 +90,7 @@ const Subjects:NextPage = () =>{
     const [topicToDelete, setTopicToDelete] = useState<Topic | null>(null)
     const [fileDelete, setFileDelete] = useState<FileRequest | null>(null)
     const [createdSubject, setCreatedSubject] = useState<Subject | null>(null)
-    const [fileToDelete, setFileToDelete] = useState<FileRequest | null>(null)
+    const [fileToDelete, setFileToDelete] = useState<Book | null>(null)
 
     // Functions
     const resetState = ():void => {
@@ -192,9 +194,35 @@ const Subjects:NextPage = () =>{
             // @ts-ignore
             title: inputForm[`current_${key}_title`],
             type: key,
-            base64: filesForm.book,
+            file: filesForm.book,
             topic_uuid: topicToShow?.uuid || ""
-          }
+        }
+        uploadFormDataWithFile({
+            setLoading,
+            payload,
+            failCb: () => toast.error("Something went wrong!"),
+            successCb: (data:any) => {
+                toast.success("Book created")
+                dispatch(getBooksEffect({
+                    setLoading,
+                    failCb: () => toast.error("Something went wrong!"),
+                    successCb: (data:any) => {
+                        fetchFiles()
+                    },
+                    payload,
+                }))
+                setInputForm(state => ({
+                    ...state,
+                    current_book_title: ""
+                }))
+                setFilesForm(state => ({
+                    ...state,
+                    book: ""
+                }))
+            }
+        })
+        
+          return
           dispatch(createBookEffect({
             setLoading,
             failCb: () => toast.error("Something went wrong!"),

@@ -73,7 +73,7 @@ const Papers = () => {
   const [paperToShow, setPaperToShow] = useState<Paper | null>(null)
   const [questionTypeImage, setQuestionTypeImage] = useState(true);
   const [answerTypeImage, setAnswerTypeImage] = useState(false);
-  const [subject, setSubject] = useState<Option | null>(null);
+  const [subject, setSubject] = useState<Subject | null>(null);
   const [form, setForm] = useState<typeof initialForm>(initialForm);
   const [inputForm, setInputForm] =
     useState<typeof initialInputForm>(initialInputForm);
@@ -86,8 +86,42 @@ const Papers = () => {
   const [paperToDelete, setPaperToDelete] = useState<Paper | null>(null)
   
   // Functions
-  const closeModal = () => setShowModal(false);
+  const closeModal = () => {
+    setShowModal(false)
+    setPaperToShow(null)
+  };
   const openModal = () => setShowModal(true);
+  const showPaper = (paper:Paper) => {
+    const {questions, subject, visible_for, ...paperData} = paper
+    setInputForm({
+      ...inputForm,
+      ...paperData
+    })
+
+    console.log(questions)
+
+    const questionsData = questions.map(q => ({
+      uuid: q?.uuid,
+      question: {
+        is_an_image: q?.is_an_image,
+        image: q?.image,
+        text: q?.text,
+      },
+      answers: q.answers
+    }))
+
+    setQuestionsRequest(questionsData)
+    setPaperToShow(paper)
+    setSubject(subject)
+    Object.keys(form).forEach(key => {
+      if(key === visible_for) {
+        setForm({
+          ...form,
+          [key]: true
+        })
+      }
+    })
+  };
   const deleteItemFromArrayState = (
     setState: Dispatch<SetStateAction<any[]>>,
     indexOnArray: number
@@ -125,10 +159,7 @@ const Papers = () => {
       });
       const data = await res.json();
       resolve(
-        data?.data?.map((data: Subject) => ({
-          label: data?.title,
-          value: data?.uuid,
-        })) || []
+        data?.data || []
       );
     });
 
@@ -160,7 +191,7 @@ const Papers = () => {
             return toast.error("Select a GCE Visibility")
         }
         const payload = {
-            subject_id: subject?.value, 
+            subject_id: subject?.uuid, 
             year: inputForm.year,
             paper_type: inputForm.paper_type,
             visible_for: Object.keys(form)!.find((key):boolean => 
@@ -168,6 +199,10 @@ const Papers = () => {
             Boolean(form[key]) ===true) as string,
             questions: questionsRequest
         }
+        if(paperToShow) {
+          Object.assign(payload, {uuid: paperToShow.uuid})
+        }
+
         dispatch((paperToShow ? updatePaperEffect : createPaperEffect)({
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
@@ -210,7 +245,7 @@ const Papers = () => {
             />
         ))}
         <Container>
-          {showModal && (
+          {(showModal || !!paperToShow) && (
             <Modal
               className="max-w-screen-md"
               handleClose={closeModal}
@@ -220,7 +255,7 @@ const Papers = () => {
                 <div>
                   <div>
                     <div>
-                      <h2>Add a paper</h2>
+                      <h2>{paperToShow ? "Edit": "Add"} a paper</h2>
                     </div>
                   </div>
                 </div>
@@ -231,6 +266,7 @@ const Papers = () => {
                     </Typo>
                     <AsyncSelect
                       value={subject}
+                      getOptionLabel={(option) => option?.title}
                       loadOptions={loadSubjectPromise}
                       onChange={(subjectOption) => {
                           setSubject(subjectOption)
@@ -545,10 +581,11 @@ const Papers = () => {
                 <div className="my-6 flex flex-col gap-4 mt-10">
                   {paper_data.data.map(paper => (
                       <DashboardItem
-                      key={paper.uuid}
-                      icon="healthicons:i-certificate-paper"
-                      title={paper.paper_type}
-                      onDelete={() => setPaperToDelete(paper)}
+                        key={paper.uuid}
+                        icon="healthicons:i-certificate-paper"
+                        title={paper.paper_type}
+                        onDelete={() => setPaperToDelete(paper)}
+                        onEdit={() => showPaper(paper)}
                     />
                   ))}
                 </div>

@@ -89,11 +89,14 @@ const Profile = () => {
   return (
     <DashboardLayout title="Profile" >
     <div className='p-12'>
+          
           <div className='mb-4'>
             <p>Search a student</p>
             <Input name="search-input" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
           </div>
+          
           <Tabs tabs={tabs} activeTabId={activeTabId} setActiveTabId={setActiveTabId} />          
+          
           {activeTabId === "invitations" && (<div className="w-full">
                 <div className='w-full grid grid-cols-5 gap-4'>
                   {invitations?.data?.map(invitation => (
@@ -101,7 +104,6 @@ const Profile = () => {
                     getData={getData} />
                   ))}
                 </div>
-
           </div>)}
           
           {activeTabId === "friends" && (
@@ -115,12 +117,15 @@ const Profile = () => {
               </div>
             )}
           
-          {activeTabId === "students" && (<div className='w-full grid grid-cols-5 gap-4'>
-                {student_data?.data?.map(student => (
-                  <Friend key={student.uuid} friend={student} />
-                ))}
-          </div>)}
-    </div>
+          {activeTabId === "students" && (
+            <div className='w-full grid grid-cols-5 gap-4'>
+                  {student_data?.data?.map(student => (
+                    <Friend key={student.uuid} friend={student} />
+                  ))}
+            </div>
+          )}
+
+      </div>
     </DashboardLayout>
   )
 }

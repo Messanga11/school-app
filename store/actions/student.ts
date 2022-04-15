@@ -1,5 +1,4 @@
-import { CreateStudent, CREATE_STUDENT, DeleteMessage, DeleteResponse, DeleteStudent, DELETE_MESSAGE, DELETE_STUDENT, GetConversations, GetMessages, GetStudent, GetStudents, GET_MESSAGES, GET_STUDENT, GET_STUDENTS, Message, ResponseRange, SendMessage, SEND_MESSAGE, Student, StudentsResponse, UpdateStudent, UPDATE_STUDENT, GET_CONVERSATIONS, User } from "../types";
-import { Conversation, GetFriends, GET_FRIENDS, GetInvitations, GET_INVITATIONS, AcceptInvitation, ACCEPT_INVITATION, REFUSE_INVITATION, RefuseInvitation, DELETE_FRIEND, DeleteFriend, SEND_INVITATION, SendInvitation } from '../types/Student';
+import { CreateStudent, CREATE_STUDENT, DeleteMessage, DeleteResponse, DeleteStudent, DELETE_MESSAGE, DELETE_STUDENT, GetConversations, GetMessages, GetStudent, GetStudents, GET_MESSAGES, GET_STUDENT, GET_STUDENTS, Message, ResponseRange, SendMessage, SEND_MESSAGE, Student, StudentsResponse, UpdateStudent, UPDATE_STUDENT, GET_CONVERSATIONS, User, Conversation, GetFriends, GET_FRIENDS, GetInvitations, GET_INVITATIONS, AcceptInvitation, ACCEPT_INVITATION, REFUSE_INVITATION, RefuseInvitation, DELETE_FRIEND, DeleteFriend, SEND_INVITATION, SendInvitation, UPDATE_PROFILE_PIC, UpdateProfilePic } from "../types";
 
 export const getStudents = (data:StudentsResponse):GetStudents => ({
   type: GET_STUDENTS,
@@ -73,5 +72,10 @@ export const refuseInvitation = (data:undefined):RefuseInvitation => ({
 
 export const deleteFriend = (data:undefined):DeleteFriend => ({
   type: DELETE_FRIEND,
+  payload: data
+})
+
+export const updateProfilePic = (data:undefined):UpdateProfilePic => ({
+  type: UPDATE_PROFILE_PIC,
   payload: data
 })

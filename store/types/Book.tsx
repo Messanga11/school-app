@@ -36,7 +36,7 @@ export interface FileRequest {
     uuid?: string,
     title: string,
     type: string,
-    base64: string,
+    file: string,
     topic_uuid: string
 }
 

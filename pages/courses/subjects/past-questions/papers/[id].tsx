@@ -105,9 +105,7 @@ const Papers = () => {
                         {started ? 'Write the answer you think is correct' : submitted ? 'Check your result' : "Ready for a test ?"}
                         </p>
                         <form className="my-4" onSubmit={validatePaper}>
-                            {started ? (
-                            <div>
-
+                            <div style={{display: (started && !submitted) ? "block" : "none"}}>
                                 {paperToShow?.questions?.map((question, i) => (
                                     <div key={question?.uuid} className="mt-4 border rounded-md p-4">
                                         {question?.is_an_image ? (
@@ -132,7 +130,7 @@ const Papers = () => {
                                                 <small>Your answer</small>
                                                 {question.answers?.map((answer, k) => (
                                                     <div className="flex gap-2" key={answer?.uuid}>
-                                                        <span>{k+1}</span>   
+                                                        <span id={`label-${answer?.uuid}`}>{k+1}</span>   
                                                         <input type="radio" name={`${i}`} onChange={(e) => {
                                                             setAnswers((state:any) => {
                                                                 state[i] = e.target.value
@@ -144,8 +142,8 @@ const Papers = () => {
                                                 {/* <input
                                                     name={i.toString()}
                                                     onChange={(e) => {
-                                                      setAnswers((state:any) => {
-                                                          state[i] = e.target.value
+                                                    setAnswers((state:any) => {
+                                                        state[i] = e.target.value
                                                             return {...state}
                                                         })  
                                                     }}
@@ -156,17 +154,19 @@ const Papers = () => {
                                     </div>
                                 ))}
 
-                                <Button className='w-full mt-8' type="submit" loading={loadingValidate}>Submit</Button>
+                            <Button className='w-full mt-8' type="submit" loading={loadingValidate}>Submit</Button>
 
                             </div>
-                            )
-                            : submitted ? (
-                                <div>
+
+                            <div style={{display: (submitted) ? "block" : "none"}}>
                                     <div className="flex justify-between">
                                     <div className="flex gap-2 flex-col font-bold text-md">
                                         {userAnswers.map((answer:string, i:number) => (
                                             <div className="flex gap-2 items-center" key={answer}>
-                                                <p className="text-green-500">{i+1})</p>
+                                                <p className={`text-${answer === serverAnswers?.correct_answers?.[i] ? "green" : "red"}-500`}>{i+1})</p>
+                                                {showCorrectAnswers && (
+                                                    <span>{document.getElementById(`label-${answer}`)?.textContent || ""}</span>
+                                                )}
                                                 {answer === serverAnswers?.correct_answers?.[i] ?(
                                                     <Icon className="text-green-500" icon="akar-icons:check" />)
                                                     : (
@@ -191,14 +191,11 @@ const Papers = () => {
                                     </Button>
                                 )}
                                 </div>
-                            )
-                            : (
-                                <div className="flex gap-4">
-                                    <Button className="mx-auto w-full mt-8" onClick={() => setStarted(true)}>Yes</Button>
-                                    <Button className="mx-auto w-full mt-8 bg-slate-600" onClick={() => setStarted(true)}>No</Button>
-                                </div>
-                            )}
                         </form>
+                        <div style={{display: (!submitted && !started) ? "block" : "none" }} className="flex gap-4">
+                                <Button className="mx-auto w-full mt-8" onClick={() => setStarted(true)} type="button">Yes</Button>
+                                <Button className="mx-auto w-full mt-8 bg-slate-600" onClick={() => closeFunc()} type="button">No</Button>
+                            </div>
                     </div>
                 </Box>
             </Modal>

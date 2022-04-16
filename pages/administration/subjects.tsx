@@ -189,12 +189,19 @@ const Subjects:NextPage = () =>{
         }))
     }, [dispatch])
 
-    const createFile = (key:string):void => {
+    const createFile = (key:string) => {
+
+        // @ts-ignore
+        if(!inputForm[`current_${key}_title`] || !filesForm[key]) {
+            return toast.error("Make sure to provide file and title")
+        }
+
         const payload:FileRequest = {
             // @ts-ignore
             title: inputForm[`current_${key}_title`],
             type: key,
-            file: filesForm.book,
+            //@ts-ignore
+            file: filesForm[key],
             topic_uuid: topicToShow?.uuid || ""
         }
         uploadFormDataWithFile({
@@ -202,7 +209,7 @@ const Subjects:NextPage = () =>{
             payload,
             failCb: () => toast.error("Something went wrong!"),
             successCb: (data:any) => {
-                toast.success("Book created")
+                toast.success("Item created")
                 dispatch(getBooksEffect({
                     setLoading,
                     failCb: () => toast.error("Something went wrong!"),
@@ -213,11 +220,11 @@ const Subjects:NextPage = () =>{
                 }))
                 setInputForm(state => ({
                     ...state,
-                    current_book_title: ""
+                    [`current_${key}_title`]: ""
                 }))
                 setFilesForm(state => ({
                     ...state,
-                    book: ""
+                    [key]: ""
                 }))
             }
         })

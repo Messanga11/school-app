@@ -21,6 +21,7 @@ export interface Token {
 export interface LoginPayload {
     phone_number: string | number,
     password: string
+    guardian_phone_number?: number
 }
 
 export interface LoginResponse {
@@ -34,10 +35,11 @@ export interface User {
     last_name:string;
     user_name:string;
     phone_number:string;
+    join_date:string;
     image_url:string;
     guardian_phone_number:string;
     email:string;
-    selected_exam:{title: string}[];
+    selected_exam:{label: string, value: string}[];
 }
 
 // ************************* Actions ***************************** //

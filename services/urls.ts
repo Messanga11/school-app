@@ -3,7 +3,7 @@ import { RequestRange } from "@/store/types"
 export const apiPrefix:string = "http://localhost:5301"
 
 export const authUrls = {
-    LOGIN: `${apiPrefix}/auth/login`,
+    LOGIN: (guardian_phone_number:number | undefined) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,
     GET_AUTH_INFOS: `${apiPrefix}/auth/me`,
     UPDATE_AUTH_INFOS: `${apiPrefix}/administration/users`
 }

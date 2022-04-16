@@ -50,17 +50,17 @@ const Administration = () =>{
         <div>
             <div className="grid grid-cols-3 gap-4">
                 <div className="rounded-md shadow-md bg-white p-4">
-                    <p className="text-6xl font-extrabold">100</p>
+                    <p className="text-6xl font-extrabold">{student_data?.data.length}</p>
                     <small className="text-2xl">Students</small>
                     <p className="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
                 <div className="rounded-md shadow-md bg-white p-4">
-                    <p className="text-6xl font-extrabold">80</p>
+                    <p className="text-6xl font-extrabold">0</p>
                     <small className="text-2xl">VIP Students</small>
                     <p className="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
                 <div className="rounded-md shadow-md bg-white p-4">
-                    <p className="text-6xl font-extrabold">100k</p>
+                    <p className="text-6xl font-extrabold">0k</p>
                     <small className="text-2xl">FCFA Paid</small>
                     <p className="mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>

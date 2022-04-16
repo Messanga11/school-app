@@ -89,6 +89,9 @@ const Papers = () => {
   const closeModal = () => {
     setShowModal(false)
     setPaperToShow(null)
+    setForm(initialForm)
+    setInputForm(initialInputForm)
+    setFilesForm(initialFilesForm)
   };
   const openModal = () => setShowModal(true);
   const showPaper = (paper:Paper) => {
@@ -113,6 +116,7 @@ const Papers = () => {
     setQuestionsRequest(questionsData)
     setPaperToShow(paper)
     setSubject(subject)
+    setForm(initialForm)
     Object.keys(form).forEach(key => {
       if(key === visible_for) {
         setForm({

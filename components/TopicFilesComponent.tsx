@@ -91,21 +91,7 @@ const TopicFilesComponent: React.FC<Props> = ({
             setFilesForm(state => ({
               ...state,
               [_key]: e.target.files?.[0]
-            }))
-            return
-            handleImages(
-              {
-                target: {
-                  files: [e.target.files?.[0]],
-                },
-              },
-              (data: string) => {
-                setFilesForm((state) => ({
-                  ...state,
-                  [_key]: data,
-                }));
-              }
-            )}
+            }))}
           }
           className="flex-grow"
         />

@@ -9,9 +9,10 @@ interface DashboardLayoutProps {
     titleDesc?: string
     children: any,
     admin?: boolean
+    guardian?: boolean
 }
 
-const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, children, admin}) => {
+const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, children, admin, guardian}) => {
 
     const t = useTranslation()
 
@@ -23,7 +24,7 @@ const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, child
             <div className="">
                 <div>
                     <div className="flex h-screen">
-                    <DashboardSidebar admin={!!admin} />
+                    <DashboardSidebar admin={!!admin} guardian={!!guardian} />
                     <div className="text-black flex-grow overflow-y-scroll h-full">
                         {!admin && (
                             <DashboardHeader />

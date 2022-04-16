@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-const DashboardSidebar = ({admin}: {admin?: boolean}) => {
+const DashboardSidebar = ({admin, guardian}: {admin?: boolean, guardian?: boolean}) => {
     
     const dispatch = useDispatch()
 
@@ -79,6 +79,14 @@ const DashboardSidebar = ({admin}: {admin?: boolean}) => {
         },
     ]
 
+    const guardianNavigationItems = [
+        {
+            name: "Dashboard",
+            link: "/guardian",
+            icon: <Icon icon="clarity:dashboard-solid" />
+        },
+    ]
+
   return (
     <div className='bg-white text-black h-full border-r border-gray-100 pb-6' style={{minWidth: 210}}>
         <div>
@@ -96,8 +104,9 @@ const DashboardSidebar = ({admin}: {admin?: boolean}) => {
                 </div>
                 <ul className='flex flex-col gap-3'>
                     <hr />
-                    {(admin ? adminNavigationItems : navigationItems).map((navItem, i) => (
+                    {(guardian ? guardianNavigationItems : admin ? adminNavigationItems : navigationItems).map((navItem, i) => (
                         <li key={`sidebar-nav-item-${i}`} className='w-full px-8 border-l-3 border-gray-400 block cursor-pointer font-semibold' onClick={() => {
+                            //@ts-ignore
                             if(navItem?.logout) {
                                 dispatch(logoutEffect())
                                 router.push("/")

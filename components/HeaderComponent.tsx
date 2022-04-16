@@ -40,6 +40,9 @@ function HeaderComponent() {
           <Button className="bg-purple-500" onClick={() => router.push(isLogged ? "/dashboard" : "/login")}>
             {isLogged ? "Dashboard" : "Login"}
           </Button>
+          {!isLogged && <Button color="secondary" onClick={() => router.push("/guardian/login")}>
+            Guardian login
+          </Button>}
         </div>
       </div>
     </header>

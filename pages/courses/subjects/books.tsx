@@ -11,8 +11,10 @@ const Books = () => {
     // Store
     const { book: {book_data}} = useSelector((state:ApplicationState) => state)
 
+    // Hooks
     const dispatch = useDispatch()
 
+    // Functions
     const fetchFiles = useCallback(():void => {
         dispatch(getBooksEffect({
             range: {

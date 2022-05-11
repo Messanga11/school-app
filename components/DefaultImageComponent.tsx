@@ -16,7 +16,7 @@ const DefaultImageComponent:React.FC<Props> = () => {
     // Effects
 
     return (
-        <div className="w-full h-full bg-gray-50 shadow-sm flex justify-center items-center rounded-md">
+        <div className="w-full h-full bg-gray-50 shadow-sm flex justify-center items-center">
             <Icon height={20} color="black" icon="ep:user-filled" />
         </div>
     )

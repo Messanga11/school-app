@@ -1,15 +1,11 @@
 import "../styles/globals.css";
-import { ThemeProvider } from "next-themes";
-import { SessionProvider } from "next-auth/react";
 import { RecoilRoot } from "recoil";
 import { I18nProvider, LOCALES } from "../i18n/index";
-import { Provider } from "react-redux";
 import {wrapper} from "../store/store"
 import { NextPage } from "next";
 import toast, { Toaster } from "react-hot-toast";
 import { Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getAuthInfos } from '../utils/auth';
 import { getUserInfosEffect } from '../store/effects/auth';
 
 interface MyAppProps {

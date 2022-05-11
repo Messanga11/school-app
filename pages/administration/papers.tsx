@@ -270,6 +270,7 @@ const Papers = () => {
                     </Typo>
                     <AsyncSelect
                       value={subject}
+                      className="select__control_custom"
                       getOptionLabel={(option) => option?.title}
                       loadOptions={loadSubjectPromise}
                       onChange={(subjectOption) => {

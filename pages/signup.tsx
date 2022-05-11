@@ -13,6 +13,7 @@ import { createStudentEffect } from "@/store/effects";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
+import Container from '../components/Container';
 
 const SignUp:NextPage = ():JSX.Element => {
 
@@ -123,28 +124,35 @@ const SignUp:NextPage = ():JSX.Element => {
 
   return (
     <DefaultLayout titleDesc="Sign up to the platform" noWidthLimit>
-      <div className="white-label  bg-gradient-to-tr from-purple-800 to-pink-700">
-        <div className="flex gap-5 justify-between px-10 max-w-6xl mx-auto">
-          <main className="flex-grow mt-16 max-w-xl">
-            <div className="space-y-6 xl:space-y-10">
-              <div>
-                <h1 className="text-3xl md:text-5xl !leading-snug pl-4 xl:pl-0 text-white">
-                  Please sign  up
-                </h1>
-                <p className="text-gray-200">Lorem ipsum dolor sit amet</p>
-              </div>
-              <form className="space-y-4" onSubmit={formik.handleSubmit}>
-              {fields}
-              <div className="py-8">
-              <Button className="w-full" loading={loading} type="submit">Submit</Button>
-              </div>
-              </form>
+      <div className="bg-dotted">
+        <Container>
+          <div className="flex justify-between max-w-6xl mx-auto bg-white rounded-xl overflow-hidden shadow-xl" style={{maxHeight: 700, height: "calc(100vh - 150px)"}}>
+            <div className="bg-purple-500 flex-shrink-0 p-8 flex justify-center items-center flex-col w-1/2">
+                <div className="w-4/5 h-full">
+                  <h2 className="text-white text-3xl mb-8">Register an join our amazing team of students!</h2>
+                  <div className="h-2/3 w-full bg-white bg-opacity-50 rounded-xl flex justify-center items-center">
+                    <img className="rounded-xl object-cover object-left-bottom" style={{width: "95%", height: "95%"}} src="/images/sign-in-illustration.jpg" alt="" />
+                  </div>
+                </div>
             </div>
-          </main>
-          <div className="flex-shrink-0">
-            <img className="w-full h-full object-contain" src="/images/illus2.svg" alt="" />
+            <div className="p-8 w-1/2 overflow-y-auto flex-shrink-0">
+              <div className="space-y-6 xl:space-y-10">
+                <div>
+                  <h1 className="text-xl md:text-3xl !leading-snug pl-4 xl:pl-0 font-bold">
+                    Please sign  up
+                  </h1>
+                  <p>Lorem ipsum dolor sit amet</p>
+                </div>
+                <form className="space-y-4" onSubmit={formik.handleSubmit}>
+                {fields}
+                <div className="py-8">
+                <Button color="primary" className="w-full" loading={loading} type="submit">Submit</Button>
+                </div>
+                </form>
+              </div>
+            </div>
           </div>
-        </div>
+        </Container>
       </div>
     </DefaultLayout>
   );

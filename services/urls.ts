@@ -3,7 +3,7 @@ import { RequestRange } from "@/store/types"
 export const apiPrefix:string = "http://localhost:5301"
 
 export const authUrls = {
-    LOGIN: (guardian_phone_number:number | undefined) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,
+    LOGIN: (guardian_phone_number?:number | string) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,
     GET_AUTH_INFOS: `${apiPrefix}/auth/me`,
     UPDATE_AUTH_INFOS: `${apiPrefix}/administration/users`
 }
@@ -41,6 +41,22 @@ export const bookUrls = {
     CREATE_BOOK: `${apiPrefix}/administration/books`,
     DELETE_BOOK: (uuid:string):string => `${apiPrefix}/administration/books/${uuid}`,
     UPDATE_BOOK: `${apiPrefix}/administration/books`,
+}
+
+export const schoolUrls = {
+    GET_SCHOOLS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/schools?page=${range?.page || "1"}&per_page=${range?.per_page || "10"}&region=${range?.region || ""}&keyword=${range?.keyword || ""}`,
+    GET_SCHOOL: (uuid:string):string => `${apiPrefix}/administration/schools/${uuid}`,
+    CREATE_SCHOOL: `${apiPrefix}/administration/schools`,
+    DELETE_SCHOOL: (uuid:string):string => `${apiPrefix}/administration/schools/${uuid}`,
+    UPDATE_SCHOOL: `${apiPrefix}/administration/schools`,
+}
+
+export const schoolPostUrls = {
+    GET_SCHOOL_POSTS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/schoolPosts`,
+    GET_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/schoolPosts/${uuid}`,
+    CREATE_SCHOOL_POST: `${apiPrefix}/administration/schoolPosts`,
+    DELETE_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/schoolPosts/${uuid}`,
+    UPDATE_SCHOOL_POST: `${apiPrefix}/administration/schoolPosts`,
 }
 
 export const paperUrls = {

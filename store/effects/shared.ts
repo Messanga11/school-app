@@ -21,7 +21,6 @@ export const basicEffectFunction = async (effectRange:EffectRange, serviceFuncti
     
     catch (e) {
         effectRange.setLoading(false)
-        console.log(e)
         effectRange.failCb()
     }
 

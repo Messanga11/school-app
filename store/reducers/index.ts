@@ -8,6 +8,7 @@ import studentReducer from "./student";
 import subjectReducer from "./subject";
 import topicReducer from "./topic";
 import videoReducer from "./video";
+import schoolReducer from './school';
 
 
 const combinedReducers:Reducer<ApplicationState, ApplicationAction> = combineReducers({
@@ -18,7 +19,8 @@ const combinedReducers:Reducer<ApplicationState, ApplicationAction> = combineRed
   payment: paymentReducer,
   subject: subjectReducer,
   video: videoReducer,
-  topic: topicReducer
+  topic: topicReducer,
+  school: schoolReducer
 });
 
 export default combinedReducers;

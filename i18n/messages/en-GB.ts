@@ -8,6 +8,16 @@ const enTranslations = {
         "page_home_about": "About",
         "page_home_programs": "Programs",
         "page_home_contact": "Contact",
+        "required_field": "Required field",
+        "first_name": "First name",
+        "user_name": "User name",
+        "email": "Email",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "last_name": "Last name",
+        "select_subject": "Select a subject",
+        "guardian_phone_number": "Guardian phone number",
+        "phone_number": "Phone number",
         "page_home_an_online_shool": "An online school design for you",
         "page_home_an_online_shool_text": "Internet school guides and support you in a direct path to your GCE examination. Our flexible, self-paced study method accommodates your needs when while challenging you to develop new skills ans expertise",
         "page_home_school_is_reliable": "Internet school is a reliable school that is 100% online. We are currently enrolling both examination candidates for GCE O and A levels",
@@ -22,7 +32,8 @@ const enTranslations = {
         "forgot_password": "Forgot password",
         "login_text": "Login to the platform to access your courses ans exercises!",
         "a_code_was_sent": "A code was sent to email address, type it in the code field bellow",
-        "tell_smth_to_the_community": "Tell something to the community"
+        "tell_smth_to_the_community": "Tell something to the community",
+        "enter_at_least_six_chars": "Enter at least 6 characters"
     }
 }
 

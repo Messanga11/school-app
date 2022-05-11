@@ -1,3 +1,4 @@
+import { School } from './School';
 import { Student, UpdateProfilePic } from './Student';
 
 // ************************* Constants **************************** //
@@ -10,7 +11,7 @@ export const LOGOUT = "LOGOUT"
 
 export interface AuthState {
     locale: string;
-    userInfos: User | null;
+    userInfos: User | School | null;
 }
 
 export interface Token {
@@ -22,6 +23,7 @@ export interface LoginPayload {
     phone_number: string | number,
     password: string
     guardian_phone_number?: number
+    type?: string
 }
 
 export interface LoginResponse {

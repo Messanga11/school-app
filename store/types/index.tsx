@@ -14,6 +14,8 @@ import { VideoActions, VideoState } from "./Video"
 import BookService from "@/services/BookService"
 import PaperService from "@/services/PaperService"
 import PaymentService from "@/services/PaymentService"
+import { SchoolActions, SchoolState } from './School';
+import { SchoolPostActions } from './SchoolPost';
 
 // ******************** Exports ******************** //
 export * from "./Student"
@@ -24,12 +26,15 @@ export * from "./Payment"
 export * from "./Subject"
 export * from "./Topic"
 export * from "./Video"
+export * from "./School"
+export * from "./SchoolPost"
 
 // ******************** Application Types  ******************** //
 export type Effect = ThunkAction<any, ApplicationState, any, ApplicationAction>
 export type ApplicationDispatch = ThunkDispatch<ApplicationState, any, ApplicationAction>
-export type ApplicationAction = StudentActions | AuthActions | BookActions | PaperActions | PaymentActions | SubjectActions | TopicActions | VideoActions
-export type ApplicationService = StudentService | AuthService | BookService | PaperService | PaymentService | AuthService
+export type ApplicationAction = StudentActions | AuthActions | BookActions | PaperActions | PaymentActions | SubjectActions | TopicActions | VideoActions | SchoolActions | SchoolPostActions
+export type ApplicationService = StudentService | AuthService | BookService | PaperService | PaymentService | AuthService | SchoolPostActions
+
 export interface ApplicationState {
     auth: AuthState
     student: StudentState,
@@ -39,16 +44,22 @@ export interface ApplicationState {
     subject: SubjectState,
     topic: TopicState,
     video: VideoState,
+    school: SchoolState,
 }
 
 // ******************** Shared interfaces ******************** //
+
+export interface MsgOk {
+    message: string
+}
 export interface RequestRange {
     page?: number;
     per_page?: number;
     keyword?: string;
     order_field?: string;
-    subject_uuid?: string
-    conversation_uuid?: string
+    subject_uuid?: string;
+    conversation_uuid?: string;
+    region?: string;
 }
 
 export interface ResponseRange<T = any> {

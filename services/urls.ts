@@ -52,11 +52,11 @@ export const schoolUrls = {
 }
 
 export const schoolPostUrls = {
-    GET_SCHOOL_POSTS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/schoolPosts`,
-    GET_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/schoolPosts/${uuid}`,
-    CREATE_SCHOOL_POST: `${apiPrefix}/administration/schoolPosts`,
-    DELETE_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/schoolPosts/${uuid}`,
-    UPDATE_SCHOOL_POST: `${apiPrefix}/administration/schoolPosts`,
+    GET_SCHOOL_POSTS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/school_posts?page=${range?.page || "1"}&per_page=${range?.per_page || "100"}&school_uuid=${range?.school_uuid || ""}&keyword=${range?.keyword || ""}`,
+    GET_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/school_posts/${uuid}`,
+    CREATE_SCHOOL_POST: `${apiPrefix}/administration/school_posts`,
+    DELETE_SCHOOL_POST: (uuid:string):string => `${apiPrefix}/administration/school_posts/${uuid}`,
+    UPDATE_SCHOOL_POST: `${apiPrefix}/administration/school_posts`,
 }
 
 export const paperUrls = {

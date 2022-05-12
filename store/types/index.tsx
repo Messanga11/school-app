@@ -15,7 +15,7 @@ import BookService from "@/services/BookService"
 import PaperService from "@/services/PaperService"
 import PaymentService from "@/services/PaymentService"
 import { SchoolActions, SchoolState } from './School';
-import { SchoolPostActions } from './SchoolPost';
+import { SchoolPostActions, SchoolPostState } from './SchoolPost';
 
 // ******************** Exports ******************** //
 export * from "./Student"
@@ -45,6 +45,7 @@ export interface ApplicationState {
     topic: TopicState,
     video: VideoState,
     school: SchoolState,
+    schoolPost: SchoolPostState,
 }
 
 // ******************** Shared interfaces ******************** //
@@ -60,6 +61,7 @@ export interface RequestRange {
     subject_uuid?: string;
     conversation_uuid?: string;
     region?: string;
+    school_uuid?: string;
 }
 
 export interface ResponseRange<T = any> {

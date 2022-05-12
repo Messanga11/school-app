@@ -13,8 +13,9 @@ import { School } from '../store/types/School';
 import Input from "./basics/Input";
 import TextArea from "./basics/Textarea";
 import { toBase64 } from "@/utils/common";
-import { createSchoolPostEffect } from '../store/effects/schoolPost';
+import { createSchoolPostEffect, getSchoolPostsEffect } from '../store/effects/schoolPost';
 import { getUserInfosEffect } from "@/store/effects/auth";
+import SchoolPost from "./SchoolPost";
 
 interface Props {
     edit?: boolean
@@ -26,11 +27,8 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
     const router = useRouter()
     const dispatch = useDispatch()
 
-    // Constants
-    const schoolUuid = router.query.id
-
     // Store
-    const { school: { current_school:schoolFromState }, auth: { userInfos } } = useSelector((state:ApplicationState) => state)
+    const { school: { current_school:schoolFromState }, auth: { userInfos }, schoolPost: {school_post_data}  } = useSelector((state:ApplicationState) => state)
 
     // App data
     const current_school = edit ? userInfos as School : schoolFromState
@@ -38,10 +36,12 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
     // States
     const [showInfos, setShowInfos] = useState<boolean>(false)
     const [showAddMemberModal, setShowAddMemberModal] = useState(false)
+    const [isPrincipal, setIsPrincipal] = useState(false)
     const [memberType, setMemberType] = useState("")
     const [showTeacherModal, setShowTeacherModal] = useState(false)
     const [showContactModal, setShowContactModal] = useState(false)
     const [loadingSchool, setLoadingSchool] = useState(false)
+    const [loadingSchoolPosts, setLoadingSchoolPosts] = useState(false)
     const [loadingUpdate, setLoadingUpdate] = useState(false)
     const [image, setImage] = useState<any>(null)
     const [loadingCreatePost, setLoadingCreatePost] = useState<boolean>(false)
@@ -52,6 +52,9 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
     const [schoolForm, setSchoolForm] = useState({...(current_school || {})})
     
     
+    // Constants
+    const schoolUuid = router.query.id || current_school?.uuid
+
     // Function
     const deletePrincipal = () => {
         setSchoolForm(state => ({
@@ -69,24 +72,34 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
     
     const deleteVicePrincipal = (i:number) => {
         setSchoolForm(state => {
-            const data = [...(state.vice_principal || [])].filter((vp, index) => index === i)
+            const data = [...(state.vice_principals || [])].filter((vp, index) => index !== i)
             return {...state,
-            vice_principal: data}
+            vice_principals: data}
+        })
+    }
+    
+    const deleteTeacher = (i:number) => {
+        setSchoolForm(state => {
+            const data = [...(state.teachers || [])].filter((vp, index) => index !== i)
+            console.log(data)
+            return {...state,
+            teachers: data}
         })
     }
     
     const updateVicePrincipal = (i:number, data:any) => {
         setSchoolForm(state => {
             return {...state,
-            vice_principal: [...(state.vice_principal || [])].map((vp, index) => index === i ? data : vp)}
+            vice_principal: [...(state.vice_principals || [])].map((vp, index) => index === i ? data : vp)}
         })
     }
 
-    const addMember = (data:any, prop:string, i:number) => {
+    const addUpdateMember = (data:any, prop:string, i?:number) => {
         setSchoolForm(state => {
             return {...state,
                 //@ts-ignore
-            [prop]: [...(state[prop] || [])].map((vp, index) => index === i ? data : vp)}
+                [prop]: [...(state[prop] || []).map((vp, index) => index === i ? data : vp), {...data}]
+            }
         })
     }
 
@@ -95,6 +108,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
         setShowAddMemberModal(false)
         setShowTeacherModal(false)
         setShowContactModal(false)
+        setIsPrincipal(false)
     }
 
     const updateSchool = () => {
@@ -126,6 +140,19 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
             payload: schoolUuid
         }))
     }
+
+    const fetchArticles= () => {
+        dispatch(getSchoolPostsEffect({
+            setLoading: setLoadingSchoolPosts,
+            failCb: () => {
+                toast.error("Unable to load this school data")
+            },
+            successCb: () => {
+
+            },
+            range: {school_uuid: String(schoolUuid)}
+        }))
+    }
     
     const handleSubmitCreatePost = () => {
         const payload = {
@@ -142,7 +169,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                         description: ""
                     })
                     setImage("")
-                    fetchData()
+                    fetchArticles()
                 },
                 failCb: () => undefined,
                 setLoading: setLoadingCreatePost
@@ -154,8 +181,11 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
     useEffect(() => {
         if(schoolUuid) {
             fetchData()
+            fetchArticles()
         }
     }, [schoolUuid])
+
+    console.log(schoolForm)
     
 
     return (
@@ -163,7 +193,14 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
 
         {showInfos && <EditSchoolInfoModal handleClose={handleClose} />}
 
-        {showAddMemberModal && <AddMemberModal updateSchool={updateSchool} handleClose={handleClose} />}
+        {showAddMemberModal && (
+            <AddMemberModal
+                updatePrincipal={updatePrincipal}
+                updateMembers={addUpdateMember}
+                handleClose={handleClose}
+                isPrincipal={isPrincipal}
+            />
+        )}
         <div className="grid grid-cols-5">
 
             {showTeacherModal && (
@@ -172,9 +209,15 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                         <h2>Teachers</h2>
                         <small>List of the teachers of this school</small>
                     </div>
-                    <div className="grid grid-cols-4 gap-4 mt-4">
-                        {(current_school?.teachers || []).map((t:SchoolMember, i:number) => (
-                            <SchoolMemberComponent key={`teacher-${i}`} />
+                    {(schoolForm?.teachers || []).length === 0 && (
+                        <p className="mt-8 text-center">No teacher provided</p>
+                    )}
+                    <div className="grid grid-cols-3 gap-4 mt-4">
+                        {(schoolForm?.teachers || []).map((t:SchoolMember, i:number) => (
+                            <div className="relative" key={`teacher-${i}`}>
+                                {edit && <span className="absolute top-0 right-1 text-lg font-bold text-red-500 cursor-pointer" onClick={() => deleteTeacher(i)}>x</span>}
+                                <SchoolMemberComponent member={t} />
+                            </div>
                         ))}
                     </div>
                 </Modal>
@@ -196,35 +239,48 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
 
             {/* Side */}
             <aside className="col-span-1">
-                <Button color="primary" className="w-full mb-4" onClick={updateSchool}>Save</Button>
-                <div className="bg-white rounded-xl p-4 shadow-xl">
-                    <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-xl">
-                        { <div>
+                <div className="bg-white rounded-xl p-4 shadow-xl mb-4">
+                    <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-xl bg-cover relative" style={{backgroundImage: `url(${ schoolForm?.principal?.base_64 || schoolForm?.principal?.image_url})`}}>
+                        {schoolForm?.principal?.name ? ( <div className="p-2 bg-black bg-opacity-20 w-full rounded-xl text-gray-400">
                             <small>Principal</small>
-                            <p className="truncate" style={{lineHeight: "15px"}}>Eteme mboto</p>
-                        </div>}
+                            <p className="truncate text-white" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
+                        </div>) : (
+                            <p>No principal specified</p>
+                        )}
                     </div>
                     <small className="font-bold">Vice principals</small>
-                        <div className="grid grid-cols-4 gap-1">
-                            <div className="h-12 relative w-full bg-gray-200 tip-wrapper rounded-md">
-                                <div className="absolute -top-1/2 z-10 bg-black text-white p-2 w-max tip">
-                                    <small>Ezongo Michel</small>
-                                </div>
-                            </div>
-                            {edit && (
-                                <button className="flex justify-center items-center w-full rounded-md bg-gray-200 hover:bg-gray-300"
-                                onClick={() => {
-                                    setShowAddMemberModal(true)
-                                    setMemberType("teacher")
-                                }}
-                                >
-                                    <div>
-                                        <p>+</p>
-                                    </div>
-                                </button>
-                            )}
+                    {schoolForm?.vice_principals?.length === 0 && (
+                        <div>
+                            <small>No member provided</small>
                         </div>
+                    )}
+                    <div className="grid grid-cols-4 gap-1">
+                        {schoolForm?.vice_principals?.map((vp, i) => (<div key={`vice-principal-${i}`}
+                        style={{backgroundImage: `url(${ vp?.base_64 || vp?.image_url})`}}
+                        className="h-12 relative w-full bg-gray-200 tip-wrapper rounded-md bg-cover">
+                            {edit && <span className="absolute top-0 right-1 text-lg font-bold text-red-500 cursor-pointer" onClick={() => deleteVicePrincipal(i)}>x</span>}
+                            <div className="absolute -top-1/2 z-10 bg-black text-white py-1 w-max tip rounded-full px-4">
+                                <small>{vp?.name}</small>
+                            </div>
+                        </div>))}
+                    </div>
+                    
                 </div>
+                {edit && <Button color="secondary" filled className="w-full mb-4 bg-purple-500" onClick={() => {
+                    setShowAddMemberModal(true)
+                    setIsPrincipal(true)
+                }}>Add/Update principal</Button>}
+                {edit && <Button filled className="w-full mb-4 bg-pink-500" onClick={updateSchool} loading={loadingUpdate}>Save</Button>}
+                {edit && (
+                    <Button className="w-full"
+                    onClick={() => {
+                        setShowAddMemberModal(true)
+                        setMemberType("teacher")
+                    }}
+                    >
+                        + Add a member
+                    </Button>
+                )}
             </aside>
 
             <div className="px-8 col-span-4 flex flex-col gap-8">
@@ -232,11 +288,20 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                 <div className="w-full bg-white py-4 px-8 rounded-xl shadow-xl">
                     <div className="flex items-center gap-4 justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="w-16 h-16 rounded-full bg-gray-400"></div>
+                            <div className="w-16 h-16 rounded-full bg-gray-400" style={{backgroundImage: `url(${schoolForm?.logo})`}}></div>
                             <div>
-                                <p className="font-semibold">{current_school?.name}</p>
-                                <small>{current_school?.region}</small>
+                                <p className="font-semibold">{schoolForm?.name}</p>
+                                <small>{schoolForm?.region}</small>
                             </div>
+                            {edit && <div className="mt-4">
+                                <input id="image" className="hidden" type="file" onChange={(e) => toBase64(e.target?.files![0]).then(base64 => setSchoolForm(state => ({
+                                    ...state,
+                                    logo: String(base64)
+                                })))} />
+                                <label htmlFor="image" className="rounded-full py-2 px-4 border-2 text-sm cursor-pointer border-black hover:bg-black hover:text-white font-semibold">
+                                    {image ? "Change logo" : "Add logo"}
+                                </label>
+                            </div>}
                         </div>
                         <div className="flex gap-6">
                             <Button onClick={() => setShowTeacherModal(true)}>See teachers</Button>
@@ -245,7 +310,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                     </div>
                 </div>
 
-                <div>
+                {edit && <div>
                     <p className="font-semibold mb-2">Add a new article</p>
                     <div className="bg-white rounded-xl">
                         {image && <div>
@@ -282,16 +347,11 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>}
 
-                <div className="w-full rounded-xl bg-white overflow-hidden shadow-md">
-                    <div className="w-full bg-gray-300 h-80">
-                    </div>
-                    <div className="p-8">
-                        <h2>We bring school to the next level</h2>
-                        <p className="text-lg">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod voluptatem laudantium voluptatibus ex, itaque adipisci ratione alias officiis ad minus accusamus voluptatum fugit quam possimus voluptates tempore ipsam reprehenderit architecto impedit odio corporis totam eligendi explicabo. Sapiente voluptatum sequi deleniti repudiandae nulla, quam fugiat sed doloremque quia ea eligendi. Non.</p>
-                    </div>
-                </div>
+                {school_post_data.data.map(sp => (
+                    <SchoolPost key={sp?.uuid} post={sp} />
+                ))}
 
             </div>
 

@@ -11,6 +11,7 @@ export const RESET_SCHOOL_POST_STATE = "RESET_SCHOOL_POST_STATE"
 
 // ************************* Interfaces ,***************************** //
 export interface SchoolPost {
+    base_64: string;
     uuid: string
     title: string
     description: string

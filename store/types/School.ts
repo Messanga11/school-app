@@ -11,8 +11,8 @@ export const RESET_SCHOOL_STATE = "RESET_SCHOOL_STATE"
 
 // ************************* Interfaces ,***************************** //
 export interface SchoolMember {
-    first_name: string
-    last_name: string
+    name: string;
+    base_64?: string;
     image_url: string
 }
 
@@ -20,10 +20,11 @@ export interface School {
     uuid?: string;
     name?: string;
     email?: string;
+    logo?: string;
     phone_number?: string;
     region?: string;
     principal?: SchoolMember | null;
-    vice_principal?: SchoolMember[];
+    vice_principals?: SchoolMember[];
     teachers?: SchoolMember[]
 }
 

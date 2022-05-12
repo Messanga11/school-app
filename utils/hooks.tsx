@@ -58,7 +58,7 @@ interface Option {
     label: string,
     value: string | number
 }
-interface Field {
+export interface Field {
     name: string,
     type?: "select" | "number" | "text" | "image" | "checkbox" | "textarea" | "password" | "email",
     placeholder?: string,

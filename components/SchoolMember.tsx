@@ -4,7 +4,7 @@ import { useSelector } from "react-redux"
 
 interface Props {
     sm?: boolean,
-    member?: SchoolMember
+    member: SchoolMember
 }
 
 const SchoolMember:React.FC<Props> = ({sm, member}) => {
@@ -19,9 +19,9 @@ const SchoolMember:React.FC<Props> = ({sm, member}) => {
     // Effects
 
     return (
-        <div className="flex flex-col justify-center items-center">
-            <img className={`${sm ? "w-12 h-12" : "w-32 h-32"} rounded-full bg-gray-300 bg-cover`} src={member?.image_url} alt="" />
-            <p className="truncate">{member?.first_name} {member?.last_name}</p>
+        <div className="text-center">
+            <img className={`${sm ? "w-12 h-12" : "w-32 h-32"} rounded-full bg-gray-300 bg-cover block mx-auto`} src={member?.base_64 || member?.image_url} alt="" />
+            <p className="truncate mt-2">{member?.name}</p>
         </div>
     )
 }

@@ -9,8 +9,9 @@ import subjectReducer from "./subject";
 import topicReducer from "./topic";
 import videoReducer from "./video";
 import schoolReducer from './school';
+import school_postReducer from "./schoolPost";
 
-
+// @ts-ignore
 const combinedReducers:Reducer<ApplicationState, ApplicationAction> = combineReducers({
   student: studentReducer,
   auth: authReducer,
@@ -20,7 +21,8 @@ const combinedReducers:Reducer<ApplicationState, ApplicationAction> = combineRed
   subject: subjectReducer,
   video: videoReducer,
   topic: topicReducer,
-  school: schoolReducer
+  school: schoolReducer,
+  schoolPost: school_postReducer
 });
 
 export default combinedReducers;

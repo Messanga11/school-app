@@ -8,10 +8,11 @@ interface Default {
     children: any,
     admin?: boolean
     school?: boolean
+    university?: boolean
     noWidthLimit?: boolean
 }
 
-const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, school, noWidthLimit}) => {
+const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, school, noWidthLimit, university}) => {
 
     const t = useTranslation()
 
@@ -22,7 +23,7 @@ const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, sch
             </Head>
             <div className="flex flex-col h-screen max-h-screen">
                 <div>
-                    <HeaderComponent school={school} />
+                    <HeaderComponent school={school} university={university} />
                 </div>
                 <div className="flex-grow overflow-y-auto pt-28">
                     <div className={`${!noWidthLimit ?  "max-w-6xl " : " "}mx-auto`}>

@@ -15,9 +15,10 @@ import { School } from '../store/types/School';
 interface Props {
     submitFunc: Function;
     update?: boolean;
+    university?: boolean;
 }
 
-const SchoolCreateUpdate:React.FC<Props> = ({submitFunc, update}) => {
+const SchoolCreateUpdate:React.FC<Props> = ({submitFunc, update, university}) => {
 
     // Store
     const { auth: { userInfos } } = useSelector((state:ApplicationState) => state)
@@ -78,7 +79,7 @@ const SchoolCreateUpdate:React.FC<Props> = ({submitFunc, update}) => {
             placeholder: "Confirm new password"
         },
     ], (values) => {
-        const payload = {...values}
+        const payload = {...values, type: university ? "UNIVERSITY": "SCHOOL"}
         if(update) {
             payload.uuid = schoolInfos?.uuid
         }
@@ -97,8 +98,8 @@ const SchoolCreateUpdate:React.FC<Props> = ({submitFunc, update}) => {
         <Container>
             <div>
                 <div className="flex flex-col items-center p-12 rounded-xl shadow-md bg-white max-w-lg w-full mx-auto">
-                    <h2>Register your school</h2>
-                    <small>Join our amazing team of schools an enjoy amazing features</small>
+                    <h2>Register your {university ? "university": "school"}</h2>
+                    <small>Join our amazing team an enjoy amazing features</small>
                     <form className="mt-8 flex flex-col gap-4 w-full" onSubmit={formik.handleSubmit}>
                         {fields}
                         <Button loading={loading}>Register</Button>

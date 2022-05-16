@@ -62,6 +62,7 @@ export interface RequestRange {
     conversation_uuid?: string;
     region?: string;
     school_uuid?: string;
+    type?: string;
 }
 
 export interface ResponseRange<T = any> {

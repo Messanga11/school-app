@@ -44,7 +44,7 @@ export const bookUrls = {
 }
 
 export const schoolUrls = {
-    GET_SCHOOLS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/schools?page=${range?.page || "1"}&per_page=${range?.per_page || "10"}&region=${range?.region || ""}&keyword=${range?.keyword || ""}`,
+    GET_SCHOOLS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/schools?page=${range?.page || "1"}&per_page=${range?.per_page || "10"}&region=${range?.region || ""}&keyword=${range?.keyword || ""}&type=${range?.type || ""}`,
     GET_SCHOOL: (uuid:string):string => `${apiPrefix}/administration/schools/${uuid}`,
     CREATE_SCHOOL: `${apiPrefix}/administration/schools`,
     DELETE_SCHOOL: (uuid:string):string => `${apiPrefix}/administration/schools/${uuid}`,

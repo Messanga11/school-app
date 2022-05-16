@@ -16,10 +16,11 @@ import { useRouter } from "next/router";
 import Button from '@/components/basics/Button';
 
 interface Props {
-  school?: boolean
+  school?: boolean;
+  university?: boolean;
 }
 
-function HeaderComponent({school}:Props) {
+function HeaderComponent({school, university}:Props) {
 
   // Hooks
   const t = useTranslation()
@@ -64,11 +65,11 @@ function HeaderComponent({school}:Props) {
         </ul>
         {/* Right */}
         <div className="flex items-center space-x-6">
-          <Button color="info" onClick={() => router.push(isLogged ? school ? "schools/administration" : "/dashboard" : school ? "/schools/login" : "/login")}>
+          <Button color="info" onClick={() => router.push(isLogged ? school ? "schools/administration" : university ? "university/administration" : "/dashboard" : school ? "/schools/login" : university ? "/university/login" : "/login")}>
             {isLogged ? "Dashboard" : "Login"}
           </Button>
-          <Button onClick={() => router.push(school ? "/schools/create" : "/guardian/login")}>
-            {school ? "Create school" : "Guardian"}
+          <Button onClick={() => router.push(school ? "/schools/create" : university ? "/university/create" : "/guardian/login")}>
+            {school ? "Create school" : university ? "Create university" : "Guardian"}
           </Button>
           {/* {!isLogged && <Button color="secondary" onClick={() => router.push("/guardian/login")}>
             Guardian

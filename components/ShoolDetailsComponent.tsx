@@ -18,10 +18,11 @@ import { getUserInfosEffect } from "@/store/effects/auth";
 import SchoolPost from "./SchoolPost";
 
 interface Props {
-    edit?: boolean
+    edit?: boolean;
+    university?: boolean;
 }
 
-const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
+const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
     //Hooks
     const router = useRouter()
@@ -207,7 +208,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                 <Modal handleClose={handleClose} className="max-w-xl p-4">
                     <div className="text-center">
                         <h2>Teachers</h2>
-                        <small>List of the teachers of this school</small>
+                        <small>List of the teachers</small>
                     </div>
                     {(schoolForm?.teachers || []).length === 0 && (
                         <p className="mt-8 text-center">No teacher provided</p>
@@ -227,7 +228,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                     <div className="text-center">
                         <div>
                             <h2>Contact</h2>
-                            <small>You want to get in touch with he school</small>
+                            <small>You want to get in touch with us</small>
                         </div>
                         <div className="mt-4">
                             <small className="font-bold">Phone number</small>
@@ -242,13 +243,13 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit }) => {
                 <div className="bg-white rounded-xl p-4 shadow-xl mb-4">
                     <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-xl bg-cover relative" style={{backgroundImage: `url(${ schoolForm?.principal?.base_64 || schoolForm?.principal?.image_url})`}}>
                         {schoolForm?.principal?.name ? ( <div className="p-2 bg-black bg-opacity-20 w-full rounded-xl text-gray-400">
-                            <small>Principal</small>
+                            <small>{university ? "Director" : "Principal"}</small>
                             <p className="truncate text-white" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
                         </div>) : (
-                            <p>No principal specified</p>
+                            <p>No {university ? "director" : "principal"} specified</p>
                         )}
                     </div>
-                    <small className="font-bold">Vice principals</small>
+                    <small className="font-bold">{university ? "Vice director" : "Vice principal"}</small>
                     {schoolForm?.vice_principals?.length === 0 && (
                         <div>
                             <small>No member provided</small>

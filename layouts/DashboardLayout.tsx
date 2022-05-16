@@ -19,6 +19,7 @@ interface DashboardLayoutProps {
     guardian?: boolean
     noHeader?: boolean
     school?: boolean
+    university?: boolean
 }
 
 const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, children, admin, guardian, noHeader, school}) => {

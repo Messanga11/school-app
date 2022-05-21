@@ -58,9 +58,9 @@ interface Option {
     label: string,
     value: string | number
 }
-interface Field {
+export interface Field {
     name: string,
-    type?: "select" | "number" | "text" | "image" | "checkbox" | "textarea" | "password",
+    type?: "select" | "number" | "text" | "image" | "checkbox" | "textarea" | "password" | "email",
     placeholder?: string,
     validation: any,
     initialValue: string,
@@ -110,6 +110,7 @@ export const useFields = (fields: Field[], formik:any) => {
                     name={field.name}
                     isMulti={!!field.isMulti}
                     label={field.placeholder}
+                    initialValue={field.initialValue ? JSON.parse(field.initialValue) : null}
                 />
                 {FormikErrorComp(field.name, formik)}
             </div>
@@ -177,7 +178,7 @@ export const useFields = (fields: Field[], formik:any) => {
     return fieldsToReturn
 }
 
-  export const useCustomFormik = (fields:Field[], onSubmit: (values: typeof fields) => any, reinitialize=true) => {
+  export const useCustomFormik = (fields:Field[], onSubmit: (values: any) => any, reinitialize=true) => {
     const [initialValues, validationSchema] = useFormikInitNValidation(fields)
 	const formik = useFormik({
 		initialValues,
@@ -200,6 +201,7 @@ export const useFields = (fields: Field[], formik:any) => {
             if(token && ["/login", "/signup"].includes(router.pathname)) {
                 router.push("/home")
             }
+            // eslint-disable-next-line
     }, [])
   }
 

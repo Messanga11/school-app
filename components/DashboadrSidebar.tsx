@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-const DashboardSidebar = ({admin, guardian}: {admin?: boolean, guardian?: boolean}) => {
+const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?: boolean, school?: boolean}) => {
     
     const dispatch = useDispatch()
 
@@ -85,6 +85,31 @@ const DashboardSidebar = ({admin, guardian}: {admin?: boolean, guardian?: boolea
             link: "/guardian",
             icon: <Icon icon="clarity:dashboard-solid" />
         },
+        {
+            name: "logout",
+            link: "#logout",
+            icon: <Icon icon="ion:exit" />,
+            logout: true
+        },
+    ]
+
+    const schoolNavigationItems:any = [
+        {
+            name: "Dashboard",
+            link: "/schools/administration",
+            icon: <Icon icon="clarity:dashboard-solid" />
+        },
+        {
+            name: "Profile",
+            link: "/schools/administration/update",
+            icon: <Icon icon="clarity:dashboard-solid" />
+        },
+        {
+            name: "logout",
+            link: "#logout",
+            icon: <Icon icon="ion:exit" />,
+            logout: true
+        },
     ]
 
   return (
@@ -104,7 +129,7 @@ const DashboardSidebar = ({admin, guardian}: {admin?: boolean, guardian?: boolea
                 </div>
                 <ul className='flex flex-col gap-3'>
                     <hr />
-                    {(guardian ? guardianNavigationItems : admin ? adminNavigationItems : navigationItems).map((navItem, i) => (
+                    {(guardian ? guardianNavigationItems : school ? schoolNavigationItems : admin ? adminNavigationItems : navigationItems).map((navItem:any, i:number) => (
                         <li key={`sidebar-nav-item-${i}`} className='w-full px-8 border-l-3 border-gray-400 block cursor-pointer font-semibold' onClick={() => {
                             //@ts-ignore
                             if(navItem?.logout) {

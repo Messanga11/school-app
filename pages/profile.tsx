@@ -16,6 +16,7 @@ import { getUserInfosEffect } from '../store/effects/auth';
 import DefaultImageComponent from '../components/DefaultImageComponent';
 import { uploadFormDataWithFile } from '../utils/hooks';
 import { studentUrls } from '@/services/urls';
+import Container from '../components/Container';
 
 const Profile = () => {
 
@@ -136,55 +137,52 @@ const Profile = () => {
         successCb: () => toast.success("Profile picture updated"),
         failCb: () => toast.error("Something went wrong!")
       })
-      return
-      dispatch(updateProfilePicEffect({
-        payload: {
-          base_64: profileBase64
-        },
-        setLoading: setUploading,
-        successCb: () => toast.success("Profile picture updated"),
-        failCb: () => toast.error("Something went wrong!")
-      }))
     }
 
   return (
     <DashboardLayout title="Profile">
-      <div className='p-12'>
-            <h2>Profile
-            </h2>
+      <Container>
+        <div>
+              <p className='mb-2'>Actual profile picture
+              </p>
 
-            <div className='flex flex-wrap gap-8'>
-              <div className='w-32 flex-shrink-0'>
-                <div className='w-full h-32'>
-                  {profileBase64 || userInfos?.image_url ? (
-                    <img className='w-full h-full object-cover' src={profileBase64 || userInfos?.image_url} alt="" />
-                  )
-                  : (
-                    <DefaultImageComponent />
+              <div className='flex flex-wrap gap-8'>
+                <div className='w-44 flex-shrink-0'>
+                  <div className='w-full h-44 rounded-xl overflow-hidden shadow-sm'>
+                    {profileBase64 || userInfos?.image_url ? (
+                      <img className='w-full h-full object-cover' src={profileBase64 || userInfos?.image_url} alt="" />
+                    )
+                    : (
+                      <DefaultImageComponent />
+                    )}
+                  </div>
+                  <input id='profile-picture' className='hidden' type="file" onChange={(e) => {
+                    setFile(e.target.files?.[0])
+                    handleImages(e, (data:string) => setProfileBase64(data))
+                  }} />
+                  <Button className='w-full mt-4'><label className='cursor-pointer' htmlFor="profile-picture">{profileBase64 || userInfos?.image_url ? "Change this image" : "Add an image"}</label></Button>
+                  {profileBase64 && (
+                    <Button loading={uploading} className='mt-2 w-full' color="secondary" onClick={uploadImage}>Upload</Button>
                   )}
                 </div>
-                <input id='profile-picture' className='hidden' type="file" onChange={(e) => {
-                  setFile(e.target.files?.[0])
-                  handleImages(e, (data:string) => setProfileBase64(data))
-                }} />
-                <Button className='w-full mt-4'><label className='cursor-pointer' htmlFor="profile-picture">{profileBase64 || userInfos?.image_url ? "Change this image" : "Add an image"}</label></Button>
-                {profileBase64 && (
-                  <Button loading={uploading} className='mt-2 w-full' color="secondary" onClick={uploadImage}>Upload</Button>
-                )}
+
+                <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow p-8 bg-white rounded-xl shadow-md'>
+                  <div className='col-span-2'>
+                    <h2>Update informations about your profile</h2>
+                    <p>You can change all informations about your profile here</p>
+                  </div>
+                      {fields}
+
+                <Button
+                      type="submit"
+                      className='col-span-2 mt-4'
+                >
+                      Save
+                </Button>
+                </form>
               </div>
-
-              <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow'>
-                    {fields}
-
-              <Button
-                    type="submit"
-                    className='col-span-2 mt-4'
-              >
-                    Save
-              </Button>
-              </form>
-            </div>
-      </div>
+        </div>
+      </Container>
     </DashboardLayout>
   )
 }

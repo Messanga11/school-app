@@ -16,22 +16,22 @@ function Home() {
       titleDesc="Welcome to the school next generation"
       noWidthLimit
     >
-      <div className="bg-gradient-to-tr from-purple-800 to-pink-700">
+      <div className="bg-gradient-to-tr from-purple-800 to-pink-700 py-8">
         <div
           className="p-10 text-white max-w-6xl mx-auto"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <h1 className="text-7xl font-bold mb-4">
+              <h1 className="text-6xl font-bold mb-4">
                 {t("page_home_an_online_shool")}
               </h1>
-              <p className="text-xl leading-relaxed mt-4  text-gray-200">
+              <p className="text-sm leading-relaxed mt-4 text-gray-200">
                 {t("page_home_an_online_shool_text")}
               </p>
             </div>
             <div>
               <div>
-                <p className="text-xl font-bold mb-4 ml-2 text-gray-200">Become a student</p>
+                <p className="text-lg mb-4 text-gray-200">Become a student</p>
                 <div
                   className="grid gap-4 grid-cols-2"
                 >
@@ -72,7 +72,7 @@ function Home() {
         className="py-4 px-6 text-white bg-black text-center"
         style={{ margin: 0 }}
       >
-        <p className="text-white">{t("page_home_school_is_reliable")}</p>
+        <p className="text-white text-sm">{t("page_home_school_is_reliable")}</p>
       </div>
       <main className="items-center mx-auto px-10 max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-16">
@@ -98,16 +98,16 @@ function Home() {
                 {" "}
                 {icon} <span>{t(title)}</span>
               </h2>
-              <p className="text-xl leading-relaxed">{t(text)}</p>
+              <p className="text-base leading-relaxed">{t(text)}</p>
             </div>
           ))}
         </div>
 
         <div className="text-center py-20">
-          <h2 className="text-5xl font-bold text-black">
+          <h2 className="text-4xl font-bold text-black">
             {t("page_home_a_new_standard")}
           </h2>
-          <p className="text-3xl font-semibold my-4">
+          <p className="text-xl font-semibold my-4">
             {t("page_home_control_over_the_way")}
           </p>
         </div>

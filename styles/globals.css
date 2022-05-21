@@ -1,7 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
 
 :root {
   --primary: #fff;
@@ -17,6 +18,7 @@ body {
 }
 
 * {
+<<<<<<< HEAD
   font-family: 'Playfair Display', serif;
   box-sizing: border-box
 }
@@ -269,6 +271,9 @@ aside {
 
 .slider-count {
   font-size: 1.5em;
+=======
+  font-family: 'Poppins', sans-serif;
+>>>>>>> origin/staging
 }
 
 @layer base {
@@ -279,15 +284,27 @@ aside {
     @apply text-xl font-semibold mb-2
   }
   p {
-    @apply text-lg text-gray-700
+    @apply text-base text-gray-700
   }
   img {
     max-width: 100%;
+  }
+  .tip {
+    opacity: 0;
+  }
+  .tip-wrapper:hover .tip {
+    opacity: 1;
   }
 }
 
 
 @layer components {
+  .bg-dotted {
+    background-color: transparent;
+    background-image: radial-gradient(circle, #ccc 5%, transparent 10%), radial-gradient(circle, #ccc 5%, transparent 10%);
+    background-size: 78px 78px;
+    background-position: 0 0, 0 0;
+  }
   .white-label label {
     color: white;
   }
@@ -295,7 +312,7 @@ aside {
     @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer rounded-none text-black bg-white mx-auto xl:mx-0 py-4;
   }
   .intent {
-    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer text-black bg-white mx-auto xl:mx-0 rounded-none;
+    @apply flex justify-between items-center hover:shadow-xl p-4 cursor-pointer text-black bg-white rounded-sm mx-auto xl:mx-0;
   }
 
   .sidebarButton {
@@ -312,6 +329,9 @@ aside {
 
   .postButton {
     @apply flex items-center justify-center space-x-2 cursor-pointer hover:bg-black/10 dark:hover:bg-black/20 w-full py-2.5 rounded transition ease-out font-medium;
+  }
+  .react-select_custom, .react-select_custom *:focus, .react-select_custom *:hover {
+    border-color: transparent!important;
   }
 }
 

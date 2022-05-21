@@ -110,7 +110,7 @@ const Friend = ({
   };
 
   return (
-    <div className="h-96 flex flex-col justify-between items-center w-full bg-gray-50 border rounded-md hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100">
+    <div className="h-96 flex flex-col justify-between items-center w-full bg-gray-50 border overflow-hidden hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100 rounded-xl">
       {showModal && (
         <Modal
           className="max-w-md mx-auto"
@@ -142,7 +142,7 @@ const Friend = ({
       ) : (
         <DefaultImageComponent />
       )}
-      <div className="py-4 px-2 w-full">
+      <div className="p-4 w-full bg-gray-00">
         <div className="flex gap-3 items-center">
           <p className="text-lg mb-2">
             <span>{friend?.first_name}</span>{" "}

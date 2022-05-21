@@ -12,6 +12,7 @@ import { getFriendsEffect, getStudentsEffect, sendInvitationEffect, getInvitatio
 import { ApplicationState } from '../store/types/index';
 import toast from 'react-hot-toast';
 import { AnyObject } from 'immer/dist/internal'
+import Container from '../components/Container';
 
 const Profile = () => {
 
@@ -88,11 +89,13 @@ const Profile = () => {
 
   return (
     <DashboardLayout title="Profile" >
-    <div className='p-12'>
+    <Container>
+      <div className='bg-white p-8 rounded-xl'>
+        <h2>Friends</h2>
+        <p>Here you can add friend, see your actual friends and invitations you have</p>
           
-          <div className='mb-4'>
-            <p>Search a student</p>
-            <Input name="search-input" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+          <div className='mb-4 mt-4'>
+            <Input placeholder='Search a student' name="search-input" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
           </div>
           
           <Tabs tabs={tabs} activeTabId={activeTabId} setActiveTabId={setActiveTabId} />          
@@ -107,7 +110,7 @@ const Profile = () => {
           </div>)}
           
           {activeTabId === "friends" && (
-            <div className='w-full grid grid-cols-5 gap-4'>
+            <div className='w-full grid grid-cols-4 gap-4'>
                 {friends?.data?.map(invitation => (
                   <Friend
                     key={invitation.request_user?.uuid} friend={invitation.request_user} invitationUuid={invitation.uuid}
@@ -126,6 +129,7 @@ const Profile = () => {
           )}
 
       </div>
+    </Container>
     </DashboardLayout>
   )
 }

@@ -24,7 +24,7 @@ const ConversationItem:React.FC<Props> = ({conversation, setCurrentConversation,
   const dispatch = useDispatch()
 
   return (
-    <button className='flex gap-4 bg-gray-50 hover:bg-gray-200 px-3 py-4 relative w-full' onClick={() => openConversation(conversation)}>
+    <button className={`flex gap-4 bg-gray-50 hover:bg-gray-200 px-3 py-4 relative w-full rounded-xl ]`} onClick={() => openConversation(conversation)}>
         <span className='bg-red-500 w-3 h-3 rounded-full absolute right-2 top-2'></span>
         <div className='flex-shrink-0'>
             <img 

@@ -16,17 +16,35 @@ import { useRouter } from "next/router";
 import Button from '@/components/basics/Button';
 import Link from "next/link";
 
-function HeaderComponent() {
+interface Props {
+  school?: boolean;
+  university?: boolean;
+}
 
+function HeaderComponent({school, university}:Props) {
+
+  // Hooks
+  const t = useTranslation()
+  const router = useRouter()
+
+  // Consts
+  const middleItems = [
+    {
+      label: "School",
+      link: "/schools"
+    },
+    {
+      label: "University",
+      link: "/university"
+    },
+  ]
+
+  // State
   const [isLogged, setIsLogged] = useState(false)
 
   useEffect(() => {
     setIsLogged(!!localStorage.getItem("token"))
   }, [])
-
-
-
-  const router = useRouter()
 
   return (
     <Fragment>

@@ -14,6 +14,7 @@ import Modal from "./Modal";
 import Input from "@/components/basics/Input";
 import toast from "react-hot-toast";
 import DefaultImageComponent from './DefaultImageComponent';
+import TextArea from "./basics/Textarea";
 
 interface StudentProps {
   friend: Student;
@@ -110,21 +111,22 @@ const Friend = ({
   };
 
   return (
-    <div className="h-96 flex flex-col justify-between items-center w-full bg-gray-50 border overflow-hidden hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100 rounded-xl">
+    <div className="h-96 flex flex-col justify-between items-center w-full bg-[#2e2e2f] border border-black overflow-hidden hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100 rounded-xl">
       {showModal && (
         <Modal
           className="max-w-md mx-auto"
           handleClose={() => setShowModal(false)}
         >
           <div>
-            <h2>Write a message to {friend?.first_name}</h2>
-            <Input
+            <h2 className="text-white">Write a message to {friend?.first_name}</h2>
+            <p className="mb-8">Type your message in the input bellow</p>
+            <TextArea
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
             <Button
               loading={loadingMessage}
-              className="mt-4 w-full"
+              className="mt-8 w-full"
               onClick={sendMessage}
             >
               Send

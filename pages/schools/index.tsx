@@ -4,6 +4,7 @@ import { useSelector } from "react-redux"
 import DefaultLayout from "@/layouts/DefaultLayout"
 import { useRouter } from "next/router"
 import Container from '@/components/Container';
+import { Icon } from "@iconify/react"
 
 interface Props {
 }
@@ -27,20 +28,22 @@ const Schools:React.FC<Props> = () => {
             <Container>
                 <div className="mt-4">
                 <div className="text-center mb-4">
-                    <h2 className="text-center">Which action do you want to perform ?</h2>
-                    <small>You can search or register a school to the platform</small>
+                    <h2 className="text-center title">Select an action</h2>
+                    <p>You can search or register a school to the platform</p>
                 </div>
-                    <div className="grid grid-cols-2 h-full gap-4">
+                    <div className="grid grid-cols-2 h-full gap-4 pt-20">
                         <div>
-                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100"
+                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100 rounded-md"
                             onClick={() => router.push("/schools/search")}>
-                                <h2 className="text-white">Search a school</h2>
+                                <div className="flex justify-center mb-8"><Icon height={80} icon="akar-icons:search" /></div>
+                                <h2>Search a school</h2>
                             </button>
                         </div>
                         <div>
-                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100"
+                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100 rounded-md text-center"
                             onClick={() => router.push("/schools/create")}>
-                                <h2 className="text-white">Create a school profile</h2>
+                                <div className="flex justify-center mb-8"><Icon height={80} icon="carbon:document-add" /></div>
+                                <h2>Create a school profile</h2>
                             </button>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ import TextArea from "@/components/basics/Textarea"
 import Typo from "@/components/basics/Typo"
 import Modal from "@/components/Modal"
 import { useCallback, useEffect, useState } from "react"
-import Button from "@/components/Button"
+import Button from "@/components/basics/Button"
 import Input from "@/components/basics/Input"
 import { ApplicationDispatch, ApplicationState, Student } from "@/store/types"
 import { NextPage } from "next"
@@ -110,7 +110,7 @@ const Students:NextPage = ():JSX.Element =>{
                         }
           /> */}
                         <Typo type="small" className="font-semibold">To</Typo>
-                        <p className="mb-4 font-semibold bg-gray-100 p-4 rounded-md">{studentToShow ? studentToShow?.first_name : "Everyone"}</p>
+                        <p className="mb-4 font-semibold bg-[#2e2e2f] p-4 rounded-md">{studentToShow ? studentToShow?.first_name : "Everyone"}</p>
                         <div className="flex flex-col">
                         <Typo type="small" className="font-semibold">Message</Typo>
                                 <TextArea  name="message" className="w-full" style={{minHeight: 150}} value={inputForm.message} onChange={handleInputChange} />
@@ -124,17 +124,16 @@ const Students:NextPage = ():JSX.Element =>{
                     <div className="my-8 col-span-3 px-4">
                         <div>
                             <div className="font-bold flex justify-between items-center">
-                                <h2 className="text-2xl">Recent students</h2>
-                                <a href="/administartion/students">Actions</a>
+                                <h2 className="text-2xl text-white mb-8">Recent students</h2>
                             </div>
                             <div className="my-4">
-                                <div className="flex gap-2 items-center intent py-0 shadow-sm">
-                                    <Icon icon="akar-icons:search" />
-                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3" />
+                                <div className="flex gap-2 items-center intent py-0 shadow-sm rounded-full bg-[#515153]">
+                                    <Icon icon="akar-icons:search" color="white" />
+                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3 text-white" />
                                 </div>
                             </div>
-                            <button className="intent bg-green-500 text-white font-semibold mt-4 h-10" onClick={() => openModal(null)}>Send a message to every student</button>
-                            <div className="my-6 grid grid-cols-4 gap-4 mt-10">
+                            <Button className="mt-4" onClick={() => openModal(null)}>Send a message to every student</Button>
+                            <div className="my-6 grid grid-cols-4 gap-4 mt-16">
                                 {data.map(item => (
                                     <Friend key={item?.uuid} friend={item} setStudentToSendMessage={(student:Student) => setStudentToShow(student)} />
                                 ))}

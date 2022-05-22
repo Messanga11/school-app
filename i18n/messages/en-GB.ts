@@ -33,7 +33,8 @@ const enTranslations = {
         "login_text": "Login to the platform to access your courses ans exercises!",
         "a_code_was_sent": "A code was sent to email address, type it in the code field bellow",
         "tell_smth_to_the_community": "Tell something to the community",
-        "enter_at_least_six_chars": "Enter at least 6 characters"
+        "enter_at_least_six_chars": "Enter at least 6 characters",
+        "click_here_to_select_an_image": "Click here to select an image"
     }
 }
 

@@ -39,7 +39,7 @@ const Library = () => {
     return (
         <DashboardLayout>
             <Container className="flex flex-col h-full">
-                <h2 className="mb-4">Library</h2>
+                <h2 className="mb-4 text-white">Library</h2>
                 <div>
                     <div>
                         {book_data.data.filter(file => file.type === "library").length !== 0 && (

@@ -33,13 +33,13 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="ant-design:message-filled" />
         },
         {
-            name: "logout",
+            name: "Logout",
             link: "#logout",
             icon: <Icon icon="ion:exit" />,
             logout: true
         },
         {
-            name: "help",
+            name: "Help",
             link: "/help",
             icon: <Icon icon="bxs:help-circle" />
         },
@@ -72,7 +72,7 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="fa-solid:money-check" />
         },
         {
-            name: "logout",
+            name: "Logout",
             link: "#logout",
             icon: <Icon icon="ion:exit" />,
             logout: true
@@ -86,7 +86,7 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="clarity:dashboard-solid" />
         },
         {
-            name: "logout",
+            name: "Logout",
             link: "#logout",
             icon: <Icon icon="ion:exit" />,
             logout: true
@@ -105,7 +105,7 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="clarity:dashboard-solid" />
         },
         {
-            name: "logout",
+            name: "Logout",
             link: "#logout",
             icon: <Icon icon="ion:exit" />,
             logout: true
@@ -113,12 +113,12 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
     ]
 
   return (
-    <div className='bg-white text-black h-full border-r border-gray-100 pb-6' style={{minWidth: 210}}>
+    <div className='bg-[#2e2e2f] text-black h-full border-r border-black pb-6' style={{minWidth: 210}}>
         <div>
             <div>
                 <div className='h-16 flex items-center justify-center'>
                     <div className="px-4 text-sm text-center flex items-center gap-3">
-                            <div className='bg-orange-600 h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
+                            <div className='bg-[#e2c78c] h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
                                 <Icon icon="bxs:user" color="white" height={25} />
                             </div>
                             <div>
@@ -127,8 +127,8 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
                             </div>
                     </div>
                 </div>
-                <ul className='flex flex-col gap-3'>
-                    <hr />
+                <hr className='border-black' />
+                <ul className='flex flex-col gap-3 mt-8'>
                     {(guardian ? guardianNavigationItems : school ? schoolNavigationItems : admin ? adminNavigationItems : navigationItems).map((navItem:any, i:number) => (
                         <li key={`sidebar-nav-item-${i}`} className='w-full px-8 border-l-3 border-gray-400 block cursor-pointer font-semibold' onClick={() => {
                             //@ts-ignore
@@ -140,8 +140,8 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
                             }
                         }}>
                             <div className={`
-                            transition-gpu duration-300 hover:ml-2 w-full py-2 flex gap-4 items-center text-lg hover:text-black 
-                            ${router.pathname === navItem.link ? " ml-2 text-black" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
+                            transition-gpu duration-300 hover:ml-2 w-full py-2 flex gap-4 items-center text-md hover:text-white font-light
+                            ${router.pathname === navItem.link ? " ml-2 text-white" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
                         </li>
                     ))}
                 </ul>

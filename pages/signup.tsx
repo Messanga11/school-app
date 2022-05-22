@@ -15,21 +15,21 @@ import { useState } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import Container from '../components/Container';
 
-const SignUp:NextPage = ():JSX.Element => {
+const SignUp: NextPage = (): JSX.Element => {
 
   const t = useTranslation()
-  const dispatch:ApplicationDispatch = useDispatch() 
+  const dispatch: ApplicationDispatch = useDispatch()
 
   const [loading, setLoading] = useState(false)
 
   const router = useRouter()
-  const selectedExam:("ordinaryGrammar" | "ordinaryCommercial" | "advancedGrammar" | "advancedCommercial") = !!router.query?.exam 
-                                ? String(router.query?.exam) as ("ordinaryGrammar" | "ordinaryCommercial" | "advancedGrammar" | "advancedCommercial")
-                                : "ordinaryGrammar"
+  const selectedExam: ("ordinaryGrammar" | "ordinaryCommercial" | "advancedGrammar" | "advancedCommercial") = !!router.query?.exam
+    ? String(router.query?.exam) as ("ordinaryGrammar" | "ordinaryCommercial" | "advancedGrammar" | "advancedCommercial")
+    : "ordinaryGrammar"
 
-  const validateConfirmPassword = (values:any) => {
+  const validateConfirmPassword = (values: any) => {
 
-    
+
 
     let error = "";
     if (values.password && values.confirm_password) {
@@ -40,7 +40,7 @@ const SignUp:NextPage = ():JSX.Element => {
     return error;
   };
 
-  const {fields, formik} = useCustomFormik([
+  const { fields, formik } = useCustomFormik([
     {
       initialValue: "",
       name: "first_name",
@@ -84,7 +84,7 @@ const SignUp:NextPage = ():JSX.Element => {
       name: "selected_exam",
       type: "select",
       isMulti: true,
-      options:subjects[selectedExam]?.map(item => ({
+      options: subjects[selectedExam]?.map(item => ({
         label: item?.title,
         value: item?.title
       })) || [],
@@ -106,53 +106,40 @@ const SignUp:NextPage = ():JSX.Element => {
       validation: Yup.string().required(t("required_field"))
     },
   ],
-  (values) => {
-    const payload = {...values}
-    Reflect.deleteProperty(payload, "confirm_password")
-    dispatch(createStudentEffect({
-      payload,
-      setLoading: setLoading,
-      successCb: () => {
-        router.push("/login")
-        toast.success("Your account have been successfully created. Please login now")
-      },
-      failCb: () => {
-        toast.error("Something went wrong")
-      },
-    }))
-  })
+    (values) => {
+      const payload = { ...values }
+      Reflect.deleteProperty(payload, "confirm_password")
+      dispatch(createStudentEffect({
+        payload,
+        setLoading: setLoading,
+        successCb: () => {
+          router.push("/login")
+          toast.success("Your account have been successfully created. Please login now")
+        },
+        failCb: (data:any) => {
+          toast.error(typeof data?.detail === "string" ? data?.detail : "Something went wrong")
+        },
+      }))
+    })
 
   return (
     <DefaultLayout titleDesc="Sign up to the platform" noWidthLimit>
-      <div className="bg-dotted">
-        <Container>
-          <div className="flex justify-between max-w-6xl mx-auto bg-white rounded-xl overflow-hidden shadow-xl" style={{maxHeight: 700, height: "calc(100vh - 150px)"}}>
-            <div className="bg-purple-500 flex-shrink-0 p-8 flex justify-center items-center flex-col w-1/2">
-                <div className="w-4/5 h-full">
-                  <h2 className="text-white text-3xl mb-8">Register an join our amazing team of students!</h2>
-                  <div className="h-2/3 w-full bg-white bg-opacity-50 rounded-xl flex justify-center items-center">
-                    <img className="rounded-xl object-cover object-left-bottom" style={{width: "95%", height: "95%"}} src="/images/sign-in-illustration.jpg" alt="" />
-                  </div>
-                </div>
-            </div>
-            <div className="p-8 w-1/2 overflow-y-auto flex-shrink-0">
-              <div className="space-y-6 xl:space-y-10">
-                <div>
-                  <h1 className="text-xl md:text-3xl !leading-snug pl-4 xl:pl-0 font-bold">
-                    Please sign  up
-                  </h1>
-                  <p>Lorem ipsum dolor sit amet</p>
-                </div>
-                <form className="space-y-4" onSubmit={formik.handleSubmit}>
-                {fields}
-                <div className="py-8">
-                <Button color="primary" className="w-full" loading={loading} type="submit">Submit</Button>
-                </div>
-                </form>
-              </div>
-            </div>
+      <div className="container-block pt-0">
+        <div className="space-y-6 xl:space-y-10">
+          <div className="text-center">
+            <h1 className="title">
+              Please sign  up
+            </h1>
+            <p>Fill your informations to create a student account</p>
           </div>
-        </Container>
+          <form className="space-y-2 max-w-xl mx-auto pb-16" onSubmit={formik.handleSubmit}>
+            {fields}
+            <div className="py-8">
+              <p className="text-xs mb-2">By clicking on the submit button bellow, you are accepting, <a href="#">privacy and policy</a>, and <a href="#">term of use</a>.</p>
+              <Button color="primary" className="w-full" loading={loading} type="submit">Submit</Button>
+            </div>
+          </form>
+        </div>
       </div>
     </DefaultLayout>
   );

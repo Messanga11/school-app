@@ -17,16 +17,14 @@ const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, sch
     const t = useTranslation()
 
     return (
-        <div color="black">
+        <div>
             <Head>
                 <title>Ultimate School | {titleDesc}</title>
             </Head>
-            <div className="flex flex-col h-screen max-h-screen">
+            <HeaderComponent school={school} university={university} />
+            <div>
                 <div>
-                    <HeaderComponent school={school} university={university} />
-                </div>
-                <div className="flex-grow overflow-y-auto pt-28">
-                    <div className={`${!noWidthLimit ?  "max-w-6xl " : " "}mx-auto`}>
+                    <div className={`${!noWidthLimit ?  "container-block " : ""}`} style={{marginTop: 130}}>
                         {children}
                     </div>
                 </div>

@@ -40,7 +40,7 @@ interface InputFormType {
     topics: TopicRequest[]
 }
 
-const Subjects:NextPage = () =>{
+const Subjects: NextPage = () => {
 
     // Const
     const initialForm = {
@@ -70,7 +70,7 @@ const Subjects:NextPage = () =>{
     const dispatch = useDispatch()
     useLoginChecker(true)
     // Store
-    const {subject: {subject_data}, topic: {topic_data}, book: {book_data}} = useSelector((state:ApplicationState) => state)
+    const { subject: { subject_data }, topic: { topic_data }, book: { book_data } } = useSelector((state: ApplicationState) => state)
 
     // States
     const [subjectToShow, setSubjectToShow] = useState<Subject | null>(null)
@@ -93,7 +93,7 @@ const Subjects:NextPage = () =>{
     const [fileToDelete, setFileToDelete] = useState<Book | null>(null)
 
     // Functions
-    const resetState = ():void => {
+    const resetState = (): void => {
         setSubjectToShow(null)
         setShowModal(false)
         setSubject("")
@@ -105,30 +105,30 @@ const Subjects:NextPage = () =>{
         setBooks([])
         setLibBooks([])
         setVideos([])
-        dispatch(getBooks({data:[]}))
-        dispatch(getTopics({data:[]}))
+        dispatch(getBooks({ data: [] }))
+        dispatch(getTopics({ data: [] }))
     }
 
-    const closeModal = ():void => {
+    const closeModal = (): void => {
         resetState()
     }
 
-    const openModal = ():void => {
+    const openModal = (): void => {
         setShowModal(true)
     }
-    
-    const deleteItemFromArrayState = (setState: Dispatch<SetStateAction<any[]>>, indexOnArray:number):void => {
+
+    const deleteItemFromArrayState = (setState: Dispatch<SetStateAction<any[]>>, indexOnArray: number): void => {
         setState((state) => state.filter((item, i) => i !== indexOnArray))
     }
 
-    const showSubject = (subject:Subject):void => setSubjectToShow(subject)
+    const showSubject = (subject: Subject): void => setSubjectToShow(subject)
 
-    const saveTopic = ():void => {
-        if(!inputForm.current_topic_title) {
+    const saveTopic = (): void => {
+        if (!inputForm.current_topic_title) {
             toast.error("Topic title is required")
             return
         }
-        const payload:TopicRequest = {
+        const payload: TopicRequest = {
             uuid: topicToShow?.uuid,
             title: inputForm?.current_topic_title,
             visible_for: createdSubject?.visible_for || "",
@@ -142,7 +142,8 @@ const Subjects:NextPage = () =>{
                 toast.success("Topic created")
                 fetchTopics()
             },
-            payload}))
+            payload
+        }))
         setInputForm({
             ...inputForm,
             current_topic_title: ""
@@ -153,50 +154,51 @@ const Subjects:NextPage = () =>{
         setVideos([])
     }
 
-    const handleChange = (e:any):void=> {
-        setForm((state:typeof initialForm) => {
+    const handleChange = (e: any): void => {
+        setForm((state: typeof initialForm) => {
             Object.keys(state).forEach((key) => {
                 // @ts-ignore
                 state[key] = false
             })
             return ({
-            ...state,
-            [e.target.name]: e.target.checked
-        })})
+                ...state,
+                [e.target.name]: e.target.checked
+            })
+        })
     }
-    
-    const handleInputChange = (e:any):void => {
+
+    const handleInputChange = (e: any): void => {
         setInputForm({
             ...inputForm,
             [e.target.name]: e.target.value,
         })
     }
 
-    const fetchFiles = useCallback(():void => {
+    const fetchFiles = useCallback((): void => {
         dispatch(getBooksEffect({
             range: {
                 page: 1,
                 per_page: 10,
                 order_field: "date_added"
             },
-            failCb: ():void => {
-                
+            failCb: (): void => {
+
             },
-            successCb: ():void => {
-                
+            successCb: (): void => {
+
             },
             setLoading: () => undefined
         }))
     }, [dispatch])
 
-    const createFile = (key:string) => {
+    const createFile = (key: string) => {
 
         // @ts-ignore
-        if(!inputForm[`current_${key}_title`] || !filesForm[key]) {
+        if (!inputForm[`current_${key}_title`] || !filesForm[key]) {
             return toast.error("Make sure to provide file and title")
         }
 
-        const payload:FileRequest = {
+        const payload: FileRequest = {
             // @ts-ignore
             title: inputForm[`current_${key}_title`],
             type: key,
@@ -208,12 +210,12 @@ const Subjects:NextPage = () =>{
             setLoading,
             payload,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:any) => {
+            successCb: (data: any) => {
                 toast.success("Item created")
                 dispatch(getBooksEffect({
                     setLoading,
                     failCb: () => toast.error("Something went wrong!"),
-                    successCb: (data:any) => {
+                    successCb: (data: any) => {
                         fetchFiles()
                     },
                     payload,
@@ -228,17 +230,17 @@ const Subjects:NextPage = () =>{
                 }))
             }
         })
-        
-          return
-          dispatch(createBookEffect({
+
+        return
+        dispatch(createBookEffect({
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:any) => {
+            successCb: (data: any) => {
                 toast.success("Book created")
                 dispatch(getBooksEffect({
                     setLoading,
                     failCb: () => toast.error("Something went wrong!"),
-                    successCb: (data:any) => {
+                    successCb: (data: any) => {
                         fetchFiles()
                     },
                     payload,
@@ -253,27 +255,27 @@ const Subjects:NextPage = () =>{
                 }))
             },
             payload,
-          }))
+        }))
     }
 
-    const fetchSubjects = useCallback(():void => {
+    const fetchSubjects = useCallback((): void => {
         dispatch(getSubjectsEffect({
             range: {
                 page: 1,
                 per_page: 10,
                 order_field: "date_added"
             },
-            failCb: ():void => {
-                
+            failCb: (): void => {
+
             },
-            successCb: ():void => {
-                
+            successCb: (): void => {
+
             },
             setLoading: () => undefined
         }))
     }, [dispatch])
 
-    const fetchTopics = ():void => {
+    const fetchTopics = (): void => {
         dispatch(getTopicsEffect({
             range: {
                 page: 1,
@@ -281,33 +283,33 @@ const Subjects:NextPage = () =>{
                 order_field: "date_added",
                 subject_uuid: createdSubject?.uuid
             },
-            failCb: ():void => {
-                
+            failCb: (): void => {
+
             },
-            successCb: ():void => {
-                
+            successCb: (): void => {
+
             },
             setLoading: () => undefined
         }))
     }
 
-    
+
     const saveSubject = () => {
         const payload: SubjectRequest = {
             uuid: subjectToShow?.uuid,
             title: inputForm.subject_title,
-            visible_for: Object.keys(form)!.find((key):boolean => 
-            // @ts-ignore
-            Boolean(form[key]) ===true) as string
+            visible_for: Object.keys(form)!.find((key): boolean =>
+                // @ts-ignore
+                Boolean(form[key]) === true) as string
         }
         dispatch((subjectToShow ? updateSubjectEffect : createSubjectEffect)({
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:Subject) => {
+            successCb: (data: Subject) => {
                 toast.success(`Subject ${subjectToShow ? "updated" : "created"}`)
                 fetchSubjects()
                 setCreatedSubject(data)
-                if(subjectToShow) {
+                if (subjectToShow) {
                     setSubjectToShow(data)
                 }
                 setOpenState(2)
@@ -317,14 +319,14 @@ const Subjects:NextPage = () =>{
         }))
     }
 
-    const openEditSubject = (subject:Subject) => {
+    const openEditSubject = (subject: Subject) => {
         showSubject(subject)
         setInputForm({
             ...inputForm,
             subject_title: subject?.title,
         })
         setForm(state => {
-            const newState: any = {...state}
+            const newState: any = { ...state }
             Object.keys(state).forEach((key) => {
                 newState[key] = key === subject?.visible_for
             })
@@ -337,44 +339,44 @@ const Subjects:NextPage = () =>{
             range: subjectToDelete?.uuid,
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:any) => {
+            successCb: (data: any) => {
                 toast.success(`Subject deleted`)
                 fetchSubjects()
                 setSubjectToDelete(null)
             }
         }))
     }
-    
+
     const deleteTopic = () => {
         dispatch(deleteTopicEffect({
             range: topicToDelete?.uuid,
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:any) => {
+            successCb: (data: any) => {
                 toast.success(`Topic deleted`)
                 fetchTopics()
                 setTopicToDelete(null)
             }
         }))
     }
-    
+
     const deleteFile = () => {
         dispatch(deleteBookEffect({
             range: fileToDelete?.uuid,
             setLoading,
             failCb: () => toast.error("Something went wrong!"),
-            successCb: (data:any) => {
+            successCb: (data: any) => {
                 toast.success(`File deleted`)
                 fetchFiles()
                 setFileToDelete(null)
             }
         }))
     }
-    
+
     useEffect(() => {
-      fetchSubjects()
+        fetchSubjects()
     }, [fetchSubjects])
-    
+
 
     return (
         <DashboardLayout titleDesc="admin pannel" admin>
@@ -386,7 +388,7 @@ const Subjects:NextPage = () =>{
                         onDecline={() => setSubjectToDelete(null)}
                     />
                 ))}
-                {(showModal||subjectToShow) && (
+                {(showModal || subjectToShow) && (
                     <Modal className="max-w-screen-md" handleClose={closeModal} type={"dropIn"}>
                         {((topicToDelete) && (
                             <DeleteModal
@@ -406,72 +408,72 @@ const Subjects:NextPage = () =>{
                             <div>
                                 <div>
                                     <div>
-                                        <h2>{subjectToShow ? "Edit" : "Add"} Subject {subjectToShow && `: ${subjectToShow?.title}`}</h2>
+                                        <h2 className="text-white">{subjectToShow ? "Edit" : "Add"} Subject {subjectToShow && `: ${subjectToShow?.title}`}</h2>
                                     </div>
                                 </div>
                             </div>
                             <div className="mt-6">
                                 <div>
                                     <div className="flex flex-col gap-4">
-                                    {openState === 1 && <div>
-                                    <Input name="subject_title" label="Title" value={inputForm.subject_title} onChange={handleInputChange} />
-                                    <div>
-                                        <Typo type="small" className="font-semibold mt-4">Visible for</Typo>
-                                        <InputCheckbox  name="alg" checked={form.alg} onClick={handleChange} label="GCE Advanced level Grammar" />
-                                        <InputCheckbox name="alc" checked={form.alc}  onClick={handleChange} label="GCE Advanced level Commercial" />
-                                        <InputCheckbox name="olg" checked={form.olg}  onClick={handleChange} label="GCE Ordinary level Grammar" />
-                                        <InputCheckbox name="olc" checked={form.olc}  onClick={handleChange} label="GCE Ordinary level Commercial" />
-                                    </div>
-                                    
-                                    <Button className="mt-4 w-full" onClick={saveSubject}>{subjectToShow ? "Update" : "Save"}</Button>
+                                        {openState === 1 && <div>
+                                            <Input name="subject_title" label="Title" value={inputForm.subject_title} onChange={handleInputChange} />
+                                            <div className="mt-4">
+                                                <Typo type="small" className="text-xs text-white">Visible for</Typo>
+                                                <InputCheckbox name="alg" checked={form.alg} onClick={handleChange} label="GCE Advanced level Grammar" />
+                                                <InputCheckbox name="alc" checked={form.alc} onClick={handleChange} label="GCE Advanced level Commercial" />
+                                                <InputCheckbox name="olg" checked={form.olg} onClick={handleChange} label="GCE Ordinary level Grammar" />
+                                                <InputCheckbox name="olc" checked={form.olc} onClick={handleChange} label="GCE Ordinary level Commercial" />
+                                            </div>
+
+                                            <Button className="mt-8 w-full" onClick={saveSubject}>{subjectToShow ? "Update" : "Save"}</Button>
                                         </div>
-                                    }
+                                        }
                                     </div>
                                     {openState === 2 && <div>
                                         <div>
-                                            <small className="text-sm font-semibold">Topics</small>
+                                            <small className="text-sm text-white">Topics</small>
                                             <div className="my-3 space-y-2">
                                                 {topic_data.data.map((topic, i) => (
                                                     <div key={topic?.uuid}>
                                                         <div className="flex flex-col gap-2">
                                                             {topicToShow?.uuid === topic?.uuid && <Button className="self-end" onClick={() => setTopicToShow(null)}>Close</Button>}
-                                                        <DashboardItem 
-                                                            size="sm" icon="uis:subject"
-                                                            title={topic.title}
-                                                            key={`topics_${i}`}
-                                                            onEdit={() => setTopicToShow(topic)}
-                                                            onDelete={() => setTopicToDelete(topic)}
-                                                        />
-                                                        {topicToShow?.uuid === topic?.uuid && (
-                                                            <TopicInput
-                                                                handleInputChange={handleInputChange}
-                                                                value={inputForm.current_topic_title}
-                                                                addFunc={saveTopic}
-                                                                name={"current_topic_title"}
-                                                                isUpdate
+                                                            <DashboardItem
+                                                                size="sm" icon="uis:subject"
+                                                                title={topic.title}
+                                                                key={`topics_${i}`}
+                                                                onEdit={() => setTopicToShow(topic)}
+                                                                onDelete={() => setTopicToDelete(topic)}
                                                             />
-                                                        )}
-                                                        </div>
-                                                        
-                                                    {topicToShow?.uuid === topic?.uuid && 
-                                                        Object.keys(initialFileForm)
-                                                            .map(key => (
-                                                                <TopicFilesComponent 
-                                                                    key={key}
-                                                                    _key={key}
+                                                            {topicToShow?.uuid === topic?.uuid && (
+                                                                <TopicInput
                                                                     handleInputChange={handleInputChange}
-                                                                    libBooks={libBooks}
-                                                                    notes={notes}
-                                                                    saveFile={createFile}
-                                                                    videos={videos}
-                                                                    fetchFiles={fetchFiles}
-                                                                    setFilesForm={setFilesForm}
-                                                                    topicToShow={topicToShow}
-                                                                    inputForm={inputForm}
-                                                                    setFileToDelete={setFileToDelete}
-                                                                />)
-                                                            )
-                                                    }
+                                                                    value={inputForm.current_topic_title}
+                                                                    addFunc={saveTopic}
+                                                                    name={"current_topic_title"}
+                                                                    isUpdate
+                                                                />
+                                                            )}
+                                                        </div>
+
+                                                        {topicToShow?.uuid === topic?.uuid &&
+                                                            Object.keys(initialFileForm)
+                                                                .map(key => (
+                                                                    <TopicFilesComponent
+                                                                        key={key}
+                                                                        _key={key}
+                                                                        handleInputChange={handleInputChange}
+                                                                        libBooks={libBooks}
+                                                                        notes={notes}
+                                                                        saveFile={createFile}
+                                                                        videos={videos}
+                                                                        fetchFiles={fetchFiles}
+                                                                        setFilesForm={setFilesForm}
+                                                                        topicToShow={topicToShow}
+                                                                        inputForm={inputForm}
+                                                                        setFileToDelete={setFileToDelete}
+                                                                    />)
+                                                                )
+                                                        }
                                                     </div>
                                                 ))}
                                             </div>
@@ -496,7 +498,7 @@ const Subjects:NextPage = () =>{
                     <div className="my-8 col-span-3 px-4">
                         <div>
                             <div className="font-bold flex justify-between items-center">
-                                <h2 className="text-2xl">Subjects</h2>
+                                <h2 className="text-2xl text-white mb-8">Subjects</h2>
                                 <div className="flex gap-5">
                                     <button className="intent shadow-md" onClick={openModal}>
                                         <Icon icon="akar-icons:plus" />
@@ -504,12 +506,12 @@ const Subjects:NextPage = () =>{
                                 </div>
                             </div>
                             <div className="my-4">
-                                <div className="flex gap-2 items-center intent py-0 shadow-sm">
-                                    <Icon icon="akar-icons:search" />
-                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3" />
+                                <div className="flex gap-2 items-center intent py-0 shadow-sm rounded-full bg-[#515153]">
+                                    <Icon icon="akar-icons:search" color="white" />
+                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3 text-white" />
                                 </div>
                             </div>
-                            <div className="my-6 flex flex-col gap-4 mt-10">
+                            <div className="my-6 flex flex-col gap-6 mt-16">
                                 {subject_data.data.map(subject => (
                                     <DashboardItem
                                         key={subject?.uuid}
@@ -524,25 +526,25 @@ const Subjects:NextPage = () =>{
             </Container>
         </DashboardLayout>
     )
-    
-    }
-    
-    Subjects.getInitialProps = wrapper.getInitialPageProps(store => async ({req, query}) => {
-        //@ts-ignore
-        await store.dispatch(getSubjectsEffect({
-            range: {
-                page: 1,
-                per_page: 10,
-                order_field: "date_added"
-            },
-            failCb: ():void => {
-                
-            },
-            successCb: ():void => {
-                
-            },
-            setLoading: () => undefined
-        }))
-      })
 
-    export default Subjects
+}
+
+Subjects.getInitialProps = wrapper.getInitialPageProps(store => async ({ req, query }) => {
+    //@ts-ignore
+    await store.dispatch(getSubjectsEffect({
+        range: {
+            page: 1,
+            per_page: 10,
+            order_field: "date_added"
+        },
+        failCb: (): void => {
+
+        },
+        successCb: (): void => {
+
+        },
+        setLoading: () => undefined
+    }))
+})
+
+export default Subjects

@@ -68,12 +68,12 @@ const SearchSchool:React.FC<Props> = () => {
 
     return (
         <DefaultLayout school title={"Search a school"}>
-            <Container>
-                <div className="grid grid-cols-2 gap-8 divide-x" style={{height: "calc(100vh - 90px)"}}>
+            <div>
+                <div className="grid grid-cols-2 gap-8 divide-x divide-black" style={{height: "calc(100vh - 90px)"}}>
                     <div className="px-8 py-4">
                         <div className="max-w-xl">
-                            <h2>Select a regoin</h2>
-                            <small>Select the region of the school you are searching for</small>
+                            <p className="title">Select a region</p>
+                            <p>Select the region of the school you are searching for</p>
                             <div className="mt-4">
                                 <Select
                                 onChange={(e) => setRegionOption(JSON.parse(e.target.value))}
@@ -85,8 +85,8 @@ const SearchSchool:React.FC<Props> = () => {
                     {regionOption ?
                      <div className="px-8 py-4 flex flex-col"  style={{maxHeight: "calc(100vh - 90px)"}}>
                         <div className="max-w-xl">
-                    <h2>Search a school</h2>
-                    <small>Enter the name of the school you are searching for</small>
+                    <h2 className="title">Search a school</h2>
+                    <p>Enter the name of the school you are searching for</p>
                     <div className="mt-4">
                         <form className="flex gap-4 items-center mt-4" onSubmit={handleSearch}>
                             <input className="flex-grow h-8 px-4 rounded-full" value={searchInputValue}
@@ -117,12 +117,12 @@ const SearchSchool:React.FC<Props> = () => {
                     </div>
                     : (
                         <div className="px-8 py-4">
-                            <h2>Select a region to see school in it</h2>
+                            <p className="title">Select a region to see school in it</p>
                         </div>
                     )    
                 }
                 </div>
-            </Container>
+            </div>
         </DefaultLayout>
     )
 }

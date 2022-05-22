@@ -8,7 +8,7 @@ const InputImage = ({field}) => {
     const [image, setImage] = useState("");
 
   return <div className="flex flex-col align-center">
-  <label htmlFor={field.name} className="flex justify-center items-center cursor-pointer h-14 w-full bg-gray-100 rounded-md shadow-sm">
+  <label htmlFor={field.name} className="flex justify-center items-center cursor-pointer h-14 w-full bg-[#515153] rounded-md shadow-sm">
       <p>{t("click_here_to_select_an_image")}</p>
   </label>
   {image && <img className="h-14 object-contain mt-2" src={image} alt="" />}

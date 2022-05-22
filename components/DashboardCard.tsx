@@ -16,17 +16,17 @@ const DashboardCard:React.FC<Props> = ({
     bonus
 }) => {
     return (
-        <div className="shadow-md rounded-md w-full bg-white">
-            <div className="p-4">
+        <div className="shadow-md rounded-md w-full bg-[#2e2e2f]">
+            <div className="px-8 py-6">
                 <div className="flex justify-between">
-                    <span className="uppercase">{title}</span>
-                    <span className="text-green-500">{bonus}</span>
+                    <p className="uppercase">{title}</p>
+                    <p className="text-green-500">{bonus}</p>
                 </div>
                 <div className="my-4">
-                    <span className="text-5xl">{value}</span>
+                    <p className="text-5xl text-white">{value}</p>
                 </div>
                 <div className="flex justify-between items-center">
-                    <p className="opacity-60">{smallText}</p>
+                    <p className="opacity-60 text-sm">{smallText}</p>
                     <div className="w-8 h-8 rounded-md bg-red-500 flex items-center justify-center text-white">
                         <Icon icon={icon} height={20} />
                     </div>

@@ -22,9 +22,7 @@ const SchoolDetails:React.FC<Props> = () => {
 
     return (
         <DefaultLayout university>
-            <Container>
-                <SchoolDetailsComponent university />
-            </Container>
+            <SchoolDetailsComponent university />
         </DefaultLayout>
     )
 }

@@ -13,12 +13,12 @@ import { useState } from "react";
 import DefaultLayout from "@/layouts/DefaultLayout";
 import { getUserInfosEffect } from '../../store/effects/auth';
 
-const Home:NextPage = () => {
+const Home: NextPage = () => {
 
   // Hooks
   const router = useRouter()
   const t = useTranslation()
-  const dispatch:ApplicationDispatch = useDispatch()
+  const dispatch: ApplicationDispatch = useDispatch()
 
   // States
   const [loading, setLoading] = useState(false)
@@ -37,46 +37,42 @@ const Home:NextPage = () => {
     (values) => {
       dispatch(loginEffect({
         payload: values,
-       successCb: () => {
-         dispatch(getUserInfosEffect({
-           setLoading,
-           successCb: () => {
-             router.push("/guardian")
-          },
-          failCb: () => {
-            toast.error("Something went wrong!")
-          }
-         }))
-       },
-       failCb: (data:any) => {
-         toast.error(data?.detail || "Something went wrong!")
-       },
-       setLoading: setLoading
+        successCb: () => {
+          dispatch(getUserInfosEffect({
+            setLoading,
+            successCb: () => {
+              router.push("/guardian")
+            },
+            failCb: () => {
+              toast.error("Something went wrong!")
+            }
+          }))
+        },
+        failCb: (data: any) => {
+          toast.error(data?.detail || "Something went wrong!")
+        },
+        setLoading: setLoading
       }))
     }
   )
 
   return (
     <DefaultLayout titleDesc="Login to your account" noWidthLimit>
-      <div className="white-label py-10 text-white bg-gradient-to-tr from-purple-800 to-pink-700" style={{margin: 0}}>
-        <main className="flex flex-col xl:flex-row items-center max-w-screen-lg mx-auto">
-          <div className="space-y-6 xl:space-y-10">
-            <div>
-              <h1 className="text-3xl md:text-5xl text-white max-w-xl !leading-snug pl-4 xl:pl-0">
-                Please Login
-              </h1>
-              <p className="text-gray-200">{t("login_text")}</p>
+      <div className="container-block pt-0">
+        <div className="space-y-6 xl:space-y-10">
+          <div className="text-center">
+            <h1 className="title">
+              Please login
+            </h1>
+            <p>Fill your informations to access the platform</p>
+          </div>
+          <form className="space-y-2 max-w-xl mx-auto pb-16" onSubmit={formik.handleSubmit}>
+            {fields}
+            <div className="py-8">
+              <Button color="primary" className="w-full" loading={loading} type="submit">Submit</Button>
             </div>
-            <form className="space-y-4" onSubmit={formik.handleSubmit}>
-              {fields}
-              <Button loading={loading} type="submit">Submit</Button>
-            </form>
-          </div>
-
-          <div className="relative xl:absolute w-72 h-72 xl:w-[650px] xl:h-[650px] top-14 right-5">
-            <Image className="object-cover" src="/images/exams.svg" layout="fill" priority alt="" />
-          </div>
-        </main>
+          </form>
+        </div>
       </div>
     </DefaultLayout>
   );

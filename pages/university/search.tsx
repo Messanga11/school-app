@@ -14,10 +14,10 @@ import LoadingComp from '../../components/LoadingComp';
 interface Props {
 }
 
-const SearchSchool:React.FC<Props> = () => {
+const SearchSchool: React.FC<Props> = () => {
     // Store
-    const { school: { school_data } } = useSelector((state:ApplicationState) => state)
-    
+    const { school: { school_data } } = useSelector((state: ApplicationState) => state)
+
     // States
     const [searchInputValue, setSearchInputValue] = useState<string>("")
     const [loadingSchools, setLoadingSchools] = useState<boolean>(false)
@@ -30,7 +30,7 @@ const SearchSchool:React.FC<Props> = () => {
     const dispatch = useDispatch()
 
     // Constants
-    
+
     // Function
     const fetchData = (keyword = searchInputValue) => {
         dispatch(
@@ -53,76 +53,76 @@ const SearchSchool:React.FC<Props> = () => {
         )
     }
 
-    const handleSearch = (e:any) => {
+    const handleSearch = (e: any) => {
         e.preventDefault()
         fetchData()
     }
 
     // Effects
     useEffect(() => {
-        if(regionOption?.value)
+        if (regionOption?.value)
             fetchData()
-      // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [regionOption?.value])
-    
+
 
     return (
         <DefaultLayout university title={"Search an university"}>
-            <Container>
-                <div className="grid grid-cols-2 gap-8 divide-x" style={{height: "calc(100vh - 90px)"}}>
+            <div>
+                <div className="grid grid-cols-2 gap-8 divide-x divide-black" style={{ height: "calc(100vh - 90px)" }}>
                     <div className="px-8 py-4">
                         <div className="max-w-xl">
-                            <h2>Select a regoin</h2>
-                            <small>Select the region of the university you are searching for</small>
+                            <p className="title">Select an university region</p>
+                            <p>Select the region of the university you are searching for</p>
                             <div className="mt-4">
                                 <Select
-                                onChange={(e) => setRegionOption(JSON.parse(e.target.value))}
-                                placeholder="Select a region" options={regionOptions} />
+                                    onChange={(e) => setRegionOption(JSON.parse(e.target.value))}
+                                    placeholder="Select a region" options={regionOptions} />
                             </div>
                         </div>
                     </div>
 
                     {regionOption ?
-                     <div className="px-8 py-4 flex flex-col"  style={{maxHeight: "calc(100vh - 90px)"}}>
-                        <div className="max-w-xl">
-                    <h2>Search an university</h2>
-                    <small>Enter the name of the university you are searching for</small>
-                    <div className="mt-4">
-                        <form className="flex gap-4 items-center mt-4" onSubmit={handleSearch}>
-                            <input className="flex-grow h-8 px-4 rounded-full" value={searchInputValue}
-                            placeholder="Enter the university name"
-                            onChange={(e) => setSearchInputValue(e.target.value)} />
-                            <Button className="block h-8">
-                                Search
-                            </Button>
-                        </form>
-                    </div>
-                        </div>
-                
-                        <div className="mt-4 mb-4">
-                            <p className="font-bold">Results</p>
-                        </div>
+                        <div className="px-8 py-4 flex flex-col" style={{ maxHeight: "calc(100vh - 90px)" }}>
+                            <div className="max-w-xl">
+                                <h2 className="title">Search a school</h2>
+                                <p>Enter the name of the university you are searching for</p>
+                                <div className="mt-4">
+                                    <form className="flex gap-4 items-center mt-4" onSubmit={handleSearch}>
+                                        <input className="flex-grow h-8 px-4 rounded-full" value={searchInputValue}
+                                            placeholder="Enter the school name"
+                                            onChange={(e) => setSearchInputValue(e.target.value)} />
+                                        <Button className="block h-8">
+                                            Search
+                                        </Button>
+                                    </form>
+                                </div>
+                            </div>
 
-                        <div className="flex-grow overflow-y-auto">
-                            <div className="grid grid-cols-2 gap-4">
-                        	    <LoadingComp loading={loadingSchools} />
-                                {!loadingSchools && school_data?.data.length === 0 && (
-                                    <p>No school found</p>
-                                )}
-                                {school_data?.data.map(school => (
-                                    <SchoolItem key={school?.uuid} school={school} />
-                                ))}
+                            <div className="mt-4 mb-4">
+                                <p className="font-bold">Results</p>
+                            </div>
+
+                            <div className="flex-grow overflow-y-auto">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <LoadingComp loading={loadingSchools} />
+                                    {!loadingSchools && school_data?.data.length === 0 && (
+                                        <p>No university found</p>
+                                    )}
+                                    {school_data?.data.map(school => (
+                                        <SchoolItem key={school?.uuid} school={school} />
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    : (
-                        <div className="px-8 py-4">
-                            <h2>Select a region to see school in it</h2>
-                        </div>
-                    )    
-                }
+                        : (
+                            <div className="px-8 py-4">
+                                <p className="title">Select a region to see universities in it</p>
+                            </div>
+                        )
+                    }
                 </div>
-            </Container>
+            </div>
         </DefaultLayout>
     )
 }

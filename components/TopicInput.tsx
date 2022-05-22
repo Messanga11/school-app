@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from './basics/Input'
 import Typo from './basics/Typo'
-import Button from './Button'
+import Button from './basics/Button'
 
 interface Props {
     handleInputChange?: React.ChangeEventHandler<HTMLInputElement>,
@@ -13,10 +13,10 @@ interface Props {
 
 const TopicInput:React.FC<Props> = ({handleInputChange, value, addFunc, name, isUpdate}) => {
   return (
-    <div className="flex flex-col border rounded-md p-4 my-4 gap-4">
-        <Typo type="small" className="font-semibold">{isUpdate ? "Update" : "Add"} a topic</Typo>
+    <div className="flex flex-col border border-black rounded-md p-4 my-4 gap-4">
+        <Typo type="small" className="text-white">{isUpdate ? "Update" : "Add"} a topic</Typo>
         <div className="">
-        <Typo type="small">Title</Typo>
+        <Typo type="small" className='text-xs text-white'>Title</Typo>
             <Input
             name={name}
             onChange={handleInputChange}
@@ -26,7 +26,7 @@ const TopicInput:React.FC<Props> = ({handleInputChange, value, addFunc, name, is
             <Button
             type="button"
             onClick={addFunc}
-            className="text-center"><span>{isUpdate ? "Update" : "Add"}</span></Button>
+            className="text-center mt-4"><span>{isUpdate ? "Update" : "Add"}</span></Button>
     </div>
   )
 }

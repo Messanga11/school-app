@@ -108,14 +108,14 @@ const Messages = () => {
     <DashboardLayout title="Profile">
       <Container>
         <div>
-          <h2>Message</h2>
-          <div className="w-full bg rounded-xl overflow-hidden shadow-md bg-white">
+          <h2 className="text-white mb-4">Message</h2>
+          <div className="w-full bg rounded-xl overflow-hidden shadow-md bg-[#2e2e2f]">
             <div
               className="flex h-screen"
               style={{ maxHeight: "calc(100vh - 200px)" }}
             >
-              <div className="w-full max-w-xs flex-shrink-0 border-r p-4 flex flex-col">
-                <h2 className="mb-4">Discussions</h2>
+              <div className="w-full max-w-xs flex-shrink-0 border-r border-black p-4 flex flex-col">
+                <h2 className="mb-4 text-white">Discussions</h2>
                 <div className="space-y-4 overflow-y-auto flex-grow">
                   {conversations?.data?.map((conv) => (
                     <ConversationItem
@@ -157,7 +157,7 @@ const Messages = () => {
                   </Fragment>
                 ) : (
                   <div className="flex justify-center items-center h-full">
-                  <h2>Select a conversation</h2>
+                  <h2 className="text-white">Select a conversation</h2>
                   </div>
                 )}
               </div>

@@ -28,7 +28,7 @@ const SelectComponent = ({defaultValue, className, onChange, style, placeholder,
     
     return (
         <div className="text-black">
-            {label && <small>{label}</small>}
+            {label && <small className="text-white">{label}</small>}
             <div className="mt-1">
                 <Select
                     name={name ||id}
@@ -39,9 +39,10 @@ const SelectComponent = ({defaultValue, className, onChange, style, placeholder,
                     styles={{
                         control: (items) => ({
                             ...items,
-                            borderColor: "rgb(229, 231, 235)",
-                            borderRadius: 999,
-                            paddingLeft: 5
+                            background: "#515153",
+                            borderColor: "transparent",
+                            borderRadius: 20,
+                            paddingLeft: "1.5rem"
                         })
                     }}
                     options={options}

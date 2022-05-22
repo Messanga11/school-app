@@ -30,7 +30,7 @@ const DashboardHeader = () => {
 
   return (
     <div>
-      <div className="w-full bg-white h-16 px-4 text-black font-semibold flex items-center justify-between">
+      <div className="w-full bg-[#2e2e2f] h-16 px-4 text-black font-semibold flex items-center justify-between">
         <div className="w-full h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex-grow flex items-center h-full">
@@ -41,26 +41,26 @@ const DashboardHeader = () => {
                     key={`nav-item-header-${i}`}
                     onClick={() => router.push(navItem.link)}
                   >
-                    <p className="flex gap-2 leading-3 items-center">
+                    <p className="flex gap-2 leading-3 items-center font-light">
                       {navItem.icon} {navItem.name}
                     </p>
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="bg-white shadow-sm m-4 rounded-md h-full">
+            <div className="bg-[#2e2e2f] shadow-sm m-4 rounded-md h-full">
               <div
                 ref={timelineMenuRef}
-                className="px-4 py-3 border-x flex gap-4 h-full items-center"
+                className="px-4 py-3 border-x border-black flex gap-4 h-full items-center"
               >
-                <p>17 FEB 2002</p>
+                <p className="font-light">17 FEB 2002</p>
                 <p className="leading-0">17:30:00</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <hr />
+      <hr className="border-black" />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import Button from "../../../components/Button"
+import Button from "../../../components/basics/Button"
 import Container from "../../../components/Container"
 import SubjectListItem from "../../../components/SubjectListItem"
 import DashboardLayout from "../../../layouts/DashboardLayout"
@@ -74,7 +74,7 @@ const SubjectDetails = () => {
             <div className="flex h-full">
                 <div className="flex-grow">
                     <div className="w-full border-b flex items-center justify-between">
-                        <h2 className="p-4">Topics</h2>
+                        <h2 className="p-4 text-white">Topics</h2>
                         <div className="flex items-center gap-4 mr-4">
                             <Button onClick={() => router.push("/courses/subjects/books")}>Books</Button>
                             <Button onClick={() => router.push("/courses/subjects/videos")}>Video</Button>

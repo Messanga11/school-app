@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Input from "./basics/Input";
 import Typo from "./basics/Typo";
-import Button from "./Button";
+import Button from "./basics/Button";
 
 interface Props {
   _key: string;
@@ -61,21 +61,21 @@ const TopicFilesComponent: React.FC<Props> = ({
         ?.map((f, i) => (
           <div
             key={`${_key}_${f?.title}_${i}`}
-            className="px-3 py-2 rounded-md border bg-black text-white relative"
+            className="px-8 py-6 rounded-md border border-black bg-black text-white relative"
           >
             <button
             className="text-sm absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 font-semibold flex justify-center items-center"
             onClick={() => setFileToDelete(f)}>x</button>
-            <p className="font-semibold">{f?.title}</p>
+            <p className="capitalize">{f?.title}</p>
           </div>
         ))}
       </div>
-      <div className="border rounded-md p-2">
-        <Typo type="small" className="font-semibold">
-          {_key}
+      <div className="border border-black rounded-md px-8 py-6">
+        <Typo type="small" className="text-white capitalize">
+          {String(_key).replace("lib_book", "Library book")}
         </Typo>
-        <div className="">
-          <Typo type="small">Title</Typo>
+        <div className="my-4">
+          <Typo type="small" className="text-white text-xs">Title</Typo>
           <Input
             name={`current_${_key}_title`}
             onChange={handleInputChange}
@@ -84,7 +84,7 @@ const TopicFilesComponent: React.FC<Props> = ({
             className="flex-grow"
           />
         </div>
-        <Typo type="small">File</Typo>
+        <Typo type="small" className="text-white capitalize">File</Typo>
         <Input
           type="file"
           onChange={(e) => {

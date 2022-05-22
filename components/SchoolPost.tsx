@@ -8,12 +8,12 @@ interface Props {
 
 const SchoolPost:React.FC<Props> = ({post}) => {
     return (
-        <div className="w-full rounded-xl bg-white overflow-hidden shadow-md">
+        <div className="w-full rounded-xl bg-[#2e2e2f] overflow-hidden shadow-md">
             <div className="w-full bg-gray-300 h-80" style={{backgroundImage: `url(${post?.image_url || post?.base_64})`}}>
             </div>
             <div className="p-8">
-                <h2>{post?.title}</h2>
-                <p className="text-lg">{post?.description}</p>
+                <h2 className="text-white mb-8 text-3xl">{post?.title}</h2>
+                <p className="text-md" style={{lineHeight: "2em"}}>{post?.description}</p>
             </div>
         </div>
     )

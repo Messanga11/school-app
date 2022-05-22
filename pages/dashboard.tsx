@@ -95,17 +95,18 @@ const Dashboard = () => {
         </div>
         <div className="mt-8 gap-4 flex">
           <div
-            className="rounded-xl shadow-md p-4 text-center bg-white"
+            className="rounded-xl shadow-md p-4 text-center bg-[#2e2e2f]"
             style={{ minWidth: 450 }}
           >
-            <div>
+            <div className="px-8 py-6">
               <div className="flex justify-between items-center">
-                <h2>Total spent</h2>
+                <p>Total spent</p>
                 <Icon
+                color="white"
                 height={16} icon="akar-icons:more-vertical" />
               </div>
               <div className="my-8">
-                <span className="text-5xl">0</span>
+                <span className="text-5xl text-white">0</span>
               </div>
               <div>
                 <p>Total hours spent in learning</p>
@@ -116,7 +117,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex-grow h-96">
-            <h2 className="my-4 ml-8">Statistics</h2>
+            <p className="my-4 ml-8">Statistics</p>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 width={500}

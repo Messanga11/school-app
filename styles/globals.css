@@ -18,7 +18,6 @@ body {
 }
 
 * {
-<<<<<<< HEAD
   font-family: 'Playfair Display', serif;
   box-sizing: border-box
 }
@@ -29,12 +28,13 @@ a {
   color: var(--primary)
 }
 
-a:hover {
+a:hover, button:hover  {
   color: var(--accent)
 }
 
-p {
-  color: var(--secondary)
+p, button {
+  color: var(--secondary);
+  transition: 0.3s;
 }
 
 ul {
@@ -48,6 +48,13 @@ ul {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: start;
+  align-items: center;
+}
+
+.container-block {
+  max-width: 1350px;
+  margin: 0 auto;
   justify-content: start;
   align-items: center;
 }
@@ -66,16 +73,28 @@ header main {
   margin: 0 0 0 auto;
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-direction: column;
 }
 
 .main-image {
-  height: 100%;
+  height: 90%;
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translateX(-50%)
+  transform: translateX(-50%);
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.header-body {
+  padding-top: 3em;
 }
 
 nav .container,
@@ -213,6 +232,7 @@ aside {
   font-size: 4.5em;
   line-height: 1.2em;
   margin: 0.5em 0;
+  color: var(--primary);
 }
 
 .pagination-mobile {
@@ -236,6 +256,7 @@ aside {
 .header-bottom {
   background: rgba(5, 5, 5, 0.5);
   backdrop-filter: blur(10px);
+  height: 200px;
 }
 
 .header-bottom .container > div {
@@ -265,15 +286,46 @@ aside {
 .header-bottom a {
   margin-top: 1em;
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 2px;
+  font-size: 0.9em;
 }
 
 .slider-count {
-  font-size: 1.5em;
-=======
-  font-family: 'Poppins', sans-serif;
->>>>>>> origin/staging
+  font-size: 1.2em;
+}
+
+.value-section-home {
+  background: #111;
+  width: 100%;
+  padding: 2.2em;
+}
+
+.value-section-home .container {
+  display: block;
+}
+
+.value-card {
+  background: #2c2c2e;
+  padding: 1.5em 2em;
+}
+
+.value-card h2 {
+  color: var(--primary);
+  line-height: 3em;
+}
+
+.value-card svg {
+  color: var(--primary);
+  padding: 1em;
+  height: 60px;
+  width: 60px;
+  background: #3f3f3f;
+  border-radius: 5px;
+}
+
+.header-bottom .thumbnail {
+  height: 200px;
 }
 
 @layer base {

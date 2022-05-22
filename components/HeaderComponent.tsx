@@ -48,35 +48,52 @@ function HeaderComponent({school, university}:Props) {
 
   return (
     <Fragment>
-      <nav>
+      <nav className="bg-[#151517] shadow-md">
         <div className="container">
           <div>
-            <span className="brand">
-              <Link href="/">Aer</Link>
+            <span className="brand link-active">
+              <Link href="/" passHref><span><span style={{color: "var(--primary)"}}>U</span><span style={{color: "var(--accent)"}}>S</span></span></Link>
             </span>
           </div>
           <ul>
             <li>
-              <span className={router.pathname === "/login" ? "link-active" : ""}>
-                <Link href={isLogged ? "/dashboard" : "/login"}>{isLogged ? "Dashboard" : "Student login"}</Link>
+              <span className={(router.pathname.includes("/university") && !router.pathname.includes("/login" ))? "link-active" : ""}>
+                <Link href="/university">University</Link>
               </span>
             </li>
-            {!isLogged && (
+            <li>
+              <span className={(router.pathname.includes("/schools" ) && !router.pathname.includes("/login" ))? "link-active" : ""}>
+                <Link href="/schools">Schools</Link>
+              </span>
+            </li>
+            {router.pathname.includes("/schools" ) ? (
               <li>
-                <span className={router.pathname === "/guardian/login" ? "link-active" : ""}>
+                <span className={router.pathname.includes("/login" ) ? "link-active" : ""}>
+                  <Link href={isLogged ? "/schools/administration" : "/schools/login"}>{isLogged ? "Dashboard" : "School login"}</Link>
+                </span>
+              </li>
+              )
+              : router.pathname.includes("/university" ) ? (
+                <li>
+                  <span className={router.pathname.includes("/login" ) ? "link-active" : ""}>
+                    <Link href={isLogged ? "/university/administration" : "/university/login"}>{isLogged ? "Dashboard" : "University login"}</Link>
+                  </span>
+                </li>
+              )
+            : (
+              <li>
+                <span className={router.pathname.includes("/login" ) ? "link-active" : ""}>
+                  <Link href={isLogged ? "/dashboard" : "/login"}>{isLogged ? "Dashboard" : "Student login"}</Link>
+                </span>
+              </li>
+              )}
+            {!isLogged && router.pathname === "/" && (
+              <li>
+                <span className={router.pathname.includes("/guardian/login") ? "link-active" : ""}>
                   <Link href="/guardian/login">Guardian login</Link>
                 </span>
               </li>
             )}
-            <li>
-              <span>
-                <Link href="/" passHref>
-                  <span className="material-icons-outlined">
-                    search
-                  </span>
-                </Link>
-              </span>
-            </li>
           </ul>
           <div className="menu-btn">
             <span className="material-icons-outlined">

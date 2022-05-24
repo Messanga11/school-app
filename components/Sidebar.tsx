@@ -25,7 +25,7 @@ function Sidebar() {
           <h4 className="hover:underline decoration-purple-700 underline-offset-1 cursor-pointer">
             Paul Messanga
           </h4>
-          <p className="text-black/60 dark:text-white/75 text-sm">
+          <p className="text-white/60 dark:text-white/75 text-sm">
             paul@messanga.com
           </p>
         </div>
@@ -71,7 +71,7 @@ function Sidebar() {
         </div>
       </div>
       {/* Bottom */}
-      {/* <div className="hidden md:flex bg-white dark:bg-[#1D2226] text-black/70 dark:text-white/75 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 sticky top-20 border border-gray-300 dark:border-none">
+      {/* <div className="hidden md:flex bg-white dark:bg-[#1D2226] text-white/70 dark:text-white/75 rounded-lg overflow-hidden flex-col space-y-2 pt-2.5 sticky top-20 border border-gray-300 dark:border-none">
         <p className="sidebarLink">Groups</p>
         <div className="flex items-center justify-between">
           <p className="sidebarLink">Events</p>

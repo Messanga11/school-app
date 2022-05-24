@@ -99,7 +99,7 @@ const Papers = () => {
 
             <Modal className="flex justify-center items-center" open={!!paperToShow} onClose={closeFunc}>
                 <Box className='max-w-screen-md w-full'>
-                    <div className="w-full mx-auto bg-white text-black rounded-md p-6 max-h-screen overflow-y-auto">
+                    <div className="w-full mx-auto bg-white text-white rounded-md p-6 max-h-screen overflow-y-auto">
                         <h2 id="parent-modal-title">{started ? 'You are passing paper 1' : submitted ? 'You have passed paper 1' : "You will pass paper 1"}</h2>
                         <p id="parent-modal-description">
                         {started ? 'Write the answer you think is correct' : submitted ? 'Check your result' : "Ready for a test ?"}

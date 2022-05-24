@@ -27,8 +27,8 @@ const SelectComponent = ({defaultValue, className, onChange, style, placeholder,
     const [value, setValue] = useState<any>(initialValue)
     
     return (
-        <div className="text-black">
-            {label && <small className="text-white">{label}</small>}
+        <div className="">
+            {label && <small className="text-[#515154]">{label}</small>}
             <div className="mt-1">
                 <Select
                     name={name ||id}
@@ -39,8 +39,9 @@ const SelectComponent = ({defaultValue, className, onChange, style, placeholder,
                     styles={{
                         control: (items) => ({
                             ...items,
-                            background: "#515153",
                             borderColor: "transparent",
+                            background: "#efefef",
+                            color: "#515154",
                             borderRadius: 20,
                             paddingLeft: "1.5rem"
                         })

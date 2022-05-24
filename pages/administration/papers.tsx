@@ -379,7 +379,7 @@ const Papers = () => {
                         </div>
                       ))}
                     </div>
-                    <div className=" p-4 rounded-md border border-black">
+                    <div className=" p-4 rounded-md border border-[#eee]">
                       <InputCheckbox
                         id="questionIsAnImage"
                         onClick={changeQuestionType}
@@ -436,7 +436,7 @@ const Papers = () => {
                           )}
                         </div>
                       ))}
-                      <div className="p-4 border border-black rounded-md">
+                      <div className="p-4 border border-[#eee] rounded-md">
                         <InputCheckbox
                           id="answerIsAnImage"
                           onClick={changeAnswerType}
@@ -450,7 +450,7 @@ const Papers = () => {
                           label="This answer is the correct one"
                         />
                         {!answerTypeImage ? (
-                          <div className="border border-black rounded-md p-4">
+                          <div className="border border-[#eee] rounded-md p-4">
                             <div className="flex flex-col gap-4">
                               <Input
                                 label="Letter or number"

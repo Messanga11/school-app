@@ -64,7 +64,7 @@ const Students = () =>{
                                     <Typo type="small" className="font-semibold">Video</Typo>
                                     <Input type="file" />
                                     <Typo type="small" className="font-semibold">Subject</Typo>
-                                    <select className="rounded-sm bg-transparent border h-10 text-black" value={subject} onChange={(e) => setSubject(e.target.value)}>
+                                    <select className="rounded-sm bg-transparent border h-10 text-white" value={subject} onChange={(e) => setSubject(e.target.value)}>
                                         <option value="Maths">Maths</option>
                                         <option value="English">English</option>
                                         <option value="French">French</option>

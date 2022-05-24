@@ -17,7 +17,7 @@ function Home({ providers }) {
           <div className="space-y-6 xl:space-y-10">
             <div>
               <div className="relative w-36 h-10 mx-auto">
-                <p className="text-black font-bold text-center">LOGO</p>
+                <p className="text-white font-bold text-center">LOGO</p>
               </div>
               <h1 className="text-3xl md:text-5xl text-white max-w-xl !leading-snug pl-4 xl:pl-0">
                 Hello!, please login

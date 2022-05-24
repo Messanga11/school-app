@@ -14,7 +14,7 @@ const DashboardItem:React.FC<DashboardItemProps> = ({icon, title, size, onEdit, 
     <div className={`flex justify-between items-center px-6 w-full bg-[#313133] rounded-md focus:outline-none focus:shadow-md transition duration-100 cursor-default ${size === "sm" ? "text-sm py-1" : "py-3"}`}>
         <div>
                 <div className='flex gap-3 items-center'>
-                  <div className='bg-black h-10 w-10 rounded-full my-4 flex justify-center items-center'>
+                  <div className='bg-white h-10 w-10 rounded-full my-4 flex justify-center items-center'>
                       <Icon icon={icon} color="white" height={15} />
                   </div>
                   <p className='text-lg'>{title}</p>

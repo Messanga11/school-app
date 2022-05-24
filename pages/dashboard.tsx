@@ -95,18 +95,18 @@ const Dashboard = () => {
         </div>
         <div className="mt-8 gap-4 flex">
           <div
-            className="rounded-xl shadow-md p-4 text-center bg-[#2e2e2f]"
+            className="rounded-xl shadow-md p-4 text-center bg-[#fff]"
             style={{ minWidth: 450 }}
           >
             <div className="px-8 py-6">
               <div className="flex justify-between items-center">
                 <p>Total spent</p>
                 <Icon
-                color="white"
+                color="black"
                 height={16} icon="akar-icons:more-vertical" />
               </div>
               <div className="my-8">
-                <span className="text-5xl text-white">0</span>
+                <span className="text-5xl text-black">0</span>
               </div>
               <div>
                 <p>Total hours spent in learning</p>

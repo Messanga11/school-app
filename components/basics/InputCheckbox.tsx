@@ -9,8 +9,8 @@ const InputCheckbox = ({className, border, label, rainbow, name, labelClassName,
     return (
         <div className="my-2">
             <input id={otherProps?.id || name} name={name} className={`hidden ${className}`} {...otherProps} type="checkbox" checked={otherProps.checked} />
-            <label className={`flex gap-x-2 items-center cursor-pointer text-xs text-white ${` ${labelClassName || ""}`}`} htmlFor={otherProps.id || name}>
-            <div className={`h-4 w-4 animate-none text-sm font-light rounded-sm ${otherProps?.checked ? 'bg-white' : 'border border-white'} `}></div>
+            <label className={`flex gap-x-2 items-center cursor-pointer text-xs text-black ${` ${labelClassName || ""}`}`} htmlFor={otherProps.id || name}>
+            <div className={`h-4 w-4 animate-none text-sm font-light rounded-sm ${otherProps?.checked ? 'bg-black' : 'border border-black'} `}></div>
                 {label}
             </label>
         </div>

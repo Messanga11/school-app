@@ -50,18 +50,18 @@ const PastQuestions = () => {
                 )}
                 
                 {!loading && paper_data.data.length === 0 && (
-                    <p className="text-center">No course at now</p>
+                    <p className="text-center">No paper at now</p>
                 )}
                 <div>
                     <div>
-                        <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-gray-50">
+                        {!loading && paper_data.data.length !== 0 && <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-gray-50">
                         {paper_data.data.map(paper => (
                             <PastQuestionItem
                                 key={paper.uuid}
                                 paper={paper}
                             />
                         ))}
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </Container>

@@ -21,7 +21,7 @@ function Home({ providers }) {
       </Head>
       <header className="flex justify-around items-center py-4">
         <div className="relative w-36 h-10">
-          <p className="text-black font-bold">LOGO</p>
+          <p className="text-white font-bold">LOGO</p>
         </div>
         <div className="flex items-center sm:divide-x divide-gray-300">
           <div className="hidden sm:flex space-x-8 pr-4">

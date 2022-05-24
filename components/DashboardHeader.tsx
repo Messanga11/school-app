@@ -30,14 +30,14 @@ const DashboardHeader = () => {
 
   return (
     <div>
-      <div className="w-full bg-[#2e2e2f] h-16 px-4 text-black font-semibold flex items-center justify-between">
+      <div className="w-full bg-[#fff] h-16 px-4 text-white font-semibold flex items-center justify-between">
         <div className="w-full h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex-grow flex items-center h-full">
               <ul className="flex h-full">
                 {navigationItems.map((navItem, i) => (
                   <li
-                    className="cursor-pointer hover:text-black h-full px-10 flex items-center"
+                    className="cursor-pointer hover:text-white h-full px-10 flex items-center"
                     key={`nav-item-header-${i}`}
                     onClick={() => router.push(navItem.link)}
                   >
@@ -48,10 +48,10 @@ const DashboardHeader = () => {
                 ))}
               </ul>
             </div>
-            <div className="bg-[#2e2e2f] shadow-sm m-4 rounded-md h-full">
+            <div className="bg-[#fff] shadow-sm m-4 rounded-md h-full">
               <div
                 ref={timelineMenuRef}
-                className="px-4 py-3 border-x border-black flex gap-4 h-full items-center"
+                className="px-4 py-3 border-x border-[#eee] flex gap-4 h-full items-center"
               >
                 <p className="font-light">17 FEB 2002</p>
                 <p className="leading-0">17:30:00</p>
@@ -60,7 +60,7 @@ const DashboardHeader = () => {
           </div>
         </div>
       </div>
-      <hr className="border-black" />
+      <hr className="border-[#eee]" />
     </div>
   );
 };

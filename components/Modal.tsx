@@ -65,7 +65,7 @@ const Modal = ({ handleClose, type, children, className }: ModalProps) => {
 
   return (
     <Backdrop onClick={handleClose}>
-        <div onClick={(e) => e.stopPropagation()} className={`bg-[#2e2e2f] w-full my-4 overflow-auto rounded-xl ${className}`} style={{maxHeight: "calc(100vh - 60px)"}}>
+        <div onClick={(e) => e.stopPropagation()} className={`bg-[#fff] w-full my-4 overflow-auto rounded-xl ${className}`} style={{maxHeight: "calc(100vh - 60px)"}}>
         <div className="p-8 flex flex-col">
             {children}
           </div>

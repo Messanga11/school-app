@@ -95,8 +95,8 @@ const SchoolCreateUpdate:React.FC<Props> = ({submitFunc, update, university}) =>
     // Effects
 
     return (
-        <div>
-            <div className="flex flex-col items-center p-12 rounded-xl shadow-md max-w-2xl w-full mx-auto">
+        <div className="pb-20">
+            <div className="flex flex-col items-center px-12 pb-10 rounded-xl shadow-md max-w-2xl w-full mx-auto bg-white">
                 <h2 className="title text-center">{update ? "Update" : "Register"} your {university ? "university": "school"}</h2>
                 <p>Join our amazing team an enjoy amazing features</p>
                 <form className="mt-8 flex flex-col gap-4 w-full" onSubmit={formik.handleSubmit}>

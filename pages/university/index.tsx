@@ -33,14 +33,14 @@ const Schools: React.FC<Props> = () => {
                     </div>
                     <div className="grid grid-cols-2 h-full gap-4 pt-20">
                         <div>
-                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100 rounded-md"
+                            <button className="h-96 bg-white block w-full opacity-80 hover:opacity-100 rounded-md"
                                 onClick={() => router.push("/university/search")}>
                                 <div className="flex justify-center mb-8"><Icon height={80} icon="akar-icons:search" /></div>
                                 <h2>Search an university</h2>
                             </button>
                         </div>
                         <div>
-                            <button className="h-96 bg-black block w-full opacity-80 hover:opacity-100 rounded-md"
+                            <button className="h-96 bg-white block w-full opacity-80 hover:opacity-100 rounded-md"
                                 onClick={() => router.push("/university/create")}>
                                 <div className="flex justify-center mb-8"><Icon height={80} icon="carbon:document-add" /></div>
                                 <h2>Create an university profile</h2>

@@ -13,7 +13,7 @@ interface Props {
 
 const TopicInput:React.FC<Props> = ({handleInputChange, value, addFunc, name, isUpdate}) => {
   return (
-    <div className="flex flex-col border border-black rounded-md p-4 my-4 gap-4">
+    <div className="flex flex-col border border-[#eee] rounded-md p-4 my-4 gap-4">
         <Typo type="small" className="text-white">{isUpdate ? "Update" : "Add"} a topic</Typo>
         <div className="">
         <Typo type="small" className='text-xs text-white'>Title</Typo>

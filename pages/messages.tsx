@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { Conversation } from "../store/types/Student";
 import Container from "../components/Container";
 import { Fragment } from 'react';
+import LoadingComp from "@/components/LoadingComp";
 
 const Messages = () => {
   // Store
@@ -94,7 +95,7 @@ const Messages = () => {
   useEffect(() => {
     getConversations();
     const id = setInterval(() => {
-      getConversations();
+      getConversations(true);
       if (!!currentConversation?.uuid && !loadingSendMessage) {
         openConversation(currentConversation);
       }
@@ -108,16 +109,20 @@ const Messages = () => {
     <DashboardLayout title="Profile">
       <Container>
         <div>
-          <h2 className="text-white mb-4">Message</h2>
-          <div className="w-full bg rounded-xl overflow-hidden shadow-md bg-[#2e2e2f]">
+          <h2 className="text-black mb-4">Message</h2>
+          <div className="w-full bg rounded-xl overflow-hidden shadow-md bg-[#fff]">
             <div
               className="flex h-screen"
               style={{ maxHeight: "calc(100vh - 200px)" }}
             >
-              <div className="w-full max-w-xs flex-shrink-0 border-r border-black p-4 flex flex-col">
+              <div className="w-full max-w-xs flex-shrink-0 border-r border-[#eee] p-4 flex flex-col">
                 <h2 className="mb-4 text-white">Discussions</h2>
                 <div className="space-y-4 overflow-y-auto flex-grow">
-                  {conversations?.data?.map((conv) => (
+                <LoadingComp loading={loadingConversation} />
+                {!loadingMessages && conversations?.data?.length === 0 && (
+                  <p className="text-center">Go to friend section and message to somebody</p>
+                )}
+                  {!loadingMessages && conversations?.data?.map((conv) => (
                     <ConversationItem
                       key={conv?.uuid}
                       conversation={conv}

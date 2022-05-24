@@ -69,7 +69,7 @@ const SearchSchool: React.FC<Props> = () => {
     return (
         <DefaultLayout university title={"Search an university"}>
             <div>
-                <div className="grid grid-cols-2 gap-8 divide-x divide-black" style={{ height: "calc(100vh - 90px)" }}>
+                <div className="grid grid-cols-2 gap-8 divide-x divide-gray-300" style={{ height: "calc(100vh - 90px)" }}>
                     <div className="px-8 py-4">
                         <div className="max-w-xl">
                             <p className="title">Select an university region</p>
@@ -109,7 +109,7 @@ const SearchSchool: React.FC<Props> = () => {
                                     {!loadingSchools && school_data?.data.length === 0 && (
                                         <p>No university found</p>
                                     )}
-                                    {school_data?.data.map(school => (
+                                    {!loadingSchools && school_data?.data.map(school => (
                                         <SchoolItem key={school?.uuid} school={school} />
                                     ))}
                                 </div>

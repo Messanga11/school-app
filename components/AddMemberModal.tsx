@@ -72,7 +72,7 @@ const AddMemberModal:React.FC<Props> = ({ handleClose, updatePrincipal, updateMe
             </div>}
             
             <input id="image" className="hidden" type="file" onChange={(e) => toBase64(e.target?.files![0]).then(base64 => setBase_64(base64))} />
-            <label htmlFor="image" className="text-center rounded-full py-2 mt-8 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-black text-white">
+            <label htmlFor="image" className="text-center rounded-full py-2 mt-8 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-white text-white">
                 {base_64 ? "Change image" : "Add an image"}
             </label>
             <form className="mt-4 flex flex-col gap-4 w-full max-w-lg" onSubmit={formik.handleSubmit}>

@@ -60,7 +60,7 @@ const DashboardLayout:React.FC<DashboardLayoutProps> = ({title, titleDesc, child
                 <div>
                     <div className="flex h-screen">
                     <DashboardSidebar admin={!!admin} guardian={!!guardian} school={!!school} />
-                    <div className="text-black flex-grow overflow-y-scroll h-full">
+                    <div className="text-white flex-grow overflow-y-scroll h-full">
                         {!admin && !noHeader && (
                             <DashboardHeader />
                         )}

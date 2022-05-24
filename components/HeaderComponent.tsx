@@ -48,7 +48,7 @@ function HeaderComponent({school, university}:Props) {
 
   return (
     <Fragment>
-      <nav className="bg-[#151517] shadow-md">
+      <nav className="bg-[#fff] shadow-md">
         <div className="container">
           <div>
             <span className="brand link-active">
@@ -57,15 +57,25 @@ function HeaderComponent({school, university}:Props) {
           </div>
           <ul>
             <li>
-              <span className={(router.pathname.includes("/university") && !router.pathname.includes("/login" ))? "link-active" : ""}>
-                <Link href="/university">University</Link>
+              <span className={(router.pathname.includes("/home") && !router.pathname.includes("/login" ))? "link-active" : ""}>
+                <Link href="/home">Home</Link>
               </span>
             </li>
             <li>
+              <span className={(router.pathname.includes("/about") && !router.pathname.includes("/login" ))? "link-active" : ""}>
+                <Link href="/about">About</Link>
+              </span>
+            </li>
+            {(router.pathname.includes("/university") || router.pathname.includes("/home")) && <li>
+              <span className={(router.pathname.includes("/university") && !router.pathname.includes("/login" ))? "link-active" : ""}>
+                <Link href="/university">University</Link>
+              </span>
+            </li>}
+            {(router.pathname.includes("/schools") || router.pathname.includes("/home")) && <li>
               <span className={(router.pathname.includes("/schools" ) && !router.pathname.includes("/login" ))? "link-active" : ""}>
                 <Link href="/schools">Schools</Link>
               </span>
-            </li>
+            </li>}
             {router.pathname.includes("/schools" ) ? (
               <li>
                 <span className={router.pathname.includes("/login" ) ? "link-active" : ""}>
@@ -81,13 +91,13 @@ function HeaderComponent({school, university}:Props) {
                 </li>
               )
             : (
-              <li>
-                <span className={router.pathname.includes("/login" ) ? "link-active" : ""}>
+              !isLogged && (router.pathname === "/login" || router.pathname === "/home") && <li>
+                <span className={router.pathname === "/login" ? "link-active" : ""}>
                   <Link href={isLogged ? "/dashboard" : "/login"}>{isLogged ? "Dashboard" : "Student login"}</Link>
                 </span>
               </li>
               )}
-            {!isLogged && router.pathname === "/" && (
+            {!isLogged && (router.pathname === "/home" || router.pathname === "/guardian/login") && (
               <li>
                 <span className={router.pathname.includes("/guardian/login") ? "link-active" : ""}>
                   <Link href="/guardian/login">Guardian login</Link>
@@ -95,11 +105,6 @@ function HeaderComponent({school, university}:Props) {
               </li>
             )}
           </ul>
-          <div className="menu-btn">
-            <span className="material-icons-outlined">
-              segment
-            </span>
-          </div>
         </div>
       </nav>
     </Fragment>

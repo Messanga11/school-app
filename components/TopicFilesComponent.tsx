@@ -61,7 +61,7 @@ const TopicFilesComponent: React.FC<Props> = ({
         ?.map((f, i) => (
           <div
             key={`${_key}_${f?.title}_${i}`}
-            className="px-8 py-6 rounded-md border border-black bg-black text-white relative"
+            className="px-8 py-6 rounded-md border border-[#eee] bg-white text-white relative"
           >
             <button
             className="text-sm absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 font-semibold flex justify-center items-center"
@@ -70,7 +70,7 @@ const TopicFilesComponent: React.FC<Props> = ({
           </div>
         ))}
       </div>
-      <div className="border border-black rounded-md px-8 py-6">
+      <div className="border border-[#eee] rounded-md px-8 py-6">
         <Typo type="small" className="text-white capitalize">
           {String(_key).replace("lib_book", "Library book")}
         </Typo>

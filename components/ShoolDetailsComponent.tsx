@@ -239,19 +239,19 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
             )}
 
             {/* Side */}
-            <div className="col-span-1 !h-auto">
-                <div className="bg-[#2e2e2f] rounded-xl p-4 shadow-xl mb-4">
+            <div className="col-span-1 !h-auto !text-black">
+                <div className="bg-[#fff] rounded-xl p-4 shadow-xl mb-4">
                     <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-xl bg-cover relative" style={{backgroundImage: `url(${ schoolForm?.principal?.base_64 || schoolForm?.principal?.image_url})`}}>
-                        {schoolForm?.principal?.name ? ( <div className="p-2 bg-black bg-opacity-40 w-full rounded-xl text-gray-400">
+                        {schoolForm?.principal?.name ? ( <div className="p-2 bg-white bg-opacity-40 w-full rounded-xl text-gray-700">
                             <small>{university ? "Director" : "Principal"}</small>
-                            <p className="truncate text-white" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
+                            <p className="truncate text-black" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
                         </div>) : (
                             <p>No {university ? "director" : "principal"} specified</p>
                         )}
                     </div>
                     <p className="mb-2 text-sm">{university ? "Vice director" : "Vice principal"}</p>
                     {schoolForm?.vice_principals?.length === 0 && (
-                        <div>
+                        <div className="text-black">
                             <small>No member provided</small>
                         </div>
                     )}
@@ -286,11 +286,11 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
             <div className="px-8 col-span-4 flex flex-col gap-8">
 
-                <div className="w-full bg-[#2e2e2f] py-4 px-8 rounded-xl shadow-xl">
+                <div className="w-full bg-[#fff] py-4 px-8 rounded-xl shadow-xl">
                     <div className="flex items-center gap-4 justify-between">
                         <div className="flex items-center gap-4">
                             <div className="w-16 h-16 rounded-full bg-gray-400" style={{backgroundImage: `url(${schoolForm?.logo})`}}></div>
-                            <div>
+                            <div className="!text-black">
                                 <p className="font-semibold">{schoolForm?.name}</p>
                                 <p className="text-xs font-light capitalize">{schoolForm?.region}</p>
                             </div>
@@ -299,7 +299,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
                                     ...state,
                                     logo: String(base64)
                                 })))} />
-                                <label htmlFor="image" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-black text-white">
+                                <label htmlFor="image" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-white text-white">
                                     {image ? "Change logo" : "Add logo"}
                                 </label>
                             </div>}
@@ -313,13 +313,13 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
                 {edit && <div>
                     <p className="mb-2">Add a new article</p>
-                    <div className="bg-[#2e2e2f] rounded-xl">
+                    <div className="bg-[#fff] rounded-xl">
                         {image && <div>
                             <img className="w-full rounded-t" src={image} alt="" />
                         </div>}
                         <div className="p-8">
                             <div>
-                                <small className="text-white">Title</small>
+                                <small className="text-black">Title</small>
                                 <Input
                                     value={articleForm.title}
                                     onChange={(e) => {setArticleForm(state => ({
@@ -329,7 +329,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
                                 />
                             </div>
                             <div className="mt-2">
-                                <small className="text-white">Description</small>
+                                <small className="text-black">Description</small>
                                 <TextArea
                                     className="w-full"
                                     value={articleForm.description}
@@ -341,7 +341,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
                             </div>
                             <div className="mt-4 flex gap-4">
                                 <input id="image" className="hidden" type="file" onChange={(e) => toBase64(e.target?.files![0]).then(base64 => setImage(base64))} />
-                                <label htmlFor="image" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-white text-white hover:bg-white hover:text-black">
+                                <label htmlFor="image" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-black text-black hover:bg-black hover:text-white">
                                     {image ? "Change image" : "Add an image"}
                                 </label>
                                 <Button color="secondary" loading={loadingCreatePost} onClick={handleSubmitCreatePost}>Publish</Button>

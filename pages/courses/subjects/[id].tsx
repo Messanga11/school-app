@@ -74,7 +74,7 @@ const SubjectDetails = () => {
             <div className="flex h-full">
                 <div className="flex-grow">
                     <div className="w-full border-b flex items-center justify-between">
-                        <h2 className="p-4 text-white">Topics</h2>
+                        <h2 className="p-4 text-black">Topics</h2>
                         <div className="flex items-center gap-4 mr-4">
                             <Button onClick={() => router.push("/courses/subjects/books")}>Books</Button>
                             <Button onClick={() => router.push("/courses/subjects/videos")}>Video</Button>

@@ -166,7 +166,7 @@ const Profile = () => {
                   )}
                 </div>
 
-                <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow p-8 bg-[#2e2e2f] rounded-xl shadow-md'>
+                <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow p-8 bg-[#fff] rounded-xl shadow-md'>
                   <div className='col-span-2'>
                     <h2 className='text-white'>Update informations about your profile</h2>
                     <p>You can change all informations about your profile here</p>

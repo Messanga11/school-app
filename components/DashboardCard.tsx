@@ -16,14 +16,14 @@ const DashboardCard:React.FC<Props> = ({
     bonus
 }) => {
     return (
-        <div className="shadow-md rounded-md w-full bg-[#2e2e2f]">
+        <div className="shadow-md rounded-md w-full bg-[#fff]">
             <div className="px-8 py-6">
                 <div className="flex justify-between">
                     <p className="uppercase">{title}</p>
                     <p className="text-green-500">{bonus}</p>
                 </div>
                 <div className="my-4">
-                    <p className="text-5xl text-white">{value}</p>
+                    <p className="text-5xl text-black">{value}</p>
                 </div>
                 <div className="flex justify-between items-center">
                     <p className="opacity-60 text-sm">{smallText}</p>

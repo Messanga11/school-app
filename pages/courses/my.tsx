@@ -51,7 +51,7 @@ const MyCourses = () => {
           )}
         {!loading && subject_data.data.length !== 0 && (
             <Fragment>
-              <h2 className="mb-4 text-white">My courses</h2>
+              <h2 className="mb-4 text-black">My courses</h2>
             </Fragment>
         )}
         <div>
@@ -60,7 +60,7 @@ const MyCourses = () => {
                 <p className="text-center">No course at now</p>
             )}
             {!loading && subject_data.data.length !== 0 && (
-              <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-[#2e2e2f]">
+              <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-[#fff]">
                 {subject_data.data.map((subject) => (
                   <Subject key={subject?.uuid} subject={subject} />
                 ))}

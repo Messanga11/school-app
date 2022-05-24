@@ -17,7 +17,7 @@ function Widgets({ articles }) {
           {articles.slice(0, 5).map((article) => (
             <div
               key={article.url}
-              className="flex space-x-2 items-center cursor-pointer hover:bg-black/10 dark:hover:bg-black/20 px-2.5 py-1"
+              className="flex space-x-2 items-center cursor-pointer hover:bg-white/10 dark:hover:bg-white/20 px-2.5 py-1"
             >
               <FiberManualRecordRoundedIcon className="!h-2 !w-2" />
               <div>

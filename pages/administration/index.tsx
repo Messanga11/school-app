@@ -49,17 +49,17 @@ const Administration = () =>{
         </div>
         <div>
             <div className="grid grid-cols-3 gap-4">
-                <div className="rounded-md shadow-md bg-[#2e2e2f] px-8 py-6">
+                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">{student_data?.data.length}</p>
                     <p className="text-xl mt-4 text-white">Students</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
-                <div className="rounded-md shadow-md bg-[#2e2e2f] px-8 py-6">
+                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0</p>
                     <p className="text-xl mt-4 text-white">VIP Students</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
-                <div className="rounded-md shadow-md bg-[#2e2e2f] px-8 py-6">
+                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0k</p>
                     <p className="text-xl mt-4 text-white">FCFA Paid</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>

@@ -110,7 +110,7 @@ const Students:NextPage = ():JSX.Element =>{
                         }
           /> */}
                         <Typo type="small" className="font-semibold">To</Typo>
-                        <p className="mb-4 font-semibold bg-[#2e2e2f] p-4 rounded-md">{studentToShow ? studentToShow?.first_name : "Everyone"}</p>
+                        <p className="mb-4 font-semibold bg-[#fff] p-4 rounded-md">{studentToShow ? studentToShow?.first_name : "Everyone"}</p>
                         <div className="flex flex-col">
                         <Typo type="small" className="font-semibold">Message</Typo>
                                 <TextArea  name="message" className="w-full" style={{minHeight: 150}} value={inputForm.message} onChange={handleInputChange} />

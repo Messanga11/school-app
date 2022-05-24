@@ -24,10 +24,10 @@ const SchoolItem:React.FC<Props> = ({school}) => {
     
 
     return (
-        <div className="shadow-sm rounded-md" style={{background: "#2e2e2f"}}>
+        <div className="shadow-sm rounded-md bg-white">
             <div className="px-8 py-6">
                 <p className="mb-4 truncate">{school?.name}</p>
-                <Button className="w-full" onClick={() => router.push(`/schools/${school?.uuid}`)}>See details</Button>
+                <Button className="w-full" color="secondary" onClick={() => router.push(`/schools/${school?.uuid}`)}>See details</Button>
             </div>
         </div>
     )

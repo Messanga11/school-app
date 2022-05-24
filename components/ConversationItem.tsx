@@ -32,7 +32,7 @@ const ConversationItem:React.FC<Props> = ({conversation, setCurrentConversation,
             src={otherMember?.image_url} alt={otherMember?.first_name} />
         </div>
         <div>
-            <p className='text-black font-semibold text-left'>{otherMember?.first_name} {otherMember?.last_name}</p>
+            <p className='text-white font-semibold text-left'>{otherMember?.first_name} {otherMember?.last_name}</p>
             <p className='text-sm text-left'>{conversation?.last_message}</p>
         </div>
     </button>

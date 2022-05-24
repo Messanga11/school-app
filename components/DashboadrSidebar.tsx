@@ -113,21 +113,21 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
     ]
 
   return (
-    <div className='bg-[#2e2e2f] text-black h-full border-r border-black pb-6' style={{minWidth: 210}}>
+    <div className='bg-[#fff] h-full border-r border-[#eee] pb-6' style={{minWidth: 210}}>
         <div>
             <div>
                 <div className='h-16 flex items-center justify-center'>
                     <div className="px-4 text-sm text-center flex items-center gap-3">
-                            <div className='bg-[#e2c78c] h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
+                            <div className='bg-black h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
                                 <Icon icon="bxs:user" color="white" height={25} />
                             </div>
-                            <div>
-                                <p className='text-sm'>@administrator</p>
-                                {!admin && <p className='text-sm'>US: ID  - 0000</p>}
+                            <div className='!text-black'>
+                                <p className='text-sm text-black'>@administrator</p>
+                                {!admin && <p className='text-sm text-black'>US: ID  - 0000</p>}
                             </div>
                     </div>
                 </div>
-                <hr className='border-black' />
+                <hr className='border-[#eee]' />
                 <ul className='flex flex-col gap-3 mt-8'>
                     {(guardian ? guardianNavigationItems : school ? schoolNavigationItems : admin ? adminNavigationItems : navigationItems).map((navItem:any, i:number) => (
                         <li key={`sidebar-nav-item-${i}`} className='w-full px-8 border-l-3 border-gray-400 block cursor-pointer font-semibold' onClick={() => {
@@ -140,8 +140,8 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
                             }
                         }}>
                             <div className={`
-                            transition-gpu duration-300 hover:ml-2 w-full py-2 flex gap-4 items-center text-md hover:text-white font-light
-                            ${router.pathname === navItem.link ? " ml-2 text-white" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
+                            transition-gpu duration-300 hover:ml-2 w-full py-2 flex gap-4 items-center text-md hover:text-black font-light
+                            ${router.pathname === navItem.link ? " ml-2 text-black" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
                         </li>
                     ))}
                 </ul>

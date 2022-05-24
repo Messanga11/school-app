@@ -24,17 +24,10 @@ function Home() {
             <div className="container">
               <div>
                 <h1 className="title">
-                  Become a student
+                {t("page_home_an_online_shool")}
                 </h1>
                 <p>
-                  Introducing the&nbsp;
-                  <span>
-                    Work Collection
-                  </span>.
-                  a line of minimalist bags designed for a&nbsp;
-                  <u>
-                    new generation specifically for the modern professional
-                  </u>
+                {t("page_home_an_online_shool_text")}
                 </p>
                 <div
                   className="grid gap-4 grid-cols-1 mt-10"
@@ -46,39 +39,36 @@ function Home() {
                   <li></li>
                 </ul>
               </div>
-              <div className="slider bg-black px-8 py-6 rounded-md bg-opacity-70">
+              <div className="slider px-8 py-6 rounded-md bg-black/20">
                 <div>
 
                   <div className="slider">
                     <div>
-                      <p className="slider-count">
-                        Register by selecting the exam you are passing
+                      <p className="text-white font-semibold text-3xl">
+                        Become a student
                       </p>
+                      <p className="text-gray-100">Select a the exam you are passing to register</p>
                       <div className="progress mb-4 mt-2">
                         <div></div>
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <button className="flex whitespace-nowrap text-left text-white hover:text-[#e2c78c]"
+                  <div className="grid grid-cols-2 gap-4">
+                    <button className="block h-20 bg-white px-4 py-2 rounded-md"
                       onClick={() => router.push("/signup?exam=advancedCommercial")}>
-                      GCE A Level Commercial &nbsp;
-                      <Icon icon={"bytesize:arrow-right"} height={20} />
+                      GCE A Level Commercial
                     </button>
-                    <button className="flex whitespace-nowrap text-left text-white hover:text-[#e2c78c]"
+                    <button className="block h-20 bg-white px-4 py-2 rounded-md"
                       onClick={() => router.push("/signup?exam=advancedGrammar")}>
-                      GCE A Level Grammar &nbsp;
-                      <Icon icon={"bytesize:arrow-right"} height={20} />
+                      GCE A Level Grammar
                     </button>
-                    <button className="flex whitespace-nowrap text-left text-white hover:text-[#e2c78c]"
+                    <button className="block h-20 bg-white px-4 py-2 rounded-md"
                       onClick={() => router.push("/signup?exam=ordinaryCommercial")}>
-                      GCE O Level Commercial &nbsp;
-                      <Icon icon={"bytesize:arrow-right"} height={20} />
+                      GCE O Level Commercial
                     </button>
-                    <button className="flex whitespace-nowrap text-left text-white hover:text-[#e2c78c]"
+                    <button className="block h-20 bg-white px-4 py-2 rounded-md"
                       onClick={() => router.push("/signup?exam=ordinaryGrammar")}>
-                      GCE O Level Grammar &nbsp;
-                      <Icon icon={"bytesize:arrow-right"} height={20} />
+                      GCE O Level Grammar
                     </button>
                   </div>
                 </div>
@@ -165,7 +155,7 @@ function Home() {
         </div>
         <div className="px-8 container-block">
 
-        <div className="w-full bg-black rounded-md" style={{ paddingBottom: "45%" }}>
+        <div className="w-full bg-white rounded-md" style={{ paddingBottom: "45%" }}>
           {/* Video goes here */}
         </div>
         </div>

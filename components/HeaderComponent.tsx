@@ -91,7 +91,7 @@ function HeaderComponent({school, university}:Props) {
                 </li>
               )
             : (
-              !isLogged && (router.pathname === "/login" || router.pathname === "/home") && <li>
+              (router.pathname === "/login" || router.pathname === "/home") && <li>
                 <span className={router.pathname === "/login" ? "link-active" : ""}>
                   <Link href={isLogged ? "/dashboard" : "/login"}>{isLogged ? "Dashboard" : "Student login"}</Link>
                 </span>

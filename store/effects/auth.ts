@@ -5,7 +5,7 @@ import { basicEffectFunction } from "./shared";
 
 export const loginEffect = (effectRange:EffectRange):Effect => async (dispatch) => basicEffectFunction(effectRange, AuthService.login, dispatch, loginSuccess)
 
-export const getUserInfosEffect = (effectRange:EffectRange):Effect => async (dispatch) => basicEffectFunction(effectRange, AuthService.getAuthInfos, dispatch, getAuthInfosSuccess)
+export const getUserInfosEffect = (effectRange:EffectRange):Effect => async (dispatch) => basicEffectFunction(effectRange, AuthService.getAuthInfos, dispatch, getAuthInfosSuccess, true)
 
 export const updateUserInfosEffect = (effectRange:EffectRange):Effect => async (dispatch) => basicEffectFunction(effectRange, AuthService.updateAuthInfos, dispatch, updateAuthInfosSuccess)
 

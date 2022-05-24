@@ -1,7 +1,7 @@
 import { ThunkDispatch } from "redux-thunk"
 import { ApplicationAction, ApplicationState, EffectRange, RequestRange, StudentActions } from "../types"
 
-export const basicEffectFunction = async (effectRange:EffectRange, serviceFunction: (rangeOrPayload?:RequestRange | any) => Promise<Response>, dispatch: ThunkDispatch<ApplicationState, any, ApplicationAction>, successActionFunction?:(data?:any) => ApplicationAction) => {
+export const basicEffectFunction = async (effectRange:EffectRange, serviceFunction: (rangeOrPayload?:RequestRange | any) => Promise<Response>, dispatch: ThunkDispatch<ApplicationState, any, ApplicationAction>, successActionFunction?:(data?:any) => ApplicationAction, isAuth=false) => {
     effectRange.setLoading(true)
     
     try {
@@ -16,13 +16,18 @@ export const basicEffectFunction = async (effectRange:EffectRange, serviceFuncti
             effectRange.successCb(data)
         } else {
             effectRange.failCb(data)
+            if(isAuth) {
+                localStorage.removeItem("token")
+            }
         }
     }
     
     catch (e) {
         effectRange.setLoading(false)
         effectRange.failCb()
-        console.log(e)
+        if(isAuth) {
+            localStorage.removeItem("token")
+        }
     }
 
     finally {

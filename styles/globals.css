@@ -56,7 +56,6 @@ ul {
   margin: 0 auto;
   justify-content: start;
   align-items: center;
-  padding: 120px 0;
 }
 
 header {
@@ -94,7 +93,7 @@ nav {
 }
 
 .header-body {
-  padding-top: 3em;
+  /* padding-top: 3em; */
 }
 
 nav .container,

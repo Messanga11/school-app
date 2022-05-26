@@ -1,5 +1,5 @@
 import {Action}  from "redux";
-import  {RequestRange}  from ".";
+import  {AppRoles, RequestRange}  from ".";
 import { MsgOk } from "./index";
 // ************************* Constants **************************** //
 export const GET_SCHOOLS = "GET_SCHOOLS"
@@ -25,7 +25,8 @@ export interface School {
     region?: string;
     principal?: SchoolMember | null;
     vice_principals?: SchoolMember[];
-    teachers?: SchoolMember[]
+    teachers?: SchoolMember[];
+    role?: keyof AppRoles;
 }
 
 export interface SchoolsResponse {

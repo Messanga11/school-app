@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from './Button';
+import Button from './basics/Button';
 import Modal from './Modal'
 
 interface Props {
@@ -18,10 +18,10 @@ const DeleteModal:React.FC<Props> = ({message, onAccept, onDecline}) => {
                 </p>
             </div>
             <div className='flex justify-between items-center mt-8'>
-                <Button onClick={() => onDecline()} className='bg-red-500'>
+                <Button color='danger' onClick={() => onDecline()}>
                     Decline
                 </Button>
-                <Button className='bg-green-500' onClick={() => onAccept()}>
+                <Button color='success' onClick={() => onAccept()}>
                     Accept
                 </Button>
             </div>

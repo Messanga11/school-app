@@ -21,8 +21,8 @@ import DefaultImageComponent from "@/components/DefaultImageComponent";
 const Dashboard = () => {
   
   // Store
-  const { auth: { userInfos } } = useSelector((state:ApplicationState) => state)
-  
+  const { auth: { userInfos:u_i } } = useSelector((state:ApplicationState) => state)
+  const userInfos = u_i as User
   const data = [
     {
       name: "Page A",
@@ -71,7 +71,7 @@ const Dashboard = () => {
   return (
     <DashboardLayout titleDesc="admin pannel" guardian>
       <Container>
-          <div className="py-8">
+          <div className="py-8 text-black">
               <h4 className="mb-4 font-semibold leading-6">Your student</h4>
               <div className="flex gap-8">
                 <div className='w-32 h-32 rounded-full overflow-hidden'>
@@ -120,7 +120,7 @@ const Dashboard = () => {
         </div>
         <div className="mt-8 gap-4 flex">
           <div
-            className="rounded-xl shadow-md p-4 text-center bg-white"
+            className="rounded-xl shadow-md p-4 text-center bg-white text-black px-8 py-6"
             style={{ minWidth: 450 }}
           >
             <div>
@@ -141,7 +141,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex-grow h-96">
-            <h2 className="my-4 ml-8">Statistics</h2>
+            <h2 className="my-4 ml-8 text-black">Statistics</h2>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 width={500}

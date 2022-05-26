@@ -2,7 +2,7 @@ import Image from "next/image";
 import HeaderLink from "../components/HeaderLink";
 import ExploreIcon from "@mui/icons-material/Explore";
 import { useRouter } from "next/router"
-import { subjects } from "@/utils/common"
+import { subjects, genders } from "@/utils/common"
 import { NextPage } from "next";
 import { useCustomFormik, useTranslation } from "@/utils/hooks";
 import * as Yup from "yup"
@@ -93,6 +93,18 @@ const SignUp: NextPage = (): JSX.Element => {
     },
     {
       initialValue: "",
+      name: "gender",
+      type: "select",
+      isMulti: false,
+      options: genders?.map(item => ({
+        label: item?.title,
+        value: item?.title
+      })) || [],
+      placeholder: "Gender",
+      validation: Yup.string()
+    },
+    {
+      initialValue: "",
       name: "guardian_phone_number",
       type: "number",
       placeholder: t("guardian_phone_number"),
@@ -106,8 +118,8 @@ const SignUp: NextPage = (): JSX.Element => {
       validation: Yup.string().required(t("required_field"))
     },
   ],
-    (values) => {
-      const payload = { ...values }
+    (values:any) => {
+      const payload = { ...values, exam: selectedExam, gender: JSON.parse(values['gender'])?.value }
       Reflect.deleteProperty(payload, "confirm_password")
       dispatch(createStudentEffect({
         payload,

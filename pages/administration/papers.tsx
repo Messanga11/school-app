@@ -186,8 +186,14 @@ const Papers = () => {
 
 
   const savePaper = () => {
+    if (!subject?.uuid) {
+      return toast.error("Select a subject")
+    }
     if (!inputForm.paper_type) {
       return toast.error("Select a paper type")
+    }
+    if (!inputForm.year) {
+      return toast.error("Provide a year please")
     }
     if (!(Object.keys(form)!.find((key): boolean =>
       // @ts-ignore
@@ -216,6 +222,7 @@ const Papers = () => {
         if (paperToShow) {
           setPaperToShow(data)
         }
+        setShowModal(false)
       },
       payload,
     }))
@@ -255,7 +262,7 @@ const Papers = () => {
             handleClose={closeModal}
             type={"dropIn"}
           >
-            <div className="!text-white">
+            <div className="!text-black">
               <div>
                 <div>
                   <div>
@@ -277,7 +284,7 @@ const Papers = () => {
                       control: (base) => ({
                         ...base,
                         borderRadius: 20,
-                        background: "#515153",
+                        background: "#fafafa",
                         border: "none",
                         marginTop: 5,
                         paddingLeft: "1.5rem"
@@ -301,7 +308,7 @@ const Papers = () => {
                     Papers
                   </Typo>
                   <select
-                    className="px-5 bg-transparent bg-[#515153] rounded-full h-10"
+                    className="px-5 bg-transparent bg-[#fafafa] rounded-full h-10"
                     value={inputForm.paper_type}
                     name={"paper_type"}
                     onChange={(e) => setInputForm({
@@ -577,20 +584,17 @@ const Papers = () => {
           <div className="my-8 col-span-3 px-4">
             <div>
               <div className="font-bold flex justify-between items-center">
-                <h2 className="text-2xl text-white mb-8">Papers</h2>
+                <h2 className="text-2xl text-black mb-8">Papers</h2>
                 <div className="flex gap-5">
                   <button className="intent shadow-md" onClick={openModal}>
-                    <Icon icon="akar-icons:plus" />
+                    <Icon icon="akar-icons:plus" color="black" />
                   </button>
                 </div>
               </div>
               <div className="my-4">
-                <div className="flex gap-2 items-center intent py-0 shadow-sm rounded-full bg-[#515153]">
-                  <Icon icon="akar-icons:search" color="white" />
-                  <input type="text" className="border-none bg-transparent outline-none flex-grow py-3 text-white" />
-                </div>
+                <Input icon={<Icon icon="akar-icons:search" color="black" />} />
               </div>
-              <div className="my-6 grid grid-cols-4 gap-4 mt-16">
+              <div className="my-6 flex flex-col gap-4 mt-16">
                 {paper_data.data.map(paper => (
                   <DashboardItem
                     key={paper.uuid}

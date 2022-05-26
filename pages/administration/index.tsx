@@ -52,17 +52,58 @@ const Administration = () =>{
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">{student_data?.data.length}</p>
                     <p className="text-xl mt-4 text-black">Students</p>
-                    <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
+                    <table className="w-full text-left mt-4 text-black">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Boys
+                                </th>
+                                <th>
+                                    Girls
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {student_data?.data?.filter(student => student.gender === "Male").length}
+                                </td>
+                                <td>
+                                    {student_data?.data?.filter(student => student.gender === "Female").length}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0</p>
                     <p className="text-xl mt-4 text-black">VIP Students</p>
-                    <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
+                    <table className="w-full text-left mt-4 text-black">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Boys
+                                </th>
+                                <th>
+                                    Girls
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {student_data?.data?.filter(student => student.gender === "Male" && student.is_vip).length}
+                                </td>
+                                <td>
+                                    {student_data?.data?.filter(student => student.gender === "Female" && student.is_vip).length}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0k</p>
                     <p className="text-xl mt-4 text-black">FCFA Paid</p>
-                    <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
             </div>
         </div>

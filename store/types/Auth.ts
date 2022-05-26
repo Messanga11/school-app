@@ -1,3 +1,4 @@
+import { AppRoles } from '.';
 import { School } from './School';
 import { Student, UpdateProfilePic } from './Student';
 
@@ -42,6 +43,7 @@ export interface User {
     guardian_phone_number:string;
     email:string;
     selected_exam:{label: string, value: string}[];
+    role: keyof AppRoles;
 }
 
 // ************************* Actions ***************************** //

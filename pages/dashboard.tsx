@@ -15,7 +15,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useSelector } from 'react-redux';
-import { ApplicationState } from '../store/types/index';
+import { ApplicationState, User } from '../store/types/index';
 
 const Dashboard = () => {
   
@@ -90,7 +90,7 @@ const Dashboard = () => {
             icon="akar-icons:paper"
             smallText="in subjects"
             title="Subjects"
-            value={userInfos?.selected_exam?.length || 0}
+            value={(userInfos as User)?.selected_exam?.length || 0}
           />
         </div>
         <div className="mt-8 gap-4 flex">

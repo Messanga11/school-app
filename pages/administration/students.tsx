@@ -124,13 +124,10 @@ const Students:NextPage = ():JSX.Element =>{
                     <div className="my-8 col-span-3 px-4">
                         <div>
                             <div className="font-bold flex justify-between items-center">
-                                <h2 className="text-2xl text-white mb-8">Recent students</h2>
+                                <h2 className="text-2xl text-black mb-8">Recent students</h2>
                             </div>
                             <div className="my-4">
-                                <div className="flex gap-2 items-center intent py-0 shadow-sm rounded-full bg-[#515153]">
-                                    <Icon icon="akar-icons:search" color="white" />
-                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3 text-white" />
-                                </div>
+                                <Input icon={<Icon icon="akar-icons:search" color="black" />} />
                             </div>
                             <Button className="mt-4" onClick={() => openModal(null)}>Send a message to every student</Button>
                             <div className="my-6 grid grid-cols-4 gap-4 mt-16">

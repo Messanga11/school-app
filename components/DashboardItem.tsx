@@ -11,11 +11,11 @@ interface DashboardItemProps {
 
 const DashboardItem:React.FC<DashboardItemProps> = ({icon, title, size, onEdit, onDelete}) => {
   return (
-    <div className={`flex justify-between items-center px-6 w-full bg-gray-100 rounded-md focus:outline-none focus:shadow-md transition duration-100 cursor-default ${size === "sm" ? "text-sm py-1" : "py-3"}`}>
+    <div className={`flex justify-between items-center px-6 w-full bg-[#fefefe] rounded-md focus:outline-none focus:shadow-md transition duration-100 cursor-default ${size === "sm" ? "text-xs py-1" : "py-3"}`}>
         <div>
                 <div className='flex gap-3 items-center'>
-                  <div className='bg-white h-10 w-10 rounded-full my-4 flex justify-center items-center'>
-                      <Icon icon={icon} color="black" height={15} />
+                  <div className='bg-[#eee] h-6 w-6 rounded-full my-4 flex justify-center items-center'>
+                      <Icon icon={icon} color="black" height={12} />
                   </div>
                   <p className='text-lg'>{title}</p>
                 </div>

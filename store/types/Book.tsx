@@ -14,7 +14,7 @@ export interface Book {
     uuid: string;
     title: string;
     url: string;
-    topic_uuid: string;
+    topic_id: string;
     type: string
 }
 

@@ -1,15 +1,17 @@
 import { logoutEffect } from '@/store/effects/auth'
+import { ApplicationState, User } from '@/store/types'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?: boolean, school?: boolean}) => {
     
     const dispatch = useDispatch()
 
     const router = useRouter()
+    const { auth: { userInfos } } = useSelector((state:ApplicationState) => state)
 
     const navigationItems = [
         {
@@ -86,6 +88,11 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="clarity:dashboard-solid" />
         },
         {
+            name: "Messages",
+            link: "/guardian/messages",
+            icon: <Icon icon="ant-design:message-filled" />
+        },
+        {
             name: "Logout",
             link: "#logout",
             icon: <Icon icon="ion:exit" />,
@@ -113,17 +120,17 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
     ]
 
   return (
-    <div className='bg-[#fff] h-full border-r border-[#eee] pb-6' style={{minWidth: 210}}>
+    <div className='bg-[#fff] h-full border-r border-[#eee] pb-6 w-full' style={{maxWidth: 250}}>
         <div>
             <div>
-                <div className='h-16 flex items-center justify-center'>
+                <div className='h-16 flex items-center justify-center w-full'>
                     <div className="px-4 text-sm text-center flex items-center gap-3">
                             <div className='bg-black h-8 w-8 rounded-md flex justify-center items-center mx-auto'>
                                 <Icon icon="bxs:user" color="white" height={25} />
                             </div>
-                            <div className='!text-black'>
-                                <p className='text-sm text-black'>@administrator</p>
-                                {!admin && <p className='text-sm text-black'>US: ID  - 0000</p>}
+                            <div className='!text-black text-left' style={{width: 150}}>
+                                <p className='text-xs text-black truncate'>@{(userInfos as User)?.user_name}</p>
+                                {!admin && <p className='text-xs text-black truncate'>US: ID  - {userInfos?.uuid}</p>}
                             </div>
                     </div>
                 </div>

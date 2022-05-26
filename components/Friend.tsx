@@ -1,21 +1,21 @@
-import { Student } from "@/store/types";
-import { Icon } from "@iconify/react";
+import { ApplicationState, Student } from "@/store/types";
 import React, { useState } from "react";
 import Button from "./basics/Button";
 import {
   sendInvitationEffect,
-  getInvitationsEffect,
   sendMessageEffect,
   acceptInvitationEffect,
   deleteFriendEffect,
+  deleteStudentEffect,
 } from "../store/effects/student";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "./Modal";
-import Input from "@/components/basics/Input";
 import toast from "react-hot-toast";
 import DefaultImageComponent from './DefaultImageComponent';
 import TextArea from "./basics/Textarea";
 import Image from "next/image";
+import DeleteModal from "./DeleteModal";
+import AccessGuard from "./basics/AccessGuard";
 
 interface StudentProps {
   friend: Student;
@@ -40,6 +40,8 @@ const Friend = ({
   const [loadingMessage, setLoadingMessage] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const [loadingDeletingStudent, setLoadingDeletingStudent] = useState(false);
+  const [showDeletingModal, setShowDeletingModal] = useState(false);
 
   // Functions
   const sendInvitation = (): void => {
@@ -112,6 +114,19 @@ const Friend = ({
     );
   };
 
+  const deleteStudent = () => {
+    dispatch(deleteStudentEffect({
+      setLoading: setLoadingDeletingStudent,
+      failCb: () => toast.error("Unable to delete this student. Something went wrong!"),
+      successCb: () => {
+        toast.success("Student deleted");
+        setShowDeletingModal(false);
+        window.location.reload();
+      },
+      payload: friend.uuid
+    }))
+  }
+
   return (
     <div className="h-96 flex flex-col justify-between items-center w-full bg-[#fff] border border-[#eee] overflow-hidden hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100 rounded-xl">
       {showModal && (
@@ -136,6 +151,15 @@ const Friend = ({
           </div>
         </Modal>
       )}
+
+      {showDeletingModal && (
+        <DeleteModal
+          message="Really want to delete this student?"
+          onAccept={deleteStudent}
+          onDecline={() => setShowDeletingModal(false)}
+        />
+      )}
+
       {friend?.image_url ? (
         <div className="relative h-2/3 w-full">
           <Image
@@ -188,6 +212,15 @@ const Friend = ({
           </Button> : (
             <Button style={{opacity: 0}}></Button>
             )}
+            <AccessGuard access_role="STUDENT">
+              <Button
+                loading={loadingDeletingStudent}
+                color="danger"
+                onClick={() => setShowDeletingModal(true)}
+              >
+                Delete a student
+              </Button>
+            </AccessGuard>
         </div>
       </div>
     </div>

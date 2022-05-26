@@ -1,14 +1,25 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useRef } from "react";
-import { useClickOutsideClose } from "../utils/hooks";
+import { clearTimeout } from "timers";
 
 const DashboardHeader = () => {
   const timelineMenuRef = useRef(null);
 
   const router = useRouter();
+
+  const [actualDate, setActualDate] = useState(new Date())
+
+  useEffect(() => {
+
+    const id = setInterval(() => {
+      setActualDate(new Date())
+    }, 1000)
+
+    return () => clearInterval(id)
+  }, [])
 
   const navigationItems = [
     {
@@ -53,8 +64,8 @@ const DashboardHeader = () => {
                 ref={timelineMenuRef}
                 className="px-4 py-3 border-x border-[#eee] flex gap-4 h-full items-center"
               >
-                <p className="font-light">17 FEB 2002</p>
-                <p className="leading-0">17:30:00</p>
+                <p className="font-light">{actualDate.toISOString().split("T")[0]}</p>
+                <p className="leading-0">{actualDate.getHours()}:{actualDate.getMinutes()}:{actualDate.getSeconds()}</p>
               </div>
             </div>
           </div>

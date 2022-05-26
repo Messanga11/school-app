@@ -28,6 +28,8 @@ export interface Student {
     last_name: string;
     phone_number: number;
     email?: string;
+    gender?: string;
+    is_vip?: boolean;
     image_url?: string;
     guardian_phone_number?: number;
     is_friend?: boolean

@@ -4,6 +4,10 @@ import SecureLS from "secure-ls";
 
 let _timerId:(NodeJS.Timeout | null) = null
 
+export const genders = [
+  {title: "Male"},
+  {title: "Female"},
+]
 
 export const subjects = {
   ordinaryGrammar : [
@@ -69,14 +73,6 @@ export const subjects = {
     {title: "Commerce and Finance"},
     {title: "Macro Economics"},
   ],
-}
-
-export interface AppRoles {
-  STUDENT: "STUDENT";
-  SCHOOL: "SCHOOL";
-  UNIVERSITY: "UNIVERSITY";
-  ADMIN: "ADMIN";
-  GUARDIAN: "GUARDIAN";
 }
 
 export interface RegionOption {

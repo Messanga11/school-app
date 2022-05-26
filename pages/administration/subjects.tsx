@@ -281,7 +281,7 @@ const Subjects: NextPage = () => {
                 page: 1,
                 per_page: 10,
                 order_field: "date_added",
-                subject_uuid: createdSubject?.uuid
+                subject_uuid: (createdSubject || subjectToShow)?.uuid
             },
             failCb: (): void => {
 

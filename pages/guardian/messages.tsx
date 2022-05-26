@@ -4,8 +4,8 @@ import DashboardLayout from "@/layouts/DashboardLayout";
 const Messages = () => {
 
   return (
-    <DashboardLayout title="Messages">
-      <MessagePage />
+    <DashboardLayout title="Messages" guardian>
+      <MessagePage guardian />
     </DashboardLayout>
   );
 };

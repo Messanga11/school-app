@@ -56,12 +56,12 @@ const TopicFilesComponent: React.FC<Props> = ({
       <div className="flex flex-wrap gap-4 my-2">
         {/* @ts-ignore */}
         {book_data.data.filter(
-          (item) => item?.topic_uuid === topicToShow?.uuid && item?.type === _key
+          (item) => item?.topic_id === topicToShow?.uuid && item?.type === _key
         )
         ?.map((f, i) => (
           <div
             key={`${_key}_${f?.title}_${i}`}
-            className="px-8 py-6 rounded-md border border-[#eee] bg-white text-white relative"
+            className="px-8 py-6 rounded-md border border-[#eee] bg-[#aaa] text-black relative"
           >
             <button
             className="text-sm absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 font-semibold flex justify-center items-center"
@@ -71,11 +71,11 @@ const TopicFilesComponent: React.FC<Props> = ({
         ))}
       </div>
       <div className="border border-[#eee] rounded-md px-8 py-6">
-        <Typo type="small" className="text-white capitalize">
+        <Typo type="small" className="text-black capitalize">
           {String(_key).replace("lib_book", "Library book")}
         </Typo>
         <div className="my-4">
-          <Typo type="small" className="text-white text-xs">Title</Typo>
+          <Typo type="small" className="text-black text-xs">Title</Typo>
           <Input
             name={`current_${_key}_title`}
             onChange={handleInputChange}
@@ -84,7 +84,7 @@ const TopicFilesComponent: React.FC<Props> = ({
             className="flex-grow"
           />
         </div>
-        <Typo type="small" className="text-white capitalize">File</Typo>
+        <Typo type="small" className="text-black capitalize">File</Typo>
         <Input
           type="file"
           onChange={(e) => {

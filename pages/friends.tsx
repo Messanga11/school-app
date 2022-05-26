@@ -91,7 +91,7 @@ const Profile = () => {
     <DashboardLayout title="Profile" >
     <Container>
       <div className='bg-[#fff] p-8 rounded-xl'>
-        <h2 className='text-white'>Friends</h2>
+        <h2 className='text-black'>Friends</h2>
         <p>Here you can add friend, see your actual friends and invitations you have</p>
           
           <div className='mb-4 mt-4'>
@@ -102,6 +102,9 @@ const Profile = () => {
           
           {activeTabId === "invitations" && (<div className="w-full">
                 <div className='w-full grid grid-cols-5 gap-4'>
+                  {invitations?.data?.length === 0 && (
+                    <p>No invitation at now</p>
+                  )}
                   {invitations?.data?.map(invitation => (
                     <Friend key={invitation.request_user?.uuid} friend={invitation.request_user} invitationUuid={invitation.uuid}
                     getData={getData} />
@@ -111,6 +114,9 @@ const Profile = () => {
           
           {activeTabId === "friends" && (
             <div className='w-full grid grid-cols-4 gap-4'>
+                {friends?.data?.length === 0 && (
+                  <p>No friend at now</p>
+                )}
                 {friends?.data?.map(invitation => (
                   <Friend
                     key={invitation.request_user?.uuid} friend={invitation.request_user} invitationUuid={invitation.uuid}
@@ -122,9 +128,12 @@ const Profile = () => {
           
           {activeTabId === "students" && (
             <div className='w-full grid grid-cols-5 gap-4'>
-                  {student_data?.data?.map(student => (
-                    <Friend key={student.uuid} friend={student} />
-                  ))}
+                {student_data?.data?.length === 0 && (
+                  <p>No student at now</p>
+                )}
+                {student_data?.data?.map(student => (
+                  <Friend key={student.uuid} friend={student} />
+                ))}
             </div>
           )}
 

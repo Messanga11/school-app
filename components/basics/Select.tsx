@@ -40,7 +40,7 @@ const SelectComponent = ({defaultValue, className, onChange, style, placeholder,
                         control: (items) => ({
                             ...items,
                             borderColor: "transparent",
-                            background: "#efefef",
+                            background: "#fafafa",
                             color: "#515154",
                             borderRadius: 20,
                             paddingLeft: "1.5rem"

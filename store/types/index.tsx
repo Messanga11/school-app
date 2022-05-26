@@ -48,6 +48,14 @@ export interface ApplicationState {
     schoolPost: SchoolPostState,
 }
 
+export interface AppRoles {
+    STUDENT: "STUDENT";
+    SCHOOL: "SCHOOL";
+    UNIVERSITY: "UNIVERSITY";
+    ADMIN: "ADMIN";
+    GUARDIAN: "GUARDIAN";
+  }
+
 // ******************** Shared interfaces ******************** //
 
 export interface MsgOk {

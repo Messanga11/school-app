@@ -14,10 +14,10 @@ export const studentUrls = {
     CREATE_STUDENT: `${apiPrefix}/administration/users`,
     DELETE_STUDENT: (uuid:string):string => `${apiPrefix}/users/${uuid}`,
     UPDATE_STUDENT: `${apiPrefix}/users`,
-    GET_MESSAGES: (range:RequestRange | undefined):string => `${apiPrefix}/messages/${range?.conversation_uuid || ""}?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}`,
-    GET_CONVERSATIONS: `${apiPrefix}/messages/conversations`,
-    DELETE_MESSAGE: `${apiPrefix}/messages`,
-    SEND_MESSAGE: `${apiPrefix}/messages`,
+    GET_MESSAGES: (range:RequestRange | undefined):string => `${apiPrefix}/administration/messages/${range?.conversation_uuid || ""}?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}`,
+    GET_CONVERSATIONS: `${apiPrefix}/administration/messages/conversations`,
+    DELETE_MESSAGE: `${apiPrefix}/administration/messages`,
+    SEND_MESSAGE: `${apiPrefix}/administration/messages`,
     GET_FRIENDS: `${apiPrefix}/users/friends`,
     GET_INVITATIONS: `${apiPrefix}/users/invitations/get`,
     ACCEPT_INVITATION: `${apiPrefix}/users/accept-invitation`,
@@ -90,12 +90,4 @@ export const videoUrls = {
     CREATE_VIDEO: `${apiPrefix}/administration/videos`,
     DELETE_VIDEO: (uuid:string):string => `${apiPrefix}/administration/videos/${uuid}`,
     UPDATE_VIDEO: `${apiPrefix}/administration/videos`,
-}
-
-export const messagesUrls = {
-    GET_MESSAGES: (range:RequestRange | undefined):string => `${apiPrefix}/administration/message`,
-    GET_MESSAGE: (uuid:string):string => `${apiPrefix}/administration/message/${uuid}`,
-    CREATE_MESSAGE: `${apiPrefix}/administration/message`,
-    DELETE_MESSAGE: (uuid:string):string => `${apiPrefix}/administration/message/${uuid}`,
-    UPDATE_MESSAGE: `${apiPrefix}/administration/message`,
 }

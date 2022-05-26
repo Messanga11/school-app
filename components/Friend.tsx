@@ -15,6 +15,7 @@ import Input from "@/components/basics/Input";
 import toast from "react-hot-toast";
 import DefaultImageComponent from './DefaultImageComponent';
 import TextArea from "./basics/Textarea";
+import Image from "next/image";
 
 interface StudentProps {
   friend: Student;
@@ -30,6 +31,7 @@ const Friend = ({
   getData,
   accepted,
 }: StudentProps) => {
+
   // Hooks
   const dispatch = useDispatch();
 
@@ -135,12 +137,17 @@ const Friend = ({
         </Modal>
       )}
       {friend?.image_url ? (
-        <img
-          className="h-2/3 w-full object-cover"
-          src={friend?.image_url}
-          alt={friend?.first_name}
-          loading="lazy"
-        />
+        <div className="relative h-2/3 w-full">
+          <Image
+            width={"100%"}
+            height={"100%"}
+            layout="fill"
+            className="object-cover"
+            src={friend?.image_url}
+            alt={friend?.first_name}
+            loading="lazy"
+          />
+        </div>
       ) : (
         <DefaultImageComponent />
       )}

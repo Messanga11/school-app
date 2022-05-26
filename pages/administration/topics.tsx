@@ -31,9 +31,9 @@ const Students = () =>{
         }
     )
 
-    const handleChange = (e) => {
+    const handleChange = (e:any) => {
         setForm(state => {
-            Object.keys(state).forEach(key => {
+            (Object.keys(state) as (keyof typeof state)[]).forEach((key) => {
                 state[key] = false
             })
             return ({

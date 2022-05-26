@@ -408,7 +408,7 @@ const Subjects: NextPage = () => {
                             <div>
                                 <div>
                                     <div>
-                                        <h2 className="text-white">{subjectToShow ? "Edit" : "Add"} Subject {subjectToShow && `: ${subjectToShow?.title}`}</h2>
+                                        <h2 className="text-black">{subjectToShow ? "Edit" : "Add"} Subject {subjectToShow && `: ${subjectToShow?.title}`}</h2>
                                     </div>
                                 </div>
                             </div>
@@ -418,7 +418,7 @@ const Subjects: NextPage = () => {
                                         {openState === 1 && <div>
                                             <Input name="subject_title" label="Title" value={inputForm.subject_title} onChange={handleInputChange} />
                                             <div className="mt-4">
-                                                <Typo type="small" className="text-xs text-white">Visible for</Typo>
+                                                <Typo type="small" className="text-xs text-black">Visible for</Typo>
                                                 <InputCheckbox name="alg" checked={form.alg} onClick={handleChange} label="GCE Advanced level Grammar" />
                                                 <InputCheckbox name="alc" checked={form.alc} onClick={handleChange} label="GCE Advanced level Commercial" />
                                                 <InputCheckbox name="olg" checked={form.olg} onClick={handleChange} label="GCE Ordinary level Grammar" />
@@ -431,7 +431,7 @@ const Subjects: NextPage = () => {
                                     </div>
                                     {openState === 2 && <div>
                                         <div>
-                                            <small className="text-sm text-white">Topics</small>
+                                            <small className="text-sm text-black">Topics</small>
                                             <div className="my-3 space-y-2">
                                                 {topic_data.data.map((topic, i) => (
                                                     <div key={topic?.uuid}>
@@ -498,18 +498,15 @@ const Subjects: NextPage = () => {
                     <div className="my-8 col-span-3 px-4">
                         <div>
                             <div className="font-bold flex justify-between items-center">
-                                <h2 className="text-2xl text-white mb-8">Subjects</h2>
+                                <h2 className="text-2xl text-black mb-8">Subjects</h2>
                                 <div className="flex gap-5">
                                     <button className="intent shadow-md" onClick={openModal}>
-                                        <Icon icon="akar-icons:plus" />
+                                        <Icon icon="akar-icons:plus" color="black" />
                                     </button>
                                 </div>
                             </div>
                             <div className="my-4">
-                                <div className="flex gap-2 items-center intent py-0 shadow-sm rounded-full bg-[#515153]">
-                                    <Icon icon="akar-icons:search" color="white" />
-                                    <input type="text" className="border-none bg-transparent outline-none flex-grow py-3 text-white" />
-                                </div>
+                                <Input icon={<Icon icon="akar-icons:search" color="black" />} />
                             </div>
                             <div className="my-6 flex flex-col gap-6 mt-16">
                                 {subject_data.data.map(subject => (

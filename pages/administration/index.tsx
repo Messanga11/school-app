@@ -45,23 +45,23 @@ const Administration = () =>{
     
       const Content = loadingHOC(() => <Container>
         <div>
-            <h2 className="text-2xl mb-4 mt-8 text-white">Dashboard</h2>
+            <h2 className="text-2xl mb-4 mt-8 text-black">Dashboard</h2>
         </div>
         <div>
             <div className="grid grid-cols-3 gap-4">
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">{student_data?.data.length}</p>
-                    <p className="text-xl mt-4 text-white">Students</p>
+                    <p className="text-xl mt-4 text-black">Students</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0</p>
-                    <p className="text-xl mt-4 text-white">VIP Students</p>
+                    <p className="text-xl mt-4 text-black">VIP Students</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
                 <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
                     <p className="text-6xl font-extrabold">0k</p>
-                    <p className="text-xl mt-4 text-white">FCFA Paid</p>
+                    <p className="text-xl mt-4 text-black">FCFA Paid</p>
                     <p className="mt-2 text-md">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt veniam, aut unde facilis mollitia similique sed eaque</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@ const Administration = () =>{
             <div className="my-8 col-span-3 px-4">
                 <div>
                     <div className="font-bold flex justify-between items-center">
-                        <h2 className="text-2xl text-white">Recent students</h2>
+                        <h2 className="text-2xl text-black">Recent students</h2>
                         <a href="/administartion/students" className="font-light text-xs">View all students</a>
                     </div>
                     <div className="my-6 grid grid-cols-3 gap-4">
@@ -81,7 +81,7 @@ const Administration = () =>{
                 </div>
                 <div className="mt-12">
                     <div className="font-bold flex justify-between items-center">
-                        <h2 className="text-2xl text-white">Recent payments</h2>
+                        <h2 className="text-2xl text-black">Recent payments</h2>
                         <a href="/administartion/students" className="font-light text-xs">View all payments</a>
                     </div>
                     <div className="my-6 flex flex-col gap-4">
@@ -91,7 +91,7 @@ const Administration = () =>{
             </div>
             <div className="col-span-1 px-4 my-8">
                 <div className="font-bold flex justify-between items-center">
-                    <h2 className="text-2xl text-white">Best students</h2>
+                    <h2 className="text-2xl text-black">Best students</h2>
                 </div>
                 <div className="my-6 flex flex-col gap-4">
                     

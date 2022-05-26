@@ -71,6 +71,14 @@ export const subjects = {
   ],
 }
 
+export interface AppRoles {
+  STUDENT: "STUDENT";
+  SCHOOL: "SCHOOL";
+  UNIVERSITY: "UNIVERSITY";
+  ADMIN: "ADMIN";
+  GUARDIAN: "GUARDIAN";
+}
+
 export interface RegionOption {
   label: string,
   value: string

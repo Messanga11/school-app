@@ -21,7 +21,6 @@ interface StudentProps {
   friend: Student;
   invitationUuid?: string;
   getData?: Function;
-  fetchFriends?: Function;
   accepted?: boolean;
   setStudentToSendMessage?: (student:Student) => void;
 }
@@ -31,7 +30,6 @@ const Friend = ({
   invitationUuid,
   getData,
   accepted,
-  fetchFriends
 }: StudentProps) => {
 
   // Hooks
@@ -55,8 +53,8 @@ const Friend = ({
         setLoading,
         successCb: () => {
           toast.success("Your invitation has been sent!")
-          if(fetchFriends instanceof Function) {
-            fetchFriends()
+          if(getData instanceof Function) {
+            getData()
           }
         },
         failCb: (data: any) =>
@@ -128,7 +126,9 @@ const Friend = ({
       successCb: () => {
         toast.success("Student deleted");
         setShowDeletingModal(false);
-        window.location.reload();
+        if(getData instanceof Function) {
+          getData()
+        }
       },
       payload: friend.uuid
     }))

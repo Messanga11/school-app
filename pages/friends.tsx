@@ -143,7 +143,6 @@ const Profile = () => {
                   <Friend
                     key={invitation.request_user?.uuid} friend={invitation.request_user} invitationUuid={invitation.uuid}
                     accepted={invitation.accepted}
-                    fetchFriends={getData}
                     getData={getData} />
                 ))}
               </div>

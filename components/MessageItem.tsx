@@ -18,9 +18,9 @@ const MessageItem:React.FC<Props> = ({message}) => {
   const dispatch = useDispatch()
 
   return (
-    <div className={`p-4 w-full bg-${message.sender_uuid !== userInfos?.uuid ? "gray-100" : "green-500"} rounded-md ml-${message.sender_uuid !== userInfos?.uuid ? "auto" : "0"}`} style={{maxWidth: "50%"}}>
-          <p className={`text-${message.sender_uuid === userInfos?.uuid ? "gray" : "green"}-50 text-sm`}>{message.text}</p>
-          <p className={`text-${message.sender_uuid === userInfos?.uuid ? "gray" : "green"}-200 mt-2 text-xs`}>{new Date(message?.created_at || "").toUTCString()}</p>
+    <div className={`p-4 w-full bg-${message.sender_uuid !== userInfos?.uuid ? "gray-200" : "green-500"} rounded-md ml-${message.sender_uuid !== userInfos?.uuid ? "auto" : "0"}`} style={{maxWidth: "50%"}}>
+          <p className={`text-${message.sender_uuid === userInfos?.uuid ? "gray" : "green"}-100 text-sm`}>{message.text}</p>
+          <p className={`text-${message.sender_uuid === userInfos?.uuid ? "gray" : "green"}-300 mt-2 text-xs`}>{new Date(message?.created_at || "").toUTCString()}</p>
     </div>
   )
 }

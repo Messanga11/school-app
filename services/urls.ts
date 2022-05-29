@@ -1,6 +1,6 @@
 import { RequestRange } from "@/store/types"
 
-export const apiPrefix:string = "http://localhost:5301"
+export const apiPrefix:string = "http://192.168.154.201:5301"
 
 export const authUrls = {
     LOGIN: (guardian_phone_number?:number | string) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,

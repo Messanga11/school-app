@@ -280,7 +280,7 @@ export const sleep = (time:number, cb:Function) => {
   }, time)
 }
 
-export const debounceFunction = (func: Function, delay:number) => {
+export const debounceFunction = (func: Function, delay:number):any => {
   let timer:NodeJS.Timeout;
   return function () {
     // @ts-ignore

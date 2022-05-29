@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import DashboardLayout from '../layouts/DashboardLayout'
-import { subjects } from '../utils/common'
+import { debounceFunction, subjects } from '../utils/common'
 import Image from "next/image"
 import { Icon } from '@iconify/react'
 import Friend from '../components/Friend'
@@ -13,6 +13,7 @@ import { ApplicationState } from '../store/types/index';
 import toast from 'react-hot-toast';
 import { AnyObject } from 'immer/dist/internal'
 import Container from '../components/Container';
+import { useSearch } from '@/utils/hooks'
 
 const Profile = () => {
 
@@ -48,9 +49,10 @@ const Profile = () => {
         range: {
             page: 1,
             per_page: 10,
-            order_field: "date_added"
+            order_field: "date_added",
+            keyword: searchText
         },
-        failCb: (data:any) => toast.error(data?.detail || "Something went wrong!"),
+        failCb: (data:any) => toast.error(typeof data?.detail === "string" ? data.detail : "Something went wrong!"),
         successCb: ():void => {
             
         },
@@ -62,7 +64,13 @@ const Profile = () => {
       dispatch(getFriendsEffect({
         setLoading,
         successCb: () => undefined,
-        failCb: (data:any) => toast.error(data?.detail || "Something went wrong!"),
+        failCb: (data:any) => toast.error(typeof data?.detail === "string" ? data.detail : "Something went wrong!"),
+        range: {
+          keyword: searchText,
+          page: 1,
+          per_page: 10,
+          order_field: "date_added",
+        }
       }))
     }
 
@@ -71,7 +79,13 @@ const Profile = () => {
     dispatch(getInvitationsEffect({
       setLoading,
       successCb: () => undefined,
-      failCb: (data:any) => toast.error(data?.detail || "Something went wrong!"),
+      failCb: (data:any) => toast.error(typeof data?.detail === "string" ? data.detail : "Something went wrong!"),
+      range: {
+        keyword: searchText,
+        page: 1,
+        per_page: 10,
+        order_field: "date_added",
+      }
     }))
   }
   
@@ -81,11 +95,14 @@ const Profile = () => {
     getInvitations()
   }
 
-    useEffect(() => {
-      getData()
-      // eslint-disable-next-line
-    }, [])
-    
+  useSearch(activeTabId  === "friends" ? fetchFriends
+  : activeTabId === "students" ? fetchOtherStudents
+  : getInvitations, [searchText, activeTabId])
+
+  useEffect(() => {
+    getData()
+    // eslint-disable-next-line
+  }, [])
 
   return (
     <DashboardLayout title="Profile" >
@@ -98,7 +115,12 @@ const Profile = () => {
             <Input placeholder='Search a student' name="search-input" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
           </div>
           
-          <Tabs tabs={tabs} activeTabId={activeTabId} setActiveTabId={setActiveTabId} />          
+          <Tabs
+            tabs={tabs}
+            activeTabId={activeTabId}
+            setActiveTabId={setActiveTabId}
+            count={{2:invitations?.data?.length}}
+          />          
           
           {activeTabId === "invitations" && (<div className="w-full">
                 <div className='w-full grid grid-cols-4 gap-4'>

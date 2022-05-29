@@ -1,6 +1,6 @@
 import { RequestRange } from "@/store/types"
 
-export const apiPrefix:string = "http://192.168.154.201:5301"
+export const apiPrefix:string = "http://localhost:5301"
 
 export const authUrls = {
     LOGIN: (guardian_phone_number?:number | string) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,
@@ -9,7 +9,7 @@ export const authUrls = {
 }
 
 export const studentUrls = {
-    GET_STUDENTS: (range:RequestRange | undefined):string => `${apiPrefix}/users`,
+    GET_STUDENTS: (range:RequestRange | undefined):string => `${apiPrefix}/users?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}&keyword=${range?.keyword || ""}`,
     GET_STUDENT: (uuid:string):string => `${apiPrefix}/users/${uuid}`,
     CREATE_STUDENT: `${apiPrefix}/administration/users`,
     DELETE_STUDENT: (uuid:string):string => `${apiPrefix}/users/${uuid}`,
@@ -18,8 +18,8 @@ export const studentUrls = {
     GET_CONVERSATIONS: `${apiPrefix}/administration/messages/conversations`,
     DELETE_MESSAGE: `${apiPrefix}/administration/messages`,
     SEND_MESSAGE: `${apiPrefix}/administration/messages`,
-    GET_FRIENDS: `${apiPrefix}/users/friends`,
-    GET_INVITATIONS: `${apiPrefix}/users/invitations/get`,
+    GET_FRIENDS: (range?:RequestRange) => `${apiPrefix}/users/friends?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}&keyword=${range?.keyword || ""}`,
+    GET_INVITATIONS: (range?:RequestRange) => `${apiPrefix}/users/invitations/get?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}&keyword=${range?.keyword || ""}`,
     ACCEPT_INVITATION: `${apiPrefix}/users/accept-invitation`,
     REFUSE_INVITATION: `${apiPrefix}/users/remove-friend`,
     DELETE_FRIEND: `${apiPrefix}/users/remove-friend`,

@@ -94,6 +94,7 @@ const Login:NextPage = () => {
                 {fields}
                 <div className="py-8">
                 <button ref={submitBtnRef} className="hidden w-full" type="submit">Submit</button>
+                Did you forgot your password? <Link href={"/recover-password"}>click here</Link>
                 </div>
                 </form>
                 <Button onClick={() => {

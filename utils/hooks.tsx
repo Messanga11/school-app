@@ -1,4 +1,4 @@
-import { EventHandler, MutableRefObject, useEffect, useRef, useState } from "react";
+import { EventHandler, MutableRefObject, useCallback, useEffect, useRef, useState } from "react";
 import { useIntl } from "react-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik"
@@ -52,6 +52,7 @@ import TextArea from "@/components/basics/Textarea"
 import toast from "react-hot-toast"
 import { useRouter } from "next/router";
 import { apiPrefix } from "@/services/urls";
+import { debounceFunction } from "./common";
 // import { object } from "yup"
 
 interface Option {
@@ -246,4 +247,18 @@ export const useFields = (fields: Field[], formik:any) => {
         setLoading(false)
         failCb()
     }
+  }
+
+  export const useSearch = (searchFunction: Function, deps:any[]=[]) => {
+    
+  // eslint-disable-next-line
+  const searchHandler = useCallback(debounceFunction(() => {
+    searchFunction()
+  }, 500), deps)
+
+
+  useEffect(() => {
+    searchHandler()
+    // eslint-disable-next-line
+  }, deps)
   }

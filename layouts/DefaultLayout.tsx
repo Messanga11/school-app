@@ -24,7 +24,7 @@ const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, sch
             <HeaderComponent school={school} university={university} />
             <div>
                 <div>
-                    <div className={`${!noWidthLimit ?  "container-block " : ""}`} style={{paddingTop: 100}}>
+                    <div className={`${!noWidthLimit ?  "container-block " : ""}`} style={{paddingTop: 80}}>
                         {children}
                     </div>
                 </div>

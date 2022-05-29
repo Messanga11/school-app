@@ -1,19 +1,7 @@
 import Image from "next/image";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import GroupIcon from "@mui/icons-material/Group";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import ChatIcon from "@mui/icons-material/Chat";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
-import { Avatar } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
-import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
 import { useTranslation } from "../utils/hooks"
-import HeaderLink from "./HeaderLink";
 import { useRouter } from "next/router";
-import Button from '@/components/basics/Button';
 import Link from "next/link";
 
 interface Props {
@@ -51,8 +39,8 @@ function HeaderComponent({school, university}:Props) {
       <nav className="bg-[#fff] shadow-md">
         <div className="container">
           <div>
-            <span className="brand link-active">
-              <Link href="/" passHref><span><span style={{color: "var(--primary)"}}>U</span><span style={{color: "var(--accent)"}}>S</span></span></Link>
+            <span className="brand">
+              <Link href="/" passHref><Image layout="fixed" width={50} height={50} src="/images/logo.png" alt="" /></Link>
             </span>
           </div>
           <ul>

@@ -30,11 +30,8 @@ const ConversationItem:React.FC<Props> = ({conversation, setCurrentConversation,
         <span className='bg-red-500 w-3 h-3 rounded-full absolute right-2 top-2'></span>
         <div className='flex-shrink-0'>
             {otherMember?.image_url ? (
-              <Image 
-                width={"4rem"}
-                height={"4rem"}
-                layout="fixed"
-                className='rounded-full object-cover'
+              <img
+                className='h-16 w-16 rounded-full object-cover'
                 src={otherMember?.image_url} alt={otherMember?.first_name}
               />
             )

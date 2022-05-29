@@ -193,14 +193,15 @@ export const useFields = (fields: Field[], formik:any) => {
       const router = useRouter()
 
     useEffect(() => {
-        const token = !isAdminPage ? localStorage.getItem("token") : localStorage.getItem("token") // replace by admin token
-            if(!token) {
-                router.push("/login")
+        const inLoginRoutes = ["/login", "/signup"].includes(router.pathname)
+        const token = localStorage.getItem("token") ? JSON.stringify(localStorage.getItem("token")) : null // replace by admin token
+            if(!token && !inLoginRoutes) {
+                router.push("/")
             }
-            
-            if(token && ["/login", "/signup"].includes(router.pathname)) {
-                router.push("/home")
+            else if(token && inLoginRoutes) {
+                router.push("/")
             }
+            console.log(token)
             // eslint-disable-next-line
     }, [])
   }

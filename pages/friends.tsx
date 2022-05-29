@@ -101,7 +101,7 @@ const Profile = () => {
           <Tabs tabs={tabs} activeTabId={activeTabId} setActiveTabId={setActiveTabId} />          
           
           {activeTabId === "invitations" && (<div className="w-full">
-                <div className='w-full grid grid-cols-5 gap-4'>
+                <div className='w-full grid grid-cols-4 gap-4'>
                   {invitations?.data?.length === 0 && (
                     <p>No invitation at now</p>
                   )}
@@ -121,13 +121,14 @@ const Profile = () => {
                   <Friend
                     key={invitation.request_user?.uuid} friend={invitation.request_user} invitationUuid={invitation.uuid}
                     accepted={invitation.accepted}
+                    fetchFriends={getData}
                     getData={getData} />
                 ))}
               </div>
             )}
           
           {activeTabId === "students" && (
-            <div className='w-full grid grid-cols-5 gap-4'>
+            <div className='w-full grid grid-cols-4 gap-4'>
                 {student_data?.data?.length === 0 && (
                   <p>No student at now</p>
                 )}

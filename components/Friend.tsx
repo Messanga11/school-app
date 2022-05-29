@@ -21,6 +21,7 @@ interface StudentProps {
   friend: Student;
   invitationUuid?: string;
   getData?: Function;
+  fetchFriends?: Function;
   accepted?: boolean;
   setStudentToSendMessage?: (student:Student) => void;
 }
@@ -30,6 +31,7 @@ const Friend = ({
   invitationUuid,
   getData,
   accepted,
+  fetchFriends
 }: StudentProps) => {
 
   // Hooks
@@ -51,7 +53,12 @@ const Friend = ({
           second_user_uuid: friend.uuid,
         },
         setLoading,
-        successCb: () => toast.success("Your invitation has been sent!"),
+        successCb: () => {
+          toast.success("Your invitation has been sent!")
+          if(fetchFriends instanceof Function) {
+            fetchFriends()
+          }
+        },
         failCb: (data: any) =>
           toast.error(data?.detail || "Something went wrong!"),
       })
@@ -135,7 +142,7 @@ const Friend = ({
           handleClose={() => setShowModal(false)}
         >
           <div>
-            <h2 className="text-white">Write a message to {friend?.first_name}</h2>
+            <h2 className="text-black">Write a message to {friend?.first_name}</h2>
             <p className="mb-8">Type your message in the input bellow</p>
             <TextArea
               value={inputValue}

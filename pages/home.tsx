@@ -133,7 +133,7 @@ function Home() {
                   icon: <Icon height={40} icon="icon-park-outline:easy" />,
                 },
               ].map(({ title, text, icon }) => (
-                <div key={text} className="value-card shadow-md rounded-md p-4 flex-grow">
+                <div key={text} className="value-card shadow-sm rounded-md p-4 flex-grow">
                   {icon}
                   <h2>
                     <span>{t(title)}</span>

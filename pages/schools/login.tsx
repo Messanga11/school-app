@@ -73,12 +73,12 @@ const SchoolLogin: NextPage = () => {
     <DefaultLayout titleDesc="Login to your account" noWidthLimit university>
       <div className="bg-dotted">
         <Container>
-          <div className="flex max-w-6xl mx-auto bg-white rounded-xl overflow-hidden shadow-xl" style={{maxHeight: 700, height: "calc(100vh - 100px)"}}>
+          <div className="flex max-w-6xl mx-auto bg-white rounded-md overflow-hidden shadow-xl" style={{maxHeight: 700, height: "calc(100vh - 100px)"}}>
             <div className="bg-blue-500 flex-shrink-0 p-8 flex justify-center items-center flex-col w-1/2">
                 <div className="w-4/5 h-full">
                   <h2 className="text-white text-3xl mb-8">We are waiting for you in the other side!</h2>
-                  <div className="h-2/3 w-full bg-white bg-opacity-50 rounded-xl flex justify-center items-center">
-                    <img className="rounded-xl object-cover object-center" style={{width: "95%", height: "95%"}} src="/images/log-in-illustration.jpg" alt="" />
+                  <div className="h-2/3 w-full bg-white bg-opacity-50 rounded-md flex justify-center items-center">
+                    <img className="rounded-md object-cover object-center" style={{width: "95%", height: "95%"}} src="/images/log-in-illustration.jpg" alt="" />
                   </div>
                 </div>
             </div>

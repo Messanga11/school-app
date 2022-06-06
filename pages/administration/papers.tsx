@@ -586,7 +586,7 @@ const Papers = () => {
               <div className="font-bold flex justify-between items-center">
                 <h2 className="text-2xl text-black mb-8">Papers</h2>
                 <div className="flex gap-5">
-                  <button className="intent shadow-md" onClick={openModal}>
+                  <button className="intent shadow-sm" onClick={openModal}>
                     <Icon icon="akar-icons:plus" color="black" />
                   </button>
                 </div>

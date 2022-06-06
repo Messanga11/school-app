@@ -60,7 +60,7 @@ const MyCourses = () => {
                 <p className="text-center">No course at now</p>
             )}
             {!loading && subject_data.data.length !== 0 && (
-              <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-[#fff]">
+              <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-[#fdfdfd]">
                 {subject_data.data.map((subject) => (
                   <Subject key={subject?.uuid} subject={subject} />
                 ))}

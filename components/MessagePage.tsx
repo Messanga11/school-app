@@ -120,7 +120,7 @@ const MessagePage: React.FC<Props> = ({ guardian }) => {
         <Container>
             <div>
                 <h2 className="text-black mb-4">Message</h2>
-                <div className="w-full bg rounded-xl overflow-hidden shadow-md bg-[#fff]">
+                <div className="w-full bg rounded-md overflow-hidden shadow-sm bg-[#fdfdfd]">
                     <div
                         className="flex h-screen"
                         style={{ maxHeight: "calc(100vh - 200px)" }}

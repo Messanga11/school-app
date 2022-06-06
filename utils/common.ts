@@ -177,7 +177,7 @@ export const kidsVideosData = [
 export const paginationStyles = {
   active: {
     background: `#5BDAF5!important`,
-    color: "#fff",
+    color: "#fdfdfd",
     height: "45px!important",
     width: "45px!important",
     display: "flex",

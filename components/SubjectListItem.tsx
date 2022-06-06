@@ -7,7 +7,7 @@ const SubjectListItem = ({item}:{item: Topic}) => {
     const router = useRouter()
 
     return (
-        <div className="bg-[#fff] text-black px-6 py-2 cursor-pointer rounded-md" onClick={() => router.push(`/courses/subjects/topics/${item.uuid}`)}>
+        <div className="bg-[#fdfdfd] text-black px-6 py-2 cursor-pointer rounded-md" onClick={() => router.push(`/courses/subjects/topics/${item.uuid}`)}>
             <div className="w-full">
                 <div className="flex items-center gap-6 w-full">
                     <Icon icon="bx:book-bookmark" />

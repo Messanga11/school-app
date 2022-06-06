@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 .next
-public
+/public/images

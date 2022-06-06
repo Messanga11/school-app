@@ -107,7 +107,7 @@ const Profile = () => {
   return (
     <DashboardLayout title="Profile" >
     <Container>
-      <div className='bg-[#fff] p-8 rounded-xl'>
+      <div className='bg-[#fdfdfd] p-8 rounded-md'>
         <h2 className='text-black'>Friends</h2>
         <p>Here you can add friend, see your actual friends and invitations you have</p>
           

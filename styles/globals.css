@@ -2,23 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&display=swap');
-
 :root {
   --primary: #111;
-  --secondary: #fff;
-  --accent: #e272b0;
+  --secondary: #fdfdfd;
+  --accent: #08b254;
+  --bg: #ececec;
 }
 
 body {
   margin: 0;
-  background: rgb(229, 233, 233);
-  font-family: "Poppins", sans-serif;
+  background: var(--bg);
   overflow-x: hidden;
+  @apply text-black
 }
 
 * {
-  font-family: 'Playfair Display', serif;
+    font-family: 'Montserrat', sans-serif!important;
   box-sizing: border-box
 }
 
@@ -40,6 +39,17 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+h2, h3, h4, h5, h6 {
+  line-height: 24px!important;
+  @apply text-[#6d6e77];
+}
+
+h1 {
+  line-height: 70px!important;
+  font-weight: bolder
+  @apply text-[#6d6e77];
 }
 
 .container {
@@ -228,7 +238,7 @@ aside {
 }
 
 .title {
-  font-size: 4.5em;
+  font-size: 2.3em;
   line-height: 1.2em;
   margin: 0.5em 0;
   color: var(--primary);
@@ -305,7 +315,7 @@ aside {
 }
 
 .value-card {
-  background: #fff;
+  background: #fdfdfd;
   padding: 1.5em 2em;
 }
 
@@ -329,7 +339,8 @@ aside {
 
 @layer base {
   body {
-    @apply bg-gray-100 select-none text-gray-600 min-h-screen;
+    background-color: #efefef;
+    @apply select-none text-gray-600 min-h-screen;
   }
   h2 {
     @apply text-xl font-semibold mb-2

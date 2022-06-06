@@ -36,11 +36,11 @@ function HeaderComponent({school, university}:Props) {
 
   return (
     <Fragment>
-      <nav className="bg-[#fff] shadow-md">
+      <nav className="bg-[#fdfdfd] shadow-sm">
         <div className="container">
           <div>
             <span className="brand">
-              <Link href="/" passHref><Image layout="fixed" width={50} height={50} src="/images/logo.png" alt="" /></Link>
+              <Link href="/" passHref><Image layout="fixed" width={50} height={50} src="/logo.png" alt="" /></Link>
             </span>
           </div>
           <ul>

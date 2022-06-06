@@ -148,7 +148,7 @@ const Profile = () => {
 
               <div className='flex flex-wrap gap-8'>
                 <div className='w-44 flex-shrink-0'>
-                  <div className='w-full h-44 rounded-xl overflow-hidden shadow-sm'>
+                  <div className='w-full h-44 rounded-md overflow-hidden shadow-sm'>
                     {profileBase64 || userInfos?.image_url ? (
                       <img className='w-full h-full object-cover' src={profileBase64 || userInfos?.image_url} alt="" />
                     )
@@ -166,7 +166,7 @@ const Profile = () => {
                   )}
                 </div>
 
-                <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow p-8 bg-[#fff] rounded-xl shadow-md'>
+                <form onSubmit={formik.handleSubmit} className='grid grid-cols-2 gap-4 flex-grow p-8 bg-[#fdfdfd] rounded-md shadow-sm'>
                   <div className='col-span-2'>
                     <h2 className='text-black'>Update informations about your profile</h2>
                     <p>You can change all informations about your profile here</p>

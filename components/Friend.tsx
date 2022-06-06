@@ -135,7 +135,7 @@ const Friend = ({
   }
 
   return (
-    <div className="h-96 flex flex-col justify-between items-center w-full bg-[#fff] border border-[#eee] overflow-hidden hover:shadow-md shadow-gray-50 focus:outline-none focus:shadow-md transition duration-100 rounded-xl">
+    <div className="h-96 flex flex-col justify-between items-center w-full bg-[#fdfdfd] border border-[#eee] overflow-hidden hover:shadow-sm shadow-gray-50 focus:outline-none focus:shadow-sm transition duration-100 rounded-md">
       {showModal && (
         <Modal
           className="max-w-md mx-auto"

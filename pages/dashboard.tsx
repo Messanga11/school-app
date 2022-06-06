@@ -70,81 +70,93 @@ const Dashboard = () => {
   return (
     <DashboardLayout titleDesc="admin pannel">
       <Container>
-        <div className="grid grid-cols-3 mx-auto w-full gap-4">
+        <h2 className="mt-4">Overview</h2>
+        <div className="grid grid-cols-4 mx-auto w-full gap-4 mt-8">
           <DashboardCard
             bonus="+0%"
             icon="bi:check-circle-fill"
-            smallText="in hours"
             title="Active hours"
             value={0}
           />
           <DashboardCard
             bonus="+0%"
             icon="akar-icons:circle-x-fill"
-            smallText="in hours"
             title="Inactive hours"
             value={0}
           />
           <DashboardCard
             bonus=""
             icon="akar-icons:paper"
-            smallText="in subjects"
+            title="Subjects"
+            value={(userInfos as User)?.selected_exam?.length || 0}
+          />
+          <DashboardCard
+            bonus=""
+            icon="akar-icons:paper"
             title="Subjects"
             value={(userInfos as User)?.selected_exam?.length || 0}
           />
         </div>
-        <div className="mt-8 gap-4 flex">
-          <div
-            className="rounded-xl shadow-md p-4 text-center bg-[#fff]"
-            style={{ minWidth: 450 }}
-          >
-            <div className="px-8 py-6">
-              <div className="flex justify-between items-center">
-                <p>Total spent</p>
-                <Icon
-                color="black"
-                height={16} icon="akar-icons:more-vertical" />
-              </div>
-              <div className="my-8">
-                <span className="text-5xl text-black">0</span>
-              </div>
-              <div>
-                <p>Total hours spent in learning</p>
-              </div>
-              <div className="mx-auto mt-4" style={{ width: 200, height: 200 }}>
-              <CircularProgressbar value={0} text={`${0}%`} />
+
+        <div className="mt-8 flex gap-8">
+          <div>
+            <h2 className="mt-4">Spent hours</h2>
+            <div
+              className="rounded-md shadow-sm p-4 text-center mt-8 bg-[#fdfdfd]"
+              style={{ minWidth: 300 }}
+            >
+              <div className="px-8 py-10">
+                <div className="my-8">
+                  <span className="text-7xl text-black">0</span>
+                </div>
+                <div>
+                  <p>Total hours spent in learning</p>
+                </div>
               </div>
             </div>
           </div>
-          <div className="flex-grow h-96">
-            <p className="my-4 ml-8">Statistics</p>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="pv"
-                  stroke="#8884d8"
-                  activeDot={{ r: 8 }}
-                />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-              </LineChart>
-            </ResponsiveContainer>
+          <div className="flex-grow flex flex-col">
+            <h2 className="mt-4 mb-8">Statistics</h2>
+            <div className="px-8 rounded-md bg-white flex-grow flex flex-col items-center justify-center gap-8 py-6">
+              <div className="flex items-center gap-10">
+                <div className="flex items-center gap-4">
+                  <Icon color="green" icon="akar-icons:circle-fill" height={12} />
+                  <span className="text-black">Active time</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Icon color="purple" icon="akar-icons:circle-fill" height={12} />
+                  <span className="text-black">Inactive time</span>
+                </div>
+              </div>
+              <ResponsiveContainer width="100%" height="90%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
+
         </div>
       </Container>
     </DashboardLayout>

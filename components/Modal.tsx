@@ -55,7 +55,7 @@ const gifYouUp = {
 };
 
 interface ModalProps {
-  handleClose: MouseEventHandler<HTMLImageElement>;
+  handleClose: Function;
   type?: string;
   className?: string;
   children: ReactNode | ReactNode[]
@@ -65,7 +65,7 @@ const Modal = ({ handleClose, type, children, className }: ModalProps) => {
 
   return (
     <Backdrop onClick={handleClose}>
-        <div onClick={(e) => e.stopPropagation()} className={`bg-[#fff] w-full my-4 overflow-auto rounded-xl ${className}`} style={{maxHeight: "calc(100vh - 60px)"}}>
+        <div onClick={(e) => e.stopPropagation()} className={`bg-[#fdfdfd] w-full my-4 overflow-auto rounded-md ${className}`} style={{maxHeight: "calc(100vh - 60px)"}}>
         <div className="p-8 flex flex-col">
             {children}
           </div>

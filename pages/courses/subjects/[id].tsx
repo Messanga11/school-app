@@ -72,7 +72,7 @@ const SubjectDetails = () => {
     return (
         <DashboardLayout>
             <div className="flex h-full">
-                <div className="flex-grow">
+                <div className="flex-grow flex flex-col">
                     <div className="w-full border-b flex items-center justify-between">
                         <h2 className="p-4 text-black">Topics</h2>
                         <div className="flex items-center gap-4 mr-4">
@@ -81,7 +81,7 @@ const SubjectDetails = () => {
                             <Button onClick={() => router.push("/courses/subjects/past-questions")}>Past questions</Button>
                         </div>
                     </div>
-                    <div className="flex flex-col gap-2 p-4 w-full">
+                    <div className="flex-grow flex flex-col gap-2 p-4 w-full bg-white/50">
                         {!loading && topic_data.data.length === 0 && (
                             <p className="text-center">No topic at now</p>
                         )}

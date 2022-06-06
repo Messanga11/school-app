@@ -120,7 +120,7 @@ const Dashboard = () => {
         </div>
         <div className="mt-8 gap-4 flex">
           <div
-            className="rounded-xl shadow-md p-4 text-center bg-white text-black px-8 py-6"
+            className="rounded-md shadow-sm p-4 text-center bg-white text-black px-8 py-6"
             style={{ minWidth: 450 }}
           >
             <div>

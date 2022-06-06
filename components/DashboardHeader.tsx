@@ -41,7 +41,7 @@ const DashboardHeader = () => {
 
   return (
     <div>
-      <div className="w-full bg-[#fff] h-16 px-4 text-white font-semibold flex items-center justify-between">
+      <div className="w-full bg-[#fdfdfd] h-16 px-4 text-white font-semibold flex items-center justify-between">
         <div className="w-full h-full">
           <div className="flex justify-between items-center h-full">
             <div className="flex-grow flex items-center h-full">
@@ -59,10 +59,10 @@ const DashboardHeader = () => {
                 ))}
               </ul>
             </div>
-            <div className="bg-[#fff] shadow-sm m-4 rounded-md h-full">
+            <div className="bg-[#fdfdfd] shadow-sm m-4 rounded-md h-full">
               <div
                 ref={timelineMenuRef}
-                className="px-4 py-3 border-x border-[#eee] flex gap-4 h-full items-center"
+                className="px-4 py-3 border-x border-[#efefef] flex gap-4 h-full items-center"
               >
                 <p className="font-light">{actualDate.toISOString().split("T")[0]}</p>
                 <p className="leading-0">{actualDate.getHours()}:{actualDate.getMinutes()}:{actualDate.getSeconds()}</p>

@@ -49,7 +49,7 @@ const Administration = () =>{
         </div>
         <div>
             <div className="grid grid-cols-3 gap-4">
-                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
+                <div className="rounded-md shadow-sm bg-[#fdfdfd] px-8 py-6">
                     <p className="text-6xl font-extrabold">{student_data?.data.length}</p>
                     <p className="text-xl mt-4 text-black">Students</p>
                     <table className="w-full text-left mt-4 text-black">
@@ -75,7 +75,7 @@ const Administration = () =>{
                         </tbody>
                     </table>
                 </div>
-                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
+                <div className="rounded-md shadow-sm bg-[#fdfdfd] px-8 py-6">
                     <p className="text-6xl font-extrabold">0</p>
                     <p className="text-xl mt-4 text-black">VIP Students</p>
                     <table className="w-full text-left mt-4 text-black">
@@ -101,7 +101,7 @@ const Administration = () =>{
                         </tbody>
                     </table>
                 </div>
-                <div className="rounded-md shadow-md bg-[#fff] px-8 py-6">
+                <div className="rounded-md shadow-sm bg-[#fdfdfd] px-8 py-6">
                     <p className="text-6xl font-extrabold">0k</p>
                     <p className="text-xl mt-4 text-black">FCFA Paid</p>
                 </div>

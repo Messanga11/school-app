@@ -45,7 +45,7 @@ const Students = () =>{
                             <div className="font-bold flex justify-between items-center">
                                 <h2 className="text-2xl">Videos</h2>
                                 <div className="flex gap-5">
-                                    <button className="intent shadow-md" onClick={openModal}>
+                                    <button className="intent shadow-sm" onClick={openModal}>
                                         <Icon icon="akar-icons:plus" />
                                     </button>
                                 </div>

@@ -240,15 +240,15 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
             {/* Side */}
             <div className="col-span-1 !h-auto !text-black">
-                <div className="bg-[#fff] rounded-xl p-4 shadow-xl mb-4">
-                    <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-xl bg-cover relative" style={{backgroundImage: `url(${ schoolForm?.principal?.base_64 || schoolForm?.principal?.image_url})`}}>
-                        {schoolForm?.principal?.name ? ( <div className="p-2 bg-white bg-opacity-40 w-full rounded-xl text-gray-700">
-                            <small>{university ? "Director" : "Principal"}</small>
-                            <p className="truncate text-black" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
-                        </div>) : (
-                            <p>No {university ? "director" : "principal"} specified</p>
-                        )}
+                <div className="bg-[#fdfdfd] rounded-md p-4 shadow-xl mb-4">
+                    <div className="w-full h-32 bg-gray-300 flex items-end p-4 mb-4 rounded-md bg-cover relative" style={{backgroundImage: `url(${ schoolForm?.principal?.base_64 || schoolForm?.principal?.image_url})`}}>
                     </div>
+                    {schoolForm?.principal?.name ? ( <div className="p-2 bg-opacity-40 w-full rounded-md text-gray-700">
+                        <small>{university ? "Director" : "Principal"}</small>
+                        <p className="truncate text-black" style={{lineHeight: "15px"}}>{schoolForm?.principal?.name}</p>
+                    </div>) : (
+                        <p>No {university ? "director" : "principal"} specified</p>
+                    )}
                     <p className="mb-2 text-sm">{university ? "Vice director" : "Vice principal"}</p>
                     {schoolForm?.vice_principals?.length === 0 && (
                         <div className="text-black">
@@ -286,20 +286,20 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
             <div className="px-8 col-span-4 flex flex-col gap-8">
 
-                <div className="w-full bg-[#fff] py-4 px-8 rounded-xl shadow-xl">
+                <div className="w-full bg-[#fdfdfd] py-4 px-8 rounded-md shadow-xl">
                     <div className="flex items-center gap-4 justify-between">
                         <div className="flex items-center gap-4">
-                            <div className="w-16 h-16 rounded-full bg-gray-400" style={{backgroundImage: `url(${schoolForm?.logo})`}}></div>
+                            <div className="w-16 h-16 rounded-full bg-gray-400 bg-cover bg-no-repeat" style={{backgroundImage: `url(${schoolForm?.logo})`}}></div>
                             <div className="!text-black">
                                 <p className="font-semibold">{schoolForm?.name}</p>
                                 <p className="text-xs font-light capitalize">{schoolForm?.region}</p>
                             </div>
                             {edit && <div className="mt-4">
-                                <input id="image" className="hidden" type="file" onChange={(e) => toBase64(e.target?.files![0]).then(base64 => setSchoolForm(state => ({
+                                <input id="image-lgo" className="hidden" type="file" onChange={(e) => toBase64(e.target?.files![0]).then(base64 => setSchoolForm(state => ({
                                     ...state,
                                     logo: String(base64)
                                 })))} />
-                                <label htmlFor="image" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-white text-white">
+                                <label htmlFor="image-logo" className="rounded-full py-2 px-4 border text-sm cursor-pointer border-white hover:bg-white hover:text-white text-white">
                                     {image ? "Change logo" : "Add logo"}
                                 </label>
                             </div>}
@@ -313,7 +313,7 @@ const SchoolDetailsComponent:React.FC<Props> = ({ edit, university }) => {
 
                 {edit && <div>
                     <p className="mb-2">Add a new article</p>
-                    <div className="bg-[#fff] rounded-xl">
+                    <div className="bg-[#fdfdfd] rounded-md">
                         {image && <div>
                             <img className="w-full rounded-t" src={image} alt="" />
                         </div>}

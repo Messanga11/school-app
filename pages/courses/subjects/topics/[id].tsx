@@ -60,12 +60,12 @@ const SubjectDetails = () => {
             <div className="flex h-full">
                 <div className="flex-grow">
                     <div className="w-full border-b border-[#eee] flex items-center justify-between">
-                        <h2 className="p-4 text-white">Taxonomy</h2>
+                        <h2 className="p-4 text-black">Taxonomy</h2>
                     </div>
-                    <div className="flex h-full">
+                    <div className="flex h-full bg-white">
                         <ul className="flex-col border-r border-[#eee]">
                             {nav.map(navItem => (
-                                <li key={navItem.id} className={`cursor-pointer text-lg text-white hover:text-white font-semibold py-3 hover:bg-slate-200 px-8 ${view === navItem.id  ? 'bg-slate-200 !text-white' : ""}`} onClick={() => setView(navItem.id)}>{navItem.name}</li>
+                                <li key={navItem.id} className={`cursor-pointer text-lg text-black hover:text-black py-3 hover:bg-slate-200 px-8 ${view === navItem.id  ? 'bg-slate-200 !text-black' : ""}`} onClick={() => setView(navItem.id)}>{navItem.name}</li>
                             ))}
                         </ul>
                         <div className="flex-grow mx-auto">

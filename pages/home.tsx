@@ -23,7 +23,7 @@ function Home() {
           <div className="header-body">
             <div className="container">
               <div>
-                <h1 className="title">
+                <h1 className="text-5xl font-semibold mb-8">
                 {t("page_home_an_online_shool")}
                 </h1>
                 <p>
@@ -135,7 +135,7 @@ function Home() {
               ].map(({ title, text, icon }) => (
                 <div key={text} className="value-card shadow-sm rounded-md p-4 flex-grow">
                   {icon}
-                  <h2>
+                  <h2 className="mt-6 mb-4">
                     <span>{t(title)}</span>
                   </h2>
                   <p className="text-base leading-relaxed">{t(text)}</p>

@@ -147,7 +147,7 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
                             }
                         }}>
                             <div className={`
-                            transition-gpu duration-300 w-full text-sm py-3 flex gap-4 items-center text-md pl-4 pr-10 rounded-md hover:text-primary hover:bg-primary/25 font-light
+                            transition-gpu duration-300 w-full text-sm py-3 flex gap-4 items-center text-md pl-4 pr-10 rounded-md hover:text-primary hover:bg-primary/25 font-normal
                             ${router.pathname === navItem.link ? " text-primary bg-primary/25" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
                         </li>
                     ))}

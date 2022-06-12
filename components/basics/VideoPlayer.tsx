@@ -13,7 +13,7 @@ const VideoPlayer:React.FC<Props> = ({open, url, handleClose}) => {
          open ? (
          <Modal className="bg-opacity-0 flex items-center justify-center w-auto" handleClose={handleClose}>
             <div>
-                <ReactPlayer url={url} playing />
+                <ReactPlayer url={url} playing controls />
             </div>
         </Modal>
         ) : null

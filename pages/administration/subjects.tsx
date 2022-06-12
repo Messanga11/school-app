@@ -63,7 +63,8 @@ const Subjects: NextPage = () => {
         note: "",
         book: "",
         lib_book: "",
-        video: ""
+        video: "",
+        video_vip: ""
     }
 
     // Hooks
@@ -114,6 +115,7 @@ const Subjects: NextPage = () => {
     }
 
     const openModal = (): void => {
+        resetState()
         setShowModal(true)
     }
 
@@ -230,32 +232,6 @@ const Subjects: NextPage = () => {
                 }))
             }
         })
-
-        return
-        dispatch(createBookEffect({
-            setLoading,
-            failCb: () => toast.error("Something went wrong!"),
-            successCb: (data: any) => {
-                toast.success("Book created")
-                dispatch(getBooksEffect({
-                    setLoading,
-                    failCb: () => toast.error("Something went wrong!"),
-                    successCb: (data: any) => {
-                        fetchFiles()
-                    },
-                    payload,
-                }))
-                setInputForm(state => ({
-                    ...state,
-                    current_book_title: ""
-                }))
-                setFilesForm(state => ({
-                    ...state,
-                    book: ""
-                }))
-            },
-            payload,
-        }))
     }
 
     const fetchSubjects = useCallback((): void => {
@@ -275,13 +251,13 @@ const Subjects: NextPage = () => {
         }))
     }, [dispatch])
 
-    const fetchTopics = (): void => {
+    const fetchTopics = (data?:Subject): void => {
         dispatch(getTopicsEffect({
             range: {
                 page: 1,
                 per_page: 10,
                 order_field: "date_added",
-                subject_uuid: (createdSubject || subjectToShow)?.uuid
+                subject_uuid: (data || createdSubject || subjectToShow)?.uuid
             },
             failCb: (): void => {
 
@@ -295,6 +271,15 @@ const Subjects: NextPage = () => {
 
 
     const saveSubject = () => {
+
+        if (!inputForm.subject_title) {
+            return toast.error("Please fill in subject title")
+        }
+        
+        if (!Object.values(form).includes(true)) {
+                return toast.error("Please select a GCE Visibility")
+        }
+
         const payload: SubjectRequest = {
             uuid: subjectToShow?.uuid,
             title: inputForm.subject_title,
@@ -313,7 +298,7 @@ const Subjects: NextPage = () => {
                     setSubjectToShow(data)
                 }
                 setOpenState(2)
-                fetchTopics()
+                fetchTopics(data)
             },
             payload,
         }))
@@ -376,6 +361,12 @@ const Subjects: NextPage = () => {
     useEffect(() => {
         fetchSubjects()
     }, [fetchSubjects])
+
+    useEffect(() => {
+        resetState()
+    // eslint-disable-next-line
+    }, [])
+    
 
 
     return (

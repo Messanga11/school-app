@@ -69,6 +69,11 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
             icon: <Icon icon="healthicons:i-certificate-paper" height={20} />
         },
         {
+            name: "Library",
+            link: "/administration/library",
+            icon: <Icon icon="healthicons:i-certificate-paper" height={20} />
+        },
+        {
             name: "Payments",
             link: "/administration/payments",
             icon: <Icon icon="fa-solid:money-check" height={20} />

@@ -9,9 +9,10 @@ import Button from "./basics/Button";
 interface Props {
   _key: string;
   notes: any[];
+  hideData?: boolean;
   libBooks: any[];
   videos: any[];
-  topicToShow: Topic;
+  topicToShow: Topic | null;
   setFileToDelete: Dispatch<SetStateAction<Book | null>>;
   handleInputChange: React.ChangeEventHandler<HTMLInputElement>;
   setFilesForm: Dispatch<
@@ -20,6 +21,7 @@ interface Props {
       book: any;
       lib_book: any;
       video: any;
+      video_vip: any;
     }>
   >;
   saveFile: Function;
@@ -38,7 +40,8 @@ const TopicFilesComponent: React.FC<Props> = ({
   setFilesForm,
   saveFile,
   inputForm,
-  setFileToDelete
+  setFileToDelete,
+  hideData
 }) => {
   // Store
   const {
@@ -55,24 +58,24 @@ const TopicFilesComponent: React.FC<Props> = ({
     <div>
       <div className="flex flex-wrap gap-4 my-2">
         {/* @ts-ignore */}
-        {book_data.data.filter(
+        {!hideData && book_data.data.filter(
           (item) => item?.topic_id === topicToShow?.uuid && item?.type === _key
         )
         ?.map((f, i) => (
           <div
             key={`${_key}_${f?.title}_${i}`}
-            className="px-8 py-6 rounded-md border border-[#eee] bg-[#aaa] text-black relative"
+            className="px-8 py-6 rounded-md border border-[#eee] bg-black text-black relative"
           >
             <button
-            className="text-sm absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 font-semibold flex justify-center items-center"
+            className="text-sm absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 text-white font-semibold flex justify-center items-center"
             onClick={() => setFileToDelete(f)}>x</button>
-            <p className="capitalize">{f?.title}</p>
+            <p className="capitalize text-white">{f?.title}</p>
           </div>
         ))}
       </div>
       <div className="border border-[#eee] rounded-md px-8 py-6">
-        <Typo type="small" className="text-black capitalize">
-          {String(_key).replace("lib_book", "Library book")}
+        <Typo type="small" className={`text-black capitalize ${(_key === "note" || _key === "video_vip") ? "text-red-500" : ""} ${(_key === "book" || _key === "video") ? "text-blue-500" : ""}`}>
+          {_key === "lib_book" ?  "Library book" : _key === "video" ?  "Video (for every one)" : _key === "video_vip" ?  "Video (for VIPs)" : _key === "note" ? "Notes (For VIPs)" : _key === "book" ? "Notes (For everyone)" : _key}
         </Typo>
         <div className="my-4">
           <Typo type="small" className="text-black text-xs">Title</Typo>

@@ -39,15 +39,15 @@ const Library = () => {
     return (
         <DashboardLayout>
             <Container className="flex flex-col h-full">
-                {book_data.data?.filter(file => file.type === "library").length !== 0 && <h2 className="mb-4 text-black">Library</h2>}
+                {book_data.data?.filter(file => file.type === "lib_book").length !== 0 && <h2 className="mb-4 text-black">Library</h2>}
                 <div>
                     <div>
-                        {book_data.data?.filter(file => file.type === "library").length === 0 && (
+                        {book_data.data?.filter(file => file.type === "lib_book").length === 0 && (
                             <p className="text-center">No library book at now</p>
                         )}
-                        {book_data.data.filter(file => file.type === "library").length !== 0 && (
+                        {book_data.data.filter(file => file.type === "lib_book").length !== 0 && (
                             <div className="grid grid-cols-4 gap-4 p-4 rounded-md bg-gray-50">
-                            {book_data.data.filter(file => file.type === "library").map(file =>  (
+                            {book_data.data.filter(file => file.type === "lib_book").map(file =>  (
                                 <BookItem key={file?.uuid} file={file} />
                                 )
                             )}

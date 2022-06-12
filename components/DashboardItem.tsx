@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react'
 import React from 'react'
 
 interface DashboardItemProps {
-  icon: string,
+  icon?: string,
   title: string,
   onEdit?: Function,
   onDelete?: Function,

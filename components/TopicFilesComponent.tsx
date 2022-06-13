@@ -19,7 +19,6 @@ interface Props {
     SetStateAction<{
       note: any;
       book: any;
-      lib_book: any;
       video: any;
       video_vip: any;
     }>

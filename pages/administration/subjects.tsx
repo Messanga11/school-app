@@ -24,10 +24,12 @@ import TopicFilesComponent from "@/components/TopicFilesComponent"
 import DeleteModal from "@/components/DeleteModal"
 import { getBooks, getTopics } from "@/store/actions"
 import Loading from "@/components/basics/Loading"
-import { useLoginChecker } from "@/utils/hooks"
+import { useLoginChecker, useSearch } from "@/utils/hooks"
 import LoadingComponent from "@/components/LodingComponent"
 import { apiPrefix } from "@/services/urls"
 import { uploadFormDataWithFile } from '../../utils/hooks';
+import Tabs from "@/components/basics/Tabs"
+import LoadingComp from "@/components/LoadingComp"
 
 // Interfaces
 interface InputFormType {
@@ -62,14 +64,35 @@ const Subjects: NextPage = () => {
     const initialFileForm = {
         note: "",
         book: "",
-        lib_book: "",
         video: "",
         video_vip: ""
     }
 
+
+    const tabs = [
+        {
+          id: "olg",
+          title: "OLG",
+        },
+        {
+          id: "alg",
+          title: "ALG",
+        },
+        {
+          id: "olc",
+          title: "OLC",
+        },
+        {
+          id: "alc",
+          title: "ALC",
+        },
+      ]
+
     // Hooks
     const dispatch = useDispatch()
     useLoginChecker(true)
+
+
     // Store
     const { subject: { subject_data }, topic: { topic_data }, book: { book_data } } = useSelector((state: ApplicationState) => state)
 
@@ -92,6 +115,8 @@ const Subjects: NextPage = () => {
     const [fileDelete, setFileDelete] = useState<FileRequest | null>(null)
     const [createdSubject, setCreatedSubject] = useState<Subject | null>(null)
     const [fileToDelete, setFileToDelete] = useState<Book | null>(null)
+    const [activeTabId, setActiveTabId] = useState(tabs[0].id)
+    const [inputSearchValue, setInputSearchValue] = useState<string>("")
 
     // Functions
     const resetState = (): void => {
@@ -214,14 +239,7 @@ const Subjects: NextPage = () => {
             failCb: () => toast.error("Something went wrong!"),
             successCb: (data: any) => {
                 toast.success("Item created")
-                dispatch(getBooksEffect({
-                    setLoading,
-                    failCb: () => toast.error("Something went wrong!"),
-                    successCb: (data: any) => {
-                        fetchFiles()
-                    },
-                    payload,
-                }))
+                fetchFiles()
                 setInputForm(state => ({
                     ...state,
                     [`current_${key}_title`]: ""
@@ -239,7 +257,8 @@ const Subjects: NextPage = () => {
             range: {
                 page: 1,
                 per_page: 10,
-                order_field: "date_added"
+                order_field: "date_added",
+                type: activeTabId
             },
             failCb: (): void => {
 
@@ -249,7 +268,8 @@ const Subjects: NextPage = () => {
             },
             setLoading: () => undefined
         }))
-    }, [dispatch])
+    }, [dispatch, activeTabId])
+    useSearch(fetchSubjects, [inputSearchValue])
 
     const fetchTopics = (data?:Subject): void => {
         dispatch(getTopicsEffect({
@@ -360,7 +380,7 @@ const Subjects: NextPage = () => {
 
     useEffect(() => {
         fetchSubjects()
-    }, [fetchSubjects])
+    }, [fetchSubjects, activeTabId])
 
     useEffect(() => {
         resetState()
@@ -497,16 +517,28 @@ const Subjects: NextPage = () => {
                                 </div>
                             </div>
                             <div className="my-4">
-                                <Input icon={<Icon icon="akar-icons:search" color="black" />} />
+                                <Input value={inputSearchValue} onChange={(e) => setInputSearchValue(e.target.value)} icon={<Icon icon="akar-icons:search" color="black"/>} />
                             </div>
-                            <div className="my-6 flex flex-col gap-6 mt-16">
-                                {subject_data.data.map(subject => (
-                                    <DashboardItem
-                                        key={subject?.uuid}
-                                        onEdit={() => openEditSubject(subject)} icon="uis:subject" title={subject.title}
-                                        onDelete={() => setSubjectToDelete(subject)}
-                                    />
-                                ))}
+                            <div className="rounded-md bg-white p-6">
+                                <Tabs
+                                    tabs={tabs}
+                                    activeTabId={activeTabId}
+                                    setActiveTabId={setActiveTabId}
+                                    // count={{2:invitations?.data?.length}}
+                                />
+                                <div className="my-6 flex flex-col gap-6 mt-16">
+                                    <LoadingComp loading={loading} />
+                                    {!loading && subject_data.data.filter(subject => subject.visible_for === activeTabId).length === 0 && (
+                                        <p>No subject at now</p>
+                                    )}
+                                    {subject_data.data.filter(subject => subject.visible_for === activeTabId).map(subject => (
+                                        <DashboardItem
+                                            key={subject?.uuid}
+                                            onEdit={() => openEditSubject(subject)} icon="uis:subject" title={subject.title}
+                                            onDelete={() => setSubjectToDelete(subject)}
+                                        />
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>

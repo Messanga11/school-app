@@ -20,7 +20,8 @@ const Library = () => {
             range: {
                 page: 1,
                 per_page: 10,
-                order_field: "date_added"
+                order_field: "date_added",
+                type: "lib_book"
             },
             failCb: ():void => {
                 

@@ -1,9 +1,10 @@
+import StudentService from '@/services/StudentService'
 import { logoutEffect } from '@/store/effects/auth'
 import { ApplicationState, User } from '@/store/types'
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?: boolean, school?: boolean}) => {
@@ -12,6 +13,35 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
 
     const router = useRouter()
     const { auth: { userInfos } } = useSelector((state:ApplicationState) => state)
+    const [messageCount, setMessageCount] = useState<number>(0)
+    const [loadingMessages, setLoadingMessages] = useState<boolean>(false)
+    const [invitationCount, setInvitationCount] = useState<number>(0)
+    const [loadingInvitations, setLoadingInvitations] = useState<boolean>(false)
+  
+  
+    const getMessageCount = ():void => {
+      setLoadingMessages(true)
+      StudentService.getMessagesCount()
+        .then(async res => await res.json())
+        .then((data:{data:number}) => {
+          setMessageCount(data.data)
+        })
+        .finally(() => {
+          setLoadingMessages(false)
+        })
+    }
+    
+    const getInvitationsCount = ():void => {
+      setLoadingMessages(true)
+      StudentService.getMessagesCount()
+        .then(async res => await res.json())
+        .then((data:{data:number}) => {
+          setInvitationCount(data.data)
+        })
+        .finally(() => {
+          setLoadingInvitations(false)
+        })
+    }
 
     const navigationItems = [
         {
@@ -71,7 +101,7 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
         {
             name: "Library",
             link: "/administration/library",
-            icon: <Icon icon="healthicons:i-certificate-paper" height={20} />
+            icon: <Icon icon="bx:library" height={20} />
         },
         {
             name: "Payments",
@@ -124,6 +154,11 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
         },
     ]
 
+    useEffect(() => {
+        getMessageCount()
+    }, [])
+    
+
   return (
     <div className='bg-[#fdfdfd] h-full border-r border-[#efefef] pb-6 w-full' style={{maxWidth: 270}}>
         <div>
@@ -153,7 +188,23 @@ const DashboardSidebar = ({admin, guardian, school}: {admin?: boolean, guardian?
                         }}>
                             <div className={`
                             transition-gpu duration-300 w-full text-sm py-3 flex gap-4 items-center text-md pl-4 pr-10 rounded-md hover:text-primary hover:bg-primary/25 font-normal
-                            ${router.pathname === navItem.link ? " text-primary bg-primary/25" : "text-gray-500 ml-0"}`}>{navItem.icon} {navItem.name}</div>
+                            ${router.pathname === navItem.link ? " text-primary bg-primary/25" : "text-gray-500 ml-0"}`}>
+                                {navItem.icon} {navItem.name} {!loadingMessages && (messageCount > 0)
+                                && (navItem.link === "/messages" || navItem.link === "/guardian/messages")
+                                && <span
+                                    style={{lineHeight: 0, paddingBottom: 2}}
+                                    className="bg-red-500 text-white rounded-full w-4 text-right h-4 flex justify-center items-center text-xs"
+                                >
+                                    {messageCount}
+                                </span>} {!loadingInvitations && (invitationCount > 0)
+                                && (navItem.link === "/invitations" || navItem.link === "/guardian/invitations")
+                                && <span
+                                    style={{lineHeight: 0, paddingBottom: 2}}
+                                    className="bg-red-500 text-white rounded-full w-4 text-right h-4 flex justify-center items-center text-xs"
+                                >
+                                    {invitationCount}
+                                </span>}
+                            </div>
                         </li>
                     ))}
                 </ul>

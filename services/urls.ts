@@ -5,7 +5,8 @@ export const apiPrefix:string = "http://localhost:5301"
 export const authUrls = {
     LOGIN: (guardian_phone_number?:number | string) => `${apiPrefix}/auth/login${!!guardian_phone_number ? `/${guardian_phone_number}` : ""}`,
     GET_AUTH_INFOS: `${apiPrefix}/auth/me`,
-    UPDATE_AUTH_INFOS: `${apiPrefix}/administration/users`
+    UPDATE_AUTH_INFOS: `${apiPrefix}/administration/users`,
+    CHECK_IS_VIP: `${apiPrefix}/administration/users/students/is-vip`
 }
 
 export const studentUrls = {
@@ -15,6 +16,8 @@ export const studentUrls = {
     DELETE_STUDENT: (uuid:string):string => `${apiPrefix}/users/${uuid}`,
     UPDATE_STUDENT: `${apiPrefix}/users`,
     GET_MESSAGES: (range:RequestRange | undefined):string => `${apiPrefix}/administration/messages/${range?.conversation_uuid || ""}?page=${range?.page || ""}&per_page${range?.per_page || ""}&order_field=${range?.order_field || "desc"}`,
+    GET_MESSAGES_COUNT: `${apiPrefix}/administration/messages/unread/total`,
+    GET_INVITATIONS_COUNT: `${apiPrefix}/users/invitations/total`,
     GET_CONVERSATIONS: `${apiPrefix}/administration/messages/conversations`,
     DELETE_MESSAGE: `${apiPrefix}/administration/messages`,
     SEND_MESSAGE: `${apiPrefix}/administration/messages`,
@@ -36,7 +39,7 @@ export const topicUrls = {
 }
 
 export const bookUrls = {
-    GET_BOOKS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/books`,
+    GET_BOOKS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/books?type=${range?.type || ""}`,
     GET_BOOK: (uuid:string):string => `${apiPrefix}/administration/books/${uuid}`,
     CREATE_BOOK: `${apiPrefix}/administration/books`,
     DELETE_BOOK: (uuid:string):string => `${apiPrefix}/administration/books/${uuid}`,
@@ -77,7 +80,7 @@ export const paymentUrls = {
 }
 
 export const subjectUrls = {
-    GET_SUBJECTS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/subjects`,
+    GET_SUBJECTS: (range:RequestRange | undefined):string => `${apiPrefix}/administration/subjects?type=${range?.type || ""}`,
     GET_SUBJECT: (uuid:string):string => `${apiPrefix}/administration/subjects/${uuid}`,
     CREATE_SUBJECT: `${apiPrefix}/administration/subjects`,
     DELETE_SUBJECT: (uuid:string):string => `${apiPrefix}/administration/subjects/${uuid}`,

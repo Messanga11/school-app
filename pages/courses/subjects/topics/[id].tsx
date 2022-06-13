@@ -1,5 +1,7 @@
+import LoadingComp from "@/components/LoadingComp"
 import { getBooksEffect } from "@/store/effects/book"
 import { ApplicationState } from "@/store/types"
+import { useVipChecker } from "@/utils/hooks"
 import { Icon } from "@iconify/react"
 import { useRouter } from "next/router"
 import { Fragment, useCallback, useEffect, useState } from "react"
@@ -16,7 +18,10 @@ const SubjectDetails = () => {
     // States
     const [topicToShow, setTopicToShow] = useState(null)
     const [view, setView] = useState("notes")
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
+
+    // Hooks
+    useVipChecker('/become-a-vip', setLoading)
 
     const router = useRouter()
     const dispatch = useDispatch()
@@ -37,7 +42,8 @@ const SubjectDetails = () => {
             range: {
                 page: 1,
                 per_page: 10,
-                order_field: "date_added"
+                order_field: "date_added",
+                type: view === "notes" ? "book": "video"
             },
             failCb: ():void => {
                 
@@ -47,7 +53,7 @@ const SubjectDetails = () => {
             },
             setLoading: () => undefined
         }))
-    }, [dispatch])
+    }, [dispatch, view])
 
     useEffect(() => {
       fetchFiles()
@@ -57,6 +63,7 @@ const SubjectDetails = () => {
 
     return (
         <DashboardLayout>
+            {!loading ? (
             <div className="flex h-full">
                 <div className="flex-grow">
                     <div className="w-full border-b border-[#eee] flex items-center justify-between">
@@ -82,6 +89,9 @@ const SubjectDetails = () => {
                     </div>
                 </div>
             </div>
+            ) : (
+                <LoadingComp loading={loading} /> 
+            )}
         </DashboardLayout>
     )
 

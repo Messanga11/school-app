@@ -11,6 +11,8 @@ export default class StudentService {
     static sendMessage = (payload: Message):Promise<Response> => BaseService.postRequest(studentUrls.SEND_MESSAGE, payload, true)
     static deleteMessage = (payload: Message):Promise<Response> => BaseService.deleteRequest(studentUrls.DELETE_MESSAGE, payload, true)
     static getMessages = (range: (RequestRange | undefined)):Promise<Response> => BaseService.getRequest(studentUrls.GET_MESSAGES(range), true)
+    static getMessagesCount = ():Promise<Response> => BaseService.getRequest(studentUrls.GET_MESSAGES_COUNT, true)
+    static getInvitationsCount = ():Promise<Response> => BaseService.getRequest(studentUrls.GET_INVITATIONS_COUNT, true)
     static getConversations = (range: (RequestRange | undefined)):Promise<Response> => BaseService.getRequest(studentUrls.GET_CONVERSATIONS, true)
     static getFriends = (range: (RequestRange | undefined)):Promise<Response> => BaseService.getRequest(studentUrls.GET_FRIENDS(range), true)
     static getInvitations = (range: (RequestRange | undefined)):Promise<Response> => BaseService.getRequest(studentUrls.GET_INVITATIONS(range), true)

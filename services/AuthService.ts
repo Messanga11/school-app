@@ -8,4 +8,5 @@ export default class StudentService {
         return BaseService.postRequest(authUrls.LOGIN(guardian_phone_number || type), payloadData, false)}
     static getAuthInfos = ():Promise<Response> => BaseService.postRequest(authUrls.GET_AUTH_INFOS, {}, true)
     static updateAuthInfos = (payload:LoginPayload):Promise<Response> => BaseService.putRequest(authUrls.UPDATE_AUTH_INFOS, payload, true)
+    static checkIsVIP = ():Promise<Response> => BaseService.getRequest(authUrls.CHECK_IS_VIP, true)
 }

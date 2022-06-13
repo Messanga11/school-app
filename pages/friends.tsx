@@ -154,7 +154,10 @@ const Profile = () => {
                   <p>No student at now</p>
                 )}
                 {student_data?.data?.map(student => (
-                  <Friend key={student.uuid} friend={student} />
+                  <Friend
+                    key={student.uuid}
+                    friend={student}
+                  />
                 ))}
             </div>
           )}

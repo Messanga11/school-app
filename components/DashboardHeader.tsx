@@ -1,14 +1,15 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { useRef } from "react";
-import { clearTimeout } from "timers";
+import moment from "moment"
+import StudentService from "@/services/StudentService";
 
 const DashboardHeader = () => {
   const timelineMenuRef = useRef(null);
 
   const router = useRouter();
+  
 
   const [actualDate, setActualDate] = useState(new Date())
 
@@ -17,7 +18,6 @@ const DashboardHeader = () => {
     const id = setInterval(() => {
       setActualDate(new Date())
     }, 1000)
-
     return () => clearInterval(id)
   }, [])
 
@@ -35,7 +35,7 @@ const DashboardHeader = () => {
     {
       name: "Library",
       link: "/library",
-      icon: <Icon icon={"ep:menu"} />,
+      icon: <Icon icon={"bx:library"} />,
     },
   ];
 
@@ -64,8 +64,8 @@ const DashboardHeader = () => {
                 ref={timelineMenuRef}
                 className="px-4 py-3 border-x border-[#efefef] flex gap-4 h-full items-center"
               >
-                <p className="font-light">{actualDate.toISOString().split("T")[0]}</p>
-                <p className="leading-0">{actualDate.getHours()}:{actualDate.getMinutes()}:{actualDate.getSeconds()}</p>
+                <p className="font-light">{moment(actualDate).format("LL")}</p>
+                <p className="leading-0 w-20">{actualDate.getHours() < 10 ? "0" : ""}{actualDate.getHours()}:{actualDate.getMinutes() < 10 ? "0" : ""}{actualDate.getMinutes()}:{actualDate.getSeconds() < 10 ? "0" : ""}{actualDate.getSeconds()}</p>
               </div>
             </div>
           </div>

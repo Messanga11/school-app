@@ -65,17 +65,20 @@ const Modal = ({ handleClose, type, children, className }: ModalProps) => {
 
   return (
     <Backdrop onClick={handleClose}>
-      <div onClick={(e) => e.stopPropagation()} className={`bg-[#fdfdfd] w-full my-4 overflow-auto relative rounded-md ${className}`} style={{ maxHeight: "calc(100vh - 60px)" }}>
+      <div className="relative">
         <button
-          onClick={() => {
-            handleClose instanceof Function && handleClose()
+          onClick={(e) => {
+            e.stopPropagation()
+            handleClose()
           }}
-          className="transform transition duration-100 hover:scale-95 focus:scale-90 appearance-none cursor-pointer absolute -right-2 -top-2 h-8 w-8 text-lg font-bold flex justify-center items-center rounded-md bg-gray-100"
+          className="transform transition duration-100 hover:scale-95 focus:scale-90 appearance-none cursor-pointer absolute -right-4 top-1 h-8 w-8 text-lg font-bold flex justify-center items-center rounded-md bg-gray-100 z-50 text-black"
         >
           X
         </button>
-        <div className="p-8 flex flex-col">
-          {children}
+        <div onClick={(e) => e.stopPropagation()} className={`bg-[#fdfdfd] w-full my-4 overflow-auto relative rounded-md ${className}`} style={{ maxHeight: "calc(100vh - 60px)" }}>
+          <div className="p-8 flex flex-col">
+            {children}
+          </div>
         </div>
       </div>
     </Backdrop>

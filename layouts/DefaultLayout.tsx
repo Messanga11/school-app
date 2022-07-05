@@ -2,7 +2,7 @@ import Head from "next/head"
 import { useTranslation } from "../utils/hooks"
 import HeaderComponent from '../components/HeaderComponent';
 
-interface Default {
+interface Props {
     title?: string
     titleDesc?: string
     children: any,
@@ -12,7 +12,7 @@ interface Default {
     noWidthLimit?: boolean
 }
 
-const DefaultLayout:React.FC<Default> = ({title, titleDesc, children, admin, school, noWidthLimit, university}) => {
+const DefaultLayout:React.FC<Props> = ({title, titleDesc, children, admin, school, noWidthLimit, university}) => {
 
     const t = useTranslation()
 

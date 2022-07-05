@@ -11,6 +11,17 @@ function Home() {
   const router = useRouter();
   const t = useTranslation();
 
+  const [data, setData] = useState<any[]>([])
+
+  useEffect(() => {
+    const source = new EventSource('http://localhost:5301/stream-logs')
+    source.onmessage = (e) => {
+      setData(state => [...state, e.data])
+      console.log(e.data)
+    }
+  }, [])
+  
+
   return (
     <DefaultLayout
       titleDesc="Welcome to the school next generation"
@@ -94,7 +105,7 @@ function Home() {
                 <div className="item">
                   <h4>Oxford University</h4>
                   <small>
-                    Oxford wan't 11 cameroonian to lean in his rooms... &nbsp;
+                    Oxford wan&apos;t 11 cameroonian to lean in his rooms... &nbsp;
                     <span className="sub-title">
                       More informations
                     </span>, Click in more info below
@@ -157,6 +168,9 @@ function Home() {
 
         <div className="w-full bg-white rounded-md" style={{ paddingBottom: "45%" }}>
           {/* Video goes here */}
+          <video width="1200" controls muted>
+            <source src="http://localhost:5301/video" type="video/mp4" />
+          </video>
         </div>
         </div>
       </main>

@@ -195,7 +195,7 @@ export const useLoginChecker = (isAdminPage: boolean = false) => {
     const router = useRouter()
 
     useEffect(() => {
-        const inLoginRoutes = ["/login", "/signup"].includes(router.pathname)
+        const inLoginRoutes = ["/login", "/signup", "code", "recover-password"].includes(router.pathname)
         const token = localStorage.getItem("token") ? JSON.stringify(localStorage.getItem("token")) : null // replace by admin token
         if (!token && !inLoginRoutes) {
             router.push("/")
